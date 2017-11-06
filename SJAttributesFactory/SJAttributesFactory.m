@@ -21,7 +21,9 @@
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrikethoughColor;
 @property (nonatomic, strong, readwrite) UIColor *r_nextBackgroundColor;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextLetterSpacing;
-
+@property (nonatomic, strong, readwrite) NSNumber *r_nextStrokeBorder;
+@property (nonatomic, strong, readwrite) UIColor *r_nextStrokeColor;
+@property (nonatomic, assign, readwrite) BOOL r_nextLetterpress;
 @end
 
 @implementation SJAttributesFactory
@@ -102,9 +104,35 @@
     };
 }
 
+- (SJAttributesFactory *(^)(float, UIColor *))stroke {
+    return ^ SJAttributesFactory *(float border, UIColor *color) {
+        [_attrM addAttribute:NSStrokeWidthAttributeName value:@(border) range:_rangeAll(_attrM)];
+        [_attrM addAttribute:NSStrokeColorAttributeName value:color range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(void))letterpress {
+    return ^ SJAttributesFactory *(void) {
+        [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 - (SJAttributesFactory *(^)(NSParagraphStyle *))paragraphStyle {
     return ^ SJAttributesFactory *(NSParagraphStyle *style) {
         [_attrM addAttribute:NSParagraphStyleAttributeName value:style range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(UIImage *, CGSize, NSInteger))insertImage {
+    return ^ SJAttributesFactory *(UIImage *image, CGSize size, NSInteger index) {
+        NSTextAttachment *attachment = [NSTextAttachment new];
+        attachment.image = image;
+        attachment.bounds = CGRectMake(0, 0, size.width, size.height);
+        NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:attachment];
+        [_attrM insertAttributedString:attr atIndex:index];
         return self;
     };
 }
@@ -121,6 +149,10 @@
         if ( _r_nextLetterSpacing ) [_attrM addAttribute:NSKernAttributeName value:_r_nextLetterSpacing range:range];
         if ( _r_nextStrikethough ) [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:range];
         if ( _r_nextStrikethoughColor ) [_attrM addAttribute:NSStrikethroughColorAttributeName value:_r_nextStrikethoughColor range:range];
+        if ( _r_nextStrokeBorder ) [_attrM addAttribute:NSStrokeWidthAttributeName value:_r_nextStrokeBorder range:range];
+        if ( _r_nextStrokeColor ) [_attrM addAttribute:NSStrokeColorAttributeName value:_r_nextStrokeColor range:range];
+        if ( _r_nextLetterpress ) [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:range];
+        
         
         // clear
         _r_nextFont = nil;
@@ -131,6 +163,9 @@
         _r_nextStrikethough = NO;
         _r_nextStrikethoughColor = nil;
         _r_nextLetterSpacing = nil;
+        _r_nextStrokeBorder = nil;
+        _r_nextStrokeColor = nil;
+        _r_nextLetterpress = NO;
     };
 }
 
@@ -174,6 +209,21 @@
     return ^ SJAttributesFactory *(UIColor *color) {
         _r_nextStrikethough = YES;
         _r_nextStrikethoughColor = color;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(float, UIColor *))nextStroke {
+    return ^ SJAttributesFactory *(float border, UIColor *color){
+        _r_nextStrokeBorder = @(border);
+        _r_nextStrokeColor = color;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(void))nextLetterpress {
+    return ^ SJAttributesFactory *(void) {
+        _r_nextLetterpress = YES;
         return self;
     };
 }
