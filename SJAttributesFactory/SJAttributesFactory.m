@@ -13,8 +13,14 @@
 @property (nonatomic, strong, readonly) NSMutableAttributedString *attrM;
 @property (nonatomic, strong, readonly) NSMutableParagraphStyle *style;
 
-@property (nonatomic, strong, readwrite) UIFont *r_Font;
-@property (nonatomic, strong, readwrite) UIColor *r_FontColor;
+@property (nonatomic, strong, readwrite) UIFont *r_nextFont;
+@property (nonatomic, strong, readwrite) UIColor *r_nextFontColor;
+@property (nonatomic, assign, readwrite) BOOL r_nextUnderline;
+@property (nonatomic, strong, readwrite) UIColor *r_nextUnderlineColor;
+@property (nonatomic, assign, readwrite) BOOL r_nextStrikethough;
+@property (nonatomic, strong, readwrite) UIColor *r_nextStrikethoughColor;
+@property (nonatomic, strong, readwrite) UIColor *r_nextBackgroundColor;
+@property (nonatomic, strong, readwrite) NSNumber *r_nextLetterSpacing;
 
 @end
 
@@ -52,6 +58,13 @@
     };
 }
 
+- (SJAttributesFactory *(^)(UIColor *))backgroundColor {
+    return ^ SJAttributesFactory *(UIColor *color) {
+        [_attrM addAttribute:NSBackgroundColorAttributeName value:color range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 - (SJAttributesFactory *(^)(float))lineSpacing {
     return ^ SJAttributesFactory *(float lineSpacing) {
         self.style.lineSpacing = lineSpacing;
@@ -59,9 +72,32 @@
     };
 }
 
+- (SJAttributesFactory *(^)(float))letterSpacing {
+    return ^ SJAttributesFactory *(float spacing) {
+        [_attrM addAttribute:NSKernAttributeName value:@(spacing) range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 - (SJAttributesFactory *(^)(NSTextAlignment))alignment {
     return ^ SJAttributesFactory *(NSTextAlignment alignment) {
         self.style.alignment = alignment;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(UIColor *))underline {
+    return ^ SJAttributesFactory *(UIColor *color) {
+        [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:_rangeAll(_attrM)];
+        [_attrM addAttribute:NSUnderlineColorAttributeName value:color range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(UIColor *))strikethrough {
+    return ^ SJAttributesFactory *(UIColor *color) {
+        [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:_rangeAll(_attrM)];
+        [_attrM addAttribute:NSStrikethroughColorAttributeName value:color range:_rangeAll(_attrM)];
         return self;
     };
 }
@@ -77,25 +113,67 @@
 
 - (void (^)(NSRange))range {
     return ^(NSRange range) {
-        if ( _r_Font ) [_attrM addAttribute:NSFontAttributeName value:_r_Font range:range];
-        if ( _r_FontColor ) [_attrM addAttribute:NSForegroundColorAttributeName value:_r_FontColor range:range];
+        if ( _r_nextFont ) [_attrM addAttribute:NSFontAttributeName value:_r_nextFont range:range];
+        if ( _r_nextFontColor ) [_attrM addAttribute:NSForegroundColorAttributeName value:_r_nextFontColor range:range];
+        if ( _r_nextUnderline ) [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:range];
+        if ( _r_nextUnderlineColor ) [_attrM addAttribute:NSUnderlineColorAttributeName value:_r_nextUnderlineColor range:range];
+        if ( _r_nextBackgroundColor ) [_attrM addAttribute:NSBackgroundColorAttributeName value:_r_nextBackgroundColor range:range];
+        if ( _r_nextLetterSpacing ) [_attrM addAttribute:NSKernAttributeName value:_r_nextLetterSpacing range:range];
+        if ( _r_nextStrikethough ) [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:range];
+        if ( _r_nextStrikethoughColor ) [_attrM addAttribute:NSStrikethroughColorAttributeName value:_r_nextStrikethoughColor range:range];
         
         // clear
-        _r_Font = nil;
-        _r_FontColor = nil;
+        _r_nextFont = nil;
+        _r_nextFontColor = nil;
+        _r_nextUnderline = NO;
+        _r_nextUnderlineColor = nil;
+        _r_nextBackgroundColor = nil;
+        _r_nextStrikethough = NO;
+        _r_nextStrikethoughColor = nil;
+        _r_nextLetterSpacing = nil;
     };
 }
 
 - (SJAttributesFactory *(^)(UIFont *font))nextFont {
     return ^ SJAttributesFactory *(UIFont *font) {
-        _r_Font = font;
+        _r_nextFont = font;
         return self;
     };
 }
 
 - (SJAttributesFactory *(^)(UIColor *color))nextFontColor {
     return ^ SJAttributesFactory *(UIColor *fontColor) {
-        _r_FontColor = fontColor;
+        _r_nextFontColor = fontColor;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(UIColor *))nextBackgroundColor {
+    return ^ SJAttributesFactory *(UIColor *color) {
+        _r_nextBackgroundColor = color;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(float))nextLetterSpacing {
+    return ^ SJAttributesFactory *(float spacing) {
+        _r_nextLetterSpacing = @(spacing);
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(UIColor *))nextUnderline {
+    return ^ SJAttributesFactory *(UIColor *color) {
+        _r_nextUnderline = YES;
+        _r_nextUnderlineColor = color;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(UIColor *))nextStrikethough {
+    return ^ SJAttributesFactory *(UIColor *color) {
+        _r_nextStrikethough = YES;
+        _r_nextStrikethoughColor = color;
         return self;
     };
 }
