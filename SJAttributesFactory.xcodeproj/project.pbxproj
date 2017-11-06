@@ -19,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		A61066CA1FB0CBCE00A67DF9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
+		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A69E5BF01FB09BDC00EB65B5 /* SJAttributesFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJAttributesFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69E5BF31FB09BDC00EB65B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 				A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */,
 				A69E5BF61FB09BDC00EB65B5 /* ViewController.h */,
 				A69E5BF71FB09BDC00EB65B5 /* ViewController.m */,
+				A61066CC1FB0D08A00A67DF9 /* sample1.png */,
 				A61066CA1FB0CBCE00A67DF9 /* sample.png */,
 				A69E5C091FB09BF400EB65B5 /* SJAttributesFactory.h */,
 				A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */,

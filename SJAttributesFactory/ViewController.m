@@ -52,9 +52,7 @@
         .range(NSMakeRange(0, webAddress.length));
     }];
     
-    
-    NSMutableAttributedString *attrM = (NSMutableAttributedString *)attr;
-    [_testBtn setAttributedTitle:attrM forState:UIControlStateNormal];
+    [_testBtn setAttributedTitle:attr forState:UIControlStateNormal];
 }
 
 @end
