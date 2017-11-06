@@ -1,4 +1,7 @@
-# SJAttributesFactory
+# SJAttributesFactory    
+    
+<img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/SJAttributesFactory/sample1.png" />    
+
 
 ```Objective-C
     NSString *webAddress = @"webAddress:http://www.baidu.com\n";
