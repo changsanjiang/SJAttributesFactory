@@ -13,8 +13,7 @@
 @property (nonatomic, strong, readonly) NSMutableAttributedString *attrM;
 @property (nonatomic, strong, readonly) NSMutableParagraphStyle *style;
 
-@property (nonatomic, strong, readwrite) NSNumber *r_Font;
-@property (nonatomic, strong, readwrite) NSNumber *r_Bold_Font;
+@property (nonatomic, strong, readwrite) UIFont *r_Font;
 @property (nonatomic, strong, readwrite) UIColor *r_FontColor;
 
 @end
@@ -39,16 +38,9 @@
 
 #pragma mark -
 
-- (SJAttributesFactory *(^)(float))font {
-    return ^ SJAttributesFactory *(float font) {
-        [_attrM addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:_rangeAll(_attrM)];
-        return self;
-    };
-}
-
-- (SJAttributesFactory *(^)(float))boldFont {
-    return ^ SJAttributesFactory *(float font) {
-        [_attrM addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:font] range:_rangeAll(_attrM)];
+- (SJAttributesFactory *(^)(UIFont *font))font {
+    return ^ SJAttributesFactory *(UIFont *font) {
+        [_attrM addAttribute:NSFontAttributeName value:font range:_rangeAll(_attrM)];
         return self;
     };
 }
@@ -85,27 +77,18 @@
 
 - (void (^)(NSRange))range {
     return ^(NSRange range) {
-        if ( _r_Font ) [_attrM addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:[_r_Font floatValue]] range:range];
-        if ( _r_Bold_Font ) [_attrM addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:[_r_Bold_Font floatValue]] range:range];
+        if ( _r_Font ) [_attrM addAttribute:NSFontAttributeName value:_r_Font range:range];
         if ( _r_FontColor ) [_attrM addAttribute:NSForegroundColorAttributeName value:_r_FontColor range:range];
         
         // clear
         _r_Font = nil;
-        _r_Bold_Font = nil;
         _r_FontColor = nil;
     };
 }
 
-- (SJAttributesFactory *(^)(float))nextFont {
-    return ^ SJAttributesFactory *(float font) {
-        _r_Font = @(font);
-        return self;
-    };
-}
-
-- (SJAttributesFactory *(^)(float))nextBoldFont {
-    return ^ SJAttributesFactory *(float font) {
-        _r_Bold_Font = @(font);
+- (SJAttributesFactory *(^)(UIFont *font))nextFont {
+    return ^ SJAttributesFactory *(UIFont *font) {
+        _r_Font = font;
         return self;
     };
 }

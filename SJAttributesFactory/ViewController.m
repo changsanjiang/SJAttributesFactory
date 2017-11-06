@@ -28,16 +28,14 @@
     
     NSAttributedString *attr = [SJAttributesFactory alterStr:[NSString stringWithFormat:@"%@%@%@", webAddress, phone, name] block:^(SJAttributesFactory *alter) {
         UIColor *color = [UIColor redColor];
-        
-        // 修改整体
-        alter.font(20).fontColor(color).lineSpacing(25).alignment(NSTextAlignmentRight);
-        
-        
-        color = [UIColor greenColor];
         NSRange range = NSMakeRange(webAddress.length, phone.length);
-        
+
+        // 修改整体
+        alter.font([UIFont systemFontOfSize:20]).fontColor(color).lineSpacing(25).alignment(NSTextAlignmentRight);
+
+        color = [UIColor greenColor];
         // 修改指定范围
-        alter.nextBoldFont(25).nextFontColor(color).range(range);
+        alter.nextFont([UIFont boldSystemFontOfSize:20]).nextFontColor(color).range(range);
     }];
     
     [_testBtn setAttributedTitle:attr forState:UIControlStateNormal];

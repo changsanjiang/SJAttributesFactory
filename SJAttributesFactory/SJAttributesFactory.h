@@ -30,9 +30,7 @@
 #pragma mark - Range
 @property (nonatomic, copy, readonly) void(^range)(NSRange range);
 
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFont)(float font);
-
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextBoldFont)(float font);
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFont)(UIFont *font);
 
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFontColor)(UIColor *fontColor);
 
