@@ -13,6 +13,7 @@
 		A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BFC1FB09BDC00EB65B5 /* Assets.xcassets */; };
 		A69E5C001FB09BDC00EB65B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BFE1FB09BDC00EB65B5 /* LaunchScreen.storyboard */; };
 		A69E5C031FB09BDC00EB65B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5C021FB09BDC00EB65B5 /* main.m */; };
+		A69E5C0B1FB09BF400EB65B5 /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		A69E5BFF1FB09BDC00EB65B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A69E5C011FB09BDC00EB65B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A69E5C021FB09BDC00EB65B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A69E5C091FB09BF400EB65B5 /* SJAttributesFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
+		A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */,
 				A69E5BF61FB09BDC00EB65B5 /* ViewController.h */,
 				A69E5BF71FB09BDC00EB65B5 /* ViewController.m */,
+				A69E5C091FB09BF400EB65B5 /* SJAttributesFactory.h */,
+				A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */,
 				A69E5BF91FB09BDC00EB65B5 /* Main.storyboard */,
 				A69E5BFC1FB09BDC00EB65B5 /* Assets.xcassets */,
 				A69E5BFE1FB09BDC00EB65B5 /* LaunchScreen.storyboard */,
@@ -102,7 +107,7 @@
 				TargetAttributes = {
 					A69E5BEF1FB09BDC00EB65B5 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -142,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A69E5C0B1FB09BF400EB65B5 /* SJAttributesFactory.m in Sources */,
 				A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
@@ -278,11 +284,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DB5B5F2RH5;
 				INFOPLIST_FILE = SJAttributesFactory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "acd2453e-e396-4ccf-bf56-508276824c6c";
+				PROVISIONING_PROFILE_SPECIFIER = SanJiangDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -291,11 +300,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SJAttributesFactory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
