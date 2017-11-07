@@ -27,9 +27,9 @@
     _testBtn.titleLabel.numberOfLines = 0;
     
     NSString *str = [NSString stringWithFormat:@"%@%@%@", webAddress, phone, name];
-    NSAttributedString *attr = [SJAttributesFactory alterStr:str block:^(SJAttributesFactory *alter) {
+    NSAttributedString *attr = [SJAttributesFactory alterStr:str block:^(SJAttributesFactory *worker) {
         // 修改整体
-        alter
+        worker
         .font([UIFont systemFontOfSize:20])
         .backgroundColor([UIColor grayColor])
         .lineSpacing(25)
@@ -39,9 +39,9 @@
         UIColor *color = [UIColor greenColor];
         NSRange range = NSMakeRange(webAddress.length, phone.length);
         // 修改指定范围
-        alter.nextFont([UIFont boldSystemFontOfSize:20]).nextFontColor(color).range(range);
+        worker.nextFont([UIFont boldSystemFontOfSize:20]).nextFontColor(color).range(range);
         
-        alter
+        worker
         .nextFontColor([UIColor blueColor])
         .nextUnderline([UIColor cyanColor])
         .nextBackgroundColor([UIColor orangeColor])

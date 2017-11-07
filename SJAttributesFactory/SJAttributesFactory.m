@@ -38,7 +38,7 @@
     return self;
 }
 
-+ (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *alter))block {
++ (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block {
     NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:str];
     if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
     return attrStrM;
