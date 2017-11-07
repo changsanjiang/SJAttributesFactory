@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7774D7AA1FB15BAA00787173 /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */; };
+		7774D7AC1FB15DB900787173 /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */; };
 		A61066CB1FB0CBD500A67DF9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = A61066CA1FB0CBCE00A67DF9 /* sample.png */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
 		A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF71FB09BDC00EB65B5 /* ViewController.m */; };
@@ -14,10 +16,12 @@
 		A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BFC1FB09BDC00EB65B5 /* Assets.xcassets */; };
 		A69E5C001FB09BDC00EB65B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BFE1FB09BDC00EB65B5 /* LaunchScreen.storyboard */; };
 		A69E5C031FB09BDC00EB65B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5C021FB09BDC00EB65B5 /* main.m */; };
-		A69E5C0B1FB09BF400EB65B5 /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
+		7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
+		7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SJAttributesFactory.podspec; sourceTree = "<group>"; };
 		A61066CA1FB0CBCE00A67DF9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A69E5BF01FB09BDC00EB65B5 /* SJAttributesFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJAttributesFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,8 +34,6 @@
 		A69E5BFF1FB09BDC00EB65B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A69E5C011FB09BDC00EB65B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A69E5C021FB09BDC00EB65B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A69E5C091FB09BF400EB65B5 /* SJAttributesFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
-		A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +47,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7774D7A71FB15BAA00787173 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */,
+				7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */,
+			);
+			path = Classes;
+			sourceTree = SOURCE_ROOT;
+		};
 		A69E5BE71FB09BDC00EB65B5 = {
 			isa = PBXGroup;
 			children = (
+				7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */,
 				A69E5BF21FB09BDC00EB65B5 /* SJAttributesFactory */,
 				A69E5BF11FB09BDC00EB65B5 /* Products */,
 			);
@@ -68,10 +80,9 @@
 				A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */,
 				A69E5BF61FB09BDC00EB65B5 /* ViewController.h */,
 				A69E5BF71FB09BDC00EB65B5 /* ViewController.m */,
+				7774D7A71FB15BAA00787173 /* Classes */,
 				A61066CC1FB0D08A00A67DF9 /* sample1.png */,
 				A61066CA1FB0CBCE00A67DF9 /* sample.png */,
-				A69E5C091FB09BF400EB65B5 /* SJAttributesFactory.h */,
-				A69E5C0A1FB09BF400EB65B5 /* SJAttributesFactory.m */,
 				A69E5BF91FB09BDC00EB65B5 /* Main.storyboard */,
 				A69E5BFC1FB09BDC00EB65B5 /* Assets.xcassets */,
 				A69E5BFE1FB09BDC00EB65B5 /* LaunchScreen.storyboard */,
@@ -143,6 +154,7 @@
 				A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */,
 				A69E5BFB1FB09BDC00EB65B5 /* Main.storyboard in Resources */,
 				A61066CB1FB0CBD500A67DF9 /* sample.png in Resources */,
+				7774D7AC1FB15DB900787173 /* SJAttributesFactory.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A69E5C0B1FB09BF400EB65B5 /* SJAttributesFactory.m in Sources */,
+				7774D7AA1FB15BAA00787173 /* SJAttributesFactory.m in Sources */,
 				A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
@@ -294,7 +306,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DB5B5F2RH5;
 				INFOPLIST_FILE = SJAttributesFactory/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -311,7 +323,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SJAttributesFactory/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";

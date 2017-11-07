@@ -5,7 +5,8 @@
 //  Created by 畅三江 on 2017/11/6.
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
-//  Attributes => http://www.jianshu.com/p/ebbcfc24f9cb
+//
+//  关于属性介绍请移步 => http://www.jianshu.com/p/ebbcfc24f9cb
 
 #import <UIKit/UIKit.h>
 
@@ -14,48 +15,66 @@
 + (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block;
 
 #pragma mark - All
-/// 整体字体
+/// 整体 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^font)(UIFont *font);
-/// 整体字体颜色
+/// 整体 字体粗度
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^expansion)(float expansion);
+/// 整体 字体颜色
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^fontColor)(UIColor *fontColor);
-/// 整体背景颜色
+/// 整体 字体阴影
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^shadow)(NSShadow *shadow);
+/// 整体 背景颜色
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^backgroundColor)(UIColor *color);
-/// 整体每行间隔
+/// 整体 每行间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^lineSpacing)(float spacing);
-/// 整体字间隔
+/// 整体 字间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterSpacing)(float spacing);
-/// 整体对齐方式
+/// 整体 对齐方式
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^alignment)(NSTextAlignment alignment);
-/// 整体下划线
+/// 整体 下划线
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^underline)(UIColor *color);
-/// 整体删除线
+/// 整体 删除线
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^strikethrough)(UIColor *color);
 /// border 如果大于0, 则显示的是空心字体. 如果小于0, 则显示实心字体(就像正常字体那样, 只不过是描边了).
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^stroke)(float border, UIColor *color);
-/// 整体凸版
+/// 整体 凸版
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterpress)(void);
-/// 整体段落样式
+/// 整体 段落样式
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^paragraphStyle)(NSParagraphStyle *style);
+/// 整体 切斜. 建议值 -1 到 1 之间.
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^obliqueness)(float obliqueness);
+
 
 #pragma mark - Range
-/// must set it up. 如果只修改一部分, 最后必须设置他.
+/// must set it up. 如果只修改一部分, 最后必须设置他. 这个很重要.
 @property (nonatomic, copy, readonly) void(^range)(NSRange range);
-/// 指定范围内的字体
+/// 指定范围内的 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFont)(UIFont *font);
-/// 指定范围内的字体颜色
+/// 指定范围内的 字体粗度
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextExpansion)(float nextExpansion);
+/// 指定范围内的 字体颜色
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFontColor)(UIColor *fontColor);
-/// 指定范围内的背景颜色
+/// 指定范围内的 阴影
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextShadow)(NSShadow *shadow);
+/// 指定范围内的 背景颜色
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextBackgroundColor)(UIColor *color);
-/// 指定范围内的字间隔
+/// 指定范围内的 字间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextLetterSpacing)(float spacing);
-/// 指定范围内的下滑线
+/// 指定范围内的 下滑线
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextUnderline)(UIColor *color);
-/// 指定范围内的删除线
+/// 指定范围内的 删除线
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextStrikethough)(UIColor *color);
-/// 指定范围内的填充. 效果同 storke.
+/// 指定范围内的 填充. 效果同 storke.
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextStroke)(float border, UIColor *color);
-/// 指定范围内的凸版
+/// 指定范围内的 凸版
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextLetterpress)(void);
+/// 指定范围内为链接
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextLink)(void);
+/// 指定范围内上下的偏移量. 正值向上, 负数向下.
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextOffset)(float offset);
+/// 指定范围内倾斜. 建议值 -1 到 1 之间.
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextObliqueness)(float obliqueness);
+
 
 #pragma mark - Insert
 /// 指定位置插入图片

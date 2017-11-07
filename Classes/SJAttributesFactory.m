@@ -14,7 +14,9 @@
 @property (nonatomic, strong, readonly) NSMutableParagraphStyle *style;
 
 @property (nonatomic, strong, readwrite) UIFont *r_nextFont;
+@property (nonatomic, strong, readwrite) NSNumber *r_nextExpansion;
 @property (nonatomic, strong, readwrite) UIColor *r_nextFontColor;
+@property (nonatomic, strong, readwrite) NSShadow *r_nextShadow;
 @property (nonatomic, assign, readwrite) BOOL r_nextUnderline;
 @property (nonatomic, strong, readwrite) UIColor *r_nextUnderlineColor;
 @property (nonatomic, assign, readwrite) BOOL r_nextStrikethough;
@@ -24,6 +26,10 @@
 @property (nonatomic, strong, readwrite) NSNumber *r_nextStrokeBorder;
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrokeColor;
 @property (nonatomic, assign, readwrite) BOOL r_nextLetterpress;
+@property (nonatomic, assign, readwrite) BOOL r_nextLink;
+@property (nonatomic, strong, readwrite) NSNumber *r_nextOffset;
+@property (nonatomic, strong, readwrite) NSNumber *r_nextObliqueness;
+
 @end
 
 @implementation SJAttributesFactory
@@ -53,9 +59,23 @@
     };
 }
 
+- (SJAttributesFactory *(^)(float))expansion {
+    return ^ SJAttributesFactory *(float expansion) {
+        [_attrM addAttribute:NSExpansionAttributeName value:@(expansion) range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 - (SJAttributesFactory *(^)(UIColor *))fontColor {
     return ^ SJAttributesFactory *(UIColor *fontColor) {
         [_attrM addAttribute:NSForegroundColorAttributeName value:fontColor range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(NSShadow *))shadow {
+    return ^ SJAttributesFactory *(NSShadow *shadow) {
+        [_attrM addAttribute:NSShadowAttributeName value:shadow range:_rangeAll(_attrM)];
         return self;
     };
 }
@@ -126,13 +146,9 @@
     };
 }
 
-- (SJAttributesFactory *(^)(UIImage *, CGSize, NSInteger))insertImage {
-    return ^ SJAttributesFactory *(UIImage *image, CGSize size, NSInteger index) {
-        NSTextAttachment *attachment = [NSTextAttachment new];
-        attachment.image = image;
-        attachment.bounds = CGRectMake(0, 0, size.width, size.height);
-        NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:attachment];
-        [_attrM insertAttributedString:attr atIndex:index];
+- (SJAttributesFactory *(^)(float))obliqueness {
+    return ^ SJAttributesFactory *(float obliqueness) {
+        [_attrM addAttribute:NSObliquenessAttributeName value:@(obliqueness) range:_rangeAll(_attrM)];
         return self;
     };
 }
@@ -142,6 +158,7 @@
 - (void (^)(NSRange))range {
     return ^(NSRange range) {
         if ( _r_nextFont ) [_attrM addAttribute:NSFontAttributeName value:_r_nextFont range:range];
+        if ( _r_nextExpansion ) [_attrM addAttribute:NSExpansionAttributeName value:_r_nextExpansion range:range];
         if ( _r_nextFontColor ) [_attrM addAttribute:NSForegroundColorAttributeName value:_r_nextFontColor range:range];
         if ( _r_nextUnderline ) [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:range];
         if ( _r_nextUnderlineColor ) [_attrM addAttribute:NSUnderlineColorAttributeName value:_r_nextUnderlineColor range:range];
@@ -152,10 +169,14 @@
         if ( _r_nextStrokeBorder ) [_attrM addAttribute:NSStrokeWidthAttributeName value:_r_nextStrokeBorder range:range];
         if ( _r_nextStrokeColor ) [_attrM addAttribute:NSStrokeColorAttributeName value:_r_nextStrokeColor range:range];
         if ( _r_nextLetterpress ) [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:range];
-        
+        if ( _r_nextLink ) [_attrM addAttribute:NSLinkAttributeName value:@(1) range:range];
+        if ( _r_nextOffset ) [_attrM addAttribute:NSBaselineOffsetAttributeName value:_r_nextOffset range:range];
+        if ( _r_nextObliqueness ) [_attrM addAttribute:NSObliquenessAttributeName value:_r_nextObliqueness range:range];
+        if ( _r_nextShadow ) [_attrM addAttribute:NSShadowAttributeName value:_r_nextShadow range:range];
         
         // clear
         _r_nextFont = nil;
+        _r_nextExpansion = nil;
         _r_nextFontColor = nil;
         _r_nextUnderline = NO;
         _r_nextUnderlineColor = nil;
@@ -166,6 +187,10 @@
         _r_nextStrokeBorder = nil;
         _r_nextStrokeColor = nil;
         _r_nextLetterpress = NO;
+        _r_nextLink = YES;
+        _r_nextOffset = nil;
+        _r_nextObliqueness = nil;
+        _r_nextShadow = nil;
     };
 }
 
@@ -176,9 +201,23 @@
     };
 }
 
+- (SJAttributesFactory *(^)(float))nextExpansion {
+    return ^ SJAttributesFactory *(float expansion) {
+        _r_nextExpansion = @(expansion);
+        return self;
+    };
+}
+
 - (SJAttributesFactory *(^)(UIColor *color))nextFontColor {
     return ^ SJAttributesFactory *(UIColor *fontColor) {
         _r_nextFontColor = fontColor;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(NSShadow *))nextShadow {
+    return ^ SJAttributesFactory *(NSShadow *nextShadow) {
+        _r_nextShadow = nextShadow;
         return self;
     };
 }
@@ -224,6 +263,40 @@
 - (SJAttributesFactory *(^)(void))nextLetterpress {
     return ^ SJAttributesFactory *(void) {
         _r_nextLetterpress = YES;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(void))nextLink {
+    return ^ SJAttributesFactory *(void) {
+        _r_nextLink = YES;
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(float))nextOffset {
+    return ^ SJAttributesFactory *(float nextOffset) {
+        _r_nextOffset = @(nextOffset);
+        return self;
+    };
+}
+
+- (SJAttributesFactory *(^)(float))nextObliqueness {
+    return ^ SJAttributesFactory *(float nextObliqueness) {
+        _r_nextObliqueness = @(nextObliqueness);
+        return self;
+    };
+}
+
+#pragma mark -
+
+- (SJAttributesFactory *(^)(UIImage *, CGSize, NSInteger))insertImage {
+    return ^ SJAttributesFactory *(UIImage *image, CGSize size, NSInteger index) {
+        NSTextAttachment *attachment = [NSTextAttachment new];
+        attachment.image = image;
+        attachment.bounds = CGRectMake(0, 0, size.width, size.height);
+        NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:attachment];
+        [_attrM insertAttributedString:attr atIndex:index];
         return self;
     };
 }

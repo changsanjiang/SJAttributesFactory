@@ -30,10 +30,12 @@
     NSAttributedString *attr = [SJAttributesFactory alterStr:str block:^(SJAttributesFactory *worker) {
         // 修改整体
         worker
-        .font([UIFont systemFontOfSize:20])
+        .font([UIFont systemFontOfSize:12])
+        .expansion(0.2)
         .backgroundColor([UIColor grayColor])
         .lineSpacing(25)
         .alignment(NSTextAlignmentRight)
+//        .obliqueness(0.4)
         .insertImage([UIImage imageNamed:@"sample"], CGSizeMake(20, 20), 10);
         
         UIColor *color = [UIColor greenColor];
@@ -43,15 +45,17 @@
         
         worker
         .nextFontColor([UIColor blueColor])
-        .nextUnderline([UIColor cyanColor])
+//        .nextUnderline([UIColor cyanColor])
         .nextBackgroundColor([UIColor orangeColor])
         .nextStrikethough([UIColor brownColor])
         .nextStroke(-1, [UIColor blackColor])
         .nextLetterSpacing(2)
         .nextLetterpress()
+//        .nextObliqueness(-0.5)
         .range(NSMakeRange(0, webAddress.length));
+        
+        worker.nextOffset(10).range(NSMakeRange(5, 10));
     }];
-    
     [_testBtn setAttributedTitle:attr forState:UIControlStateNormal];
 }
 
