@@ -1,5 +1,12 @@
 # SJAttributesFactory    
-    
+
+### Use
+```ruby
+pod SJAttributesFactory
+```
+
+### Example
+
 <img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/SJAttributesFactory/sample1.png" />    
 
 
