@@ -2,7 +2,7 @@
 
 ### Use
 ```ruby
-pod SJAttributesFactory
+pod 'SJAttributesFactory'
 ```
 
 ### Example
