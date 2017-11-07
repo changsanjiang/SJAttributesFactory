@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7774D7AA1FB15BAA00787173 /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */; };
 		7774D7AC1FB15DB900787173 /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */; };
+		7774D7AE1FB1603F00787173 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AD1FB1603F00787173 /* README.md */; };
 		A61066CB1FB0CBD500A67DF9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = A61066CA1FB0CBCE00A67DF9 /* sample.png */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
 		A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF71FB09BDC00EB65B5 /* ViewController.m */; };
@@ -22,6 +23,7 @@
 		7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
 		7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
 		7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SJAttributesFactory.podspec; sourceTree = "<group>"; };
+		7774D7AD1FB1603F00787173 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A61066CA1FB0CBCE00A67DF9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A69E5BF01FB09BDC00EB65B5 /* SJAttributesFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJAttributesFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */,
+				7774D7AD1FB1603F00787173 /* README.md */,
 				A69E5BF21FB09BDC00EB65B5 /* SJAttributesFactory */,
 				A69E5BF11FB09BDC00EB65B5 /* Products */,
 			);
@@ -150,6 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7774D7AE1FB1603F00787173 /* README.md in Resources */,
 				A69E5C001FB09BDC00EB65B5 /* LaunchScreen.storyboard in Resources */,
 				A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */,
 				A69E5BFB1FB09BDC00EB65B5 /* Main.storyboard in Resources */,
