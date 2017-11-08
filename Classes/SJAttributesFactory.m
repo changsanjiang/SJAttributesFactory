@@ -187,7 +187,7 @@
         _r_nextStrokeBorder = nil;
         _r_nextStrokeColor = nil;
         _r_nextLetterpress = NO;
-        _r_nextLink = YES;
+        _r_nextLink = NO;
         _r_nextOffset = nil;
         _r_nextObliqueness = nil;
         _r_nextShadow = nil;

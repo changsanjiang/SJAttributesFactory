@@ -55,6 +55,7 @@
         worker.nextOffset(10).range(NSMakeRange(5, 10));
     }];
     [_testBtn setAttributedTitle:attr forState:UIControlStateNormal];
+    
 }
 
 @end

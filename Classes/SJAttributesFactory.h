@@ -10,6 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SJAttributesFactory : NSObject
 
 + (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block;
@@ -81,3 +83,4 @@
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertImage)(UIImage *image, CGSize size, NSInteger index);
 @end
 
+NS_ASSUME_NONNULL_END
