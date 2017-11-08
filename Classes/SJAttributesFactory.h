@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - All
 /// 整体 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^font)(UIFont *font);
-/// 整体 字体粗度
+/// 整体 放大
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^expansion)(float expansion);
 /// 整体 字体颜色
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^fontColor)(UIColor *fontColor);
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) void(^range)(NSRange range);
 /// 指定范围内的 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFont)(UIFont *font);
-/// 指定范围内的 字体粗度
+/// 指定范围内的 字体放大
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextExpansion)(float nextExpansion);
 /// 指定范围内的 字体颜色
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextFontColor)(UIColor *fontColor);
