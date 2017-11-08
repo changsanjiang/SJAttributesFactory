@@ -14,9 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SJAttributesFactory : NSObject
 
+#pragma mark - Create
 + (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block;
 
 + (NSAttributedString *)alterAttrStr:(NSAttributedString *)attrStr block:(void(^)(SJAttributesFactory *worker))block;
+
++ (NSAttributedString *)alterWithImage:(UIImage *)image size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block;
+
 
 #pragma mark - All
 /// 整体 字体
@@ -35,10 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterSpacing)(float spacing);
 /// 整体 对齐方式
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^alignment)(NSTextAlignment alignment);
-/// 整体 下划线
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^underline)(UIColor *color);
-/// 整体 删除线
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^strikethrough)(UIColor *color);
+/// 整体 下划线 ex: worker.underline(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor blueColor])
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^underline)(NSUnderlineStyle style, UIColor *color);
+/// 整体 删除线 ex: worker.strikethrough(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor redColor])
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^strikethrough)(NSUnderlineStyle style, UIColor *color);
 /// border 如果大于0, 则显示的是空心字体. 如果小于0, 则显示实心字体(就像正常字体那样, 只不过是描边了).
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^stroke)(float border, UIColor *color);
 /// 整体 凸版
@@ -65,9 +69,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 指定范围内的 字间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextLetterSpacing)(float spacing);
 /// 指定范围内的 下划线
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextUnderline)(UIColor *color);
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextUnderline)(NSUnderlineStyle style, UIColor *color);
 /// 指定范围内的 删除线
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextStrikethough)(UIColor *color);
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^nextStrikethough)(NSUnderlineStyle style, UIColor *color);
 /// 指定范围内的 填充. 效果同 storke.
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextStroke)(float border, UIColor *color);
 /// 指定范围内的 凸版
@@ -87,6 +91,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertAttr)(NSAttributedString *attr, NSInteger index);
 /// 指定位置 插入文本
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertText)(NSString *text, NSInteger index);
+
+
+#pragma mark - Remove
 /// 指定范围 删除文本
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^removeText)(NSRange range);
 /// 指定范围 删除属性

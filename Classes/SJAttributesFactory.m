@@ -17,9 +17,9 @@
 @property (nonatomic, strong, readwrite) NSNumber *r_nextExpansion;
 @property (nonatomic, strong, readwrite) UIColor *r_nextFontColor;
 @property (nonatomic, strong, readwrite) NSShadow *r_nextShadow;
-@property (nonatomic, assign, readwrite) BOOL r_nextUnderline;
+@property (nonatomic, strong, readwrite) NSNumber *r_nextUnderline;
 @property (nonatomic, strong, readwrite) UIColor *r_nextUnderlineColor;
-@property (nonatomic, assign, readwrite) BOOL r_nextStrikethough;
+@property (nonatomic, strong, readwrite) NSNumber *r_nextStrikethough;
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrikethoughColor;
 @property (nonatomic, strong, readwrite) UIColor *r_nextBackgroundColor;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextLetterSpacing;
@@ -47,6 +47,19 @@
     NSMutableAttributedString *attrStrM = attrStr.mutableCopy;
     if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
     return attrStrM;
+}
+
++ (NSAttributedString *)alterWithImage:(UIImage *)image size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block {
+    NSMutableAttributedString *attrStrM = [self attrStrWithImage:image size:size].mutableCopy;
+    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
+    return attrStrM;
+}
+
++ (NSAttributedString *)attrStrWithImage:(UIImage *)image size:(CGSize)size {
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment.image = image;
+    attachment.bounds = CGRectMake(0, 0, size.width, size.height);
+    return [NSAttributedString attributedStringWithAttachment:attachment];
 }
 
 - (instancetype)initWithAttr:(NSMutableAttributedString *)attr {
@@ -114,17 +127,17 @@
     };
 }
 
-- (SJAttributesFactory *(^)(UIColor *))underline {
-    return ^ SJAttributesFactory *(UIColor *color) {
-        [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:_rangeAll(_attrM)];
+- (SJAttributesFactory * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))underline {
+    return ^ SJAttributesFactory *(NSUnderlineStyle style, UIColor *color) {
+        [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(style) range:_rangeAll(_attrM)];
         [_attrM addAttribute:NSUnderlineColorAttributeName value:color range:_rangeAll(_attrM)];
         return self;
     };
 }
 
-- (SJAttributesFactory *(^)(UIColor *))strikethrough {
-    return ^ SJAttributesFactory *(UIColor *color) {
-        [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:_rangeAll(_attrM)];
+- (SJAttributesFactory * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))strikethrough {
+    return ^ SJAttributesFactory *(NSUnderlineStyle style, UIColor *color) {
+        [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(style) range:_rangeAll(_attrM)];
         [_attrM addAttribute:NSStrikethroughColorAttributeName value:color range:_rangeAll(_attrM)];
         return self;
     };
@@ -176,8 +189,8 @@
             _r_nextFontColor = nil;
         }
         if ( _r_nextUnderline ) {
-            [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:range];
-            _r_nextUnderline = NO;
+            [_attrM addAttribute:NSUnderlineStyleAttributeName value:_r_nextUnderline range:range];
+            _r_nextUnderline = nil;
         }
         if ( _r_nextUnderlineColor ) {
             [_attrM addAttribute:NSUnderlineColorAttributeName value:_r_nextUnderlineColor range:range];
@@ -192,8 +205,8 @@
             _r_nextLetterSpacing = nil;
         }
         if ( _r_nextStrikethough ) {
-            [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:range];
-            _r_nextStrikethough = NO;
+            [_attrM addAttribute:NSStrikethroughStyleAttributeName value:_r_nextStrikethough range:range];
+            _r_nextStrikethough = nil;
         }
         if ( _r_nextStrikethoughColor ) {
             [_attrM addAttribute:NSStrikethroughColorAttributeName value:_r_nextStrikethoughColor range:range];
@@ -272,17 +285,17 @@
     };
 }
 
-- (SJAttributesFactory *(^)(UIColor *))nextUnderline {
-    return ^ SJAttributesFactory *(UIColor *color) {
-        _r_nextUnderline = YES;
+- (SJAttributesFactory * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))nextUnderline {
+    return ^ SJAttributesFactory *(NSUnderlineStyle style, UIColor *color) {
+        _r_nextUnderline = @(style);
         _r_nextUnderlineColor = color;
         return self;
     };
 }
 
-- (SJAttributesFactory *(^)(UIColor *))nextStrikethough {
-    return ^ SJAttributesFactory *(UIColor *color) {
-        _r_nextStrikethough = YES;
+- (SJAttributesFactory * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))nextStrikethough {
+    return ^ SJAttributesFactory *(NSUnderlineStyle style, UIColor *color) {
+        _r_nextStrikethough = @(style);
         _r_nextStrikethoughColor = color;
         return self;
     };
@@ -328,10 +341,7 @@
 
 - (SJAttributesFactory *(^)(UIImage *, CGSize, NSInteger))insertImage {
     return ^ SJAttributesFactory *(UIImage *image, CGSize size, NSInteger index) {
-        NSTextAttachment *attachment = [NSTextAttachment new];
-        attachment.image = image;
-        attachment.bounds = CGRectMake(0, 0, size.width, size.height);
-        self.insertAttr([NSAttributedString attributedStringWithAttachment:attachment], index);
+        self.insertAttr([[self class] attrStrWithImage:image size:size], index);
         return self;
     };
 }
