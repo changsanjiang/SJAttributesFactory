@@ -37,17 +37,17 @@
 @synthesize attrM = _attrM;
 @synthesize style = _style;
 
++ (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block {
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:str];
+    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
+    return attrStrM;
+}
+
 - (instancetype)initWithAttr:(NSMutableAttributedString *)attr {
     self = [super init];
     if ( !self ) return nil;
     _attrM = attr;
     return self;
-}
-
-+ (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block {
-    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:str];
-    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
-    return attrStrM;
 }
 
 #pragma mark -
@@ -157,40 +157,70 @@
 
 - (void (^)(NSRange))range {
     return ^(NSRange range) {
-        if ( _r_nextFont ) [_attrM addAttribute:NSFontAttributeName value:_r_nextFont range:range];
-        if ( _r_nextExpansion ) [_attrM addAttribute:NSExpansionAttributeName value:_r_nextExpansion range:range];
-        if ( _r_nextFontColor ) [_attrM addAttribute:NSForegroundColorAttributeName value:_r_nextFontColor range:range];
-        if ( _r_nextUnderline ) [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:range];
-        if ( _r_nextUnderlineColor ) [_attrM addAttribute:NSUnderlineColorAttributeName value:_r_nextUnderlineColor range:range];
-        if ( _r_nextBackgroundColor ) [_attrM addAttribute:NSBackgroundColorAttributeName value:_r_nextBackgroundColor range:range];
-        if ( _r_nextLetterSpacing ) [_attrM addAttribute:NSKernAttributeName value:_r_nextLetterSpacing range:range];
-        if ( _r_nextStrikethough ) [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:range];
-        if ( _r_nextStrikethoughColor ) [_attrM addAttribute:NSStrikethroughColorAttributeName value:_r_nextStrikethoughColor range:range];
-        if ( _r_nextStrokeBorder ) [_attrM addAttribute:NSStrokeWidthAttributeName value:_r_nextStrokeBorder range:range];
-        if ( _r_nextStrokeColor ) [_attrM addAttribute:NSStrokeColorAttributeName value:_r_nextStrokeColor range:range];
-        if ( _r_nextLetterpress ) [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:range];
-        if ( _r_nextLink ) [_attrM addAttribute:NSLinkAttributeName value:@(1) range:range];
-        if ( _r_nextOffset ) [_attrM addAttribute:NSBaselineOffsetAttributeName value:_r_nextOffset range:range];
-        if ( _r_nextObliqueness ) [_attrM addAttribute:NSObliquenessAttributeName value:_r_nextObliqueness range:range];
-        if ( _r_nextShadow ) [_attrM addAttribute:NSShadowAttributeName value:_r_nextShadow range:range];
-        
-        // clear
-        _r_nextFont = nil;
-        _r_nextExpansion = nil;
-        _r_nextFontColor = nil;
-        _r_nextUnderline = NO;
-        _r_nextUnderlineColor = nil;
-        _r_nextBackgroundColor = nil;
-        _r_nextStrikethough = NO;
-        _r_nextStrikethoughColor = nil;
-        _r_nextLetterSpacing = nil;
-        _r_nextStrokeBorder = nil;
-        _r_nextStrokeColor = nil;
-        _r_nextLetterpress = NO;
-        _r_nextLink = NO;
-        _r_nextOffset = nil;
-        _r_nextObliqueness = nil;
-        _r_nextShadow = nil;
+        if ( _r_nextFont ) {
+            [_attrM addAttribute:NSFontAttributeName value:_r_nextFont range:range];
+            _r_nextFont = nil;
+        }
+        if ( _r_nextExpansion ) {
+            [_attrM addAttribute:NSExpansionAttributeName value:_r_nextExpansion range:range];
+            _r_nextExpansion = nil;
+        }
+        if ( _r_nextFontColor ) {
+            [_attrM addAttribute:NSForegroundColorAttributeName value:_r_nextFontColor range:range];
+            _r_nextFontColor = nil;
+        }
+        if ( _r_nextUnderline ) {
+            [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(1) range:range];
+            _r_nextUnderline = NO;
+        }
+        if ( _r_nextUnderlineColor ) {
+            [_attrM addAttribute:NSUnderlineColorAttributeName value:_r_nextUnderlineColor range:range];
+            _r_nextUnderlineColor = nil;
+        }
+        if ( _r_nextBackgroundColor ) {
+            [_attrM addAttribute:NSBackgroundColorAttributeName value:_r_nextBackgroundColor range:range];
+            _r_nextBackgroundColor = nil;
+        }
+        if ( _r_nextLetterSpacing ) {
+            [_attrM addAttribute:NSKernAttributeName value:_r_nextLetterSpacing range:range];
+            _r_nextLetterSpacing = nil;
+        }
+        if ( _r_nextStrikethough ) {
+            [_attrM addAttribute:NSStrikethroughStyleAttributeName value:@(1) range:range];
+            _r_nextStrikethough = NO;
+        }
+        if ( _r_nextStrikethoughColor ) {
+            [_attrM addAttribute:NSStrikethroughColorAttributeName value:_r_nextStrikethoughColor range:range];
+            _r_nextStrikethoughColor = nil;
+        }
+        if ( _r_nextStrokeBorder ) {
+            [_attrM addAttribute:NSStrokeWidthAttributeName value:_r_nextStrokeBorder range:range];
+            _r_nextStrokeBorder = nil;
+        }
+        if ( _r_nextStrokeColor ) {
+            [_attrM addAttribute:NSStrokeColorAttributeName value:_r_nextStrokeColor range:range];
+            _r_nextStrokeColor = nil;
+        }
+        if ( _r_nextLetterpress ) {
+            [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:range];
+            _r_nextLetterpress = NO;
+        }
+        if ( _r_nextLink ) {
+            [_attrM addAttribute:NSLinkAttributeName value:@(1) range:range];
+            _r_nextLink = NO;
+        }
+        if ( _r_nextOffset ) {
+            [_attrM addAttribute:NSBaselineOffsetAttributeName value:_r_nextOffset range:range];
+            _r_nextOffset = nil;
+        }
+        if ( _r_nextObliqueness ) {
+            [_attrM addAttribute:NSObliquenessAttributeName value:_r_nextObliqueness range:range];
+            _r_nextObliqueness = nil;
+        }
+        if ( _r_nextShadow ) {
+            [_attrM addAttribute:NSShadowAttributeName value:_r_nextShadow range:range];
+            _r_nextShadow = nil;
+        }
     };
 }
 
