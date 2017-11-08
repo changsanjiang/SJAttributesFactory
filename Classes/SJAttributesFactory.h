@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterpress)(void);
 /// 整体 段落样式
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^paragraphStyle)(NSParagraphStyle *style);
-/// 整体 切斜. 建议值 -1 到 1 之间.
+/// 整体 倾斜. 建议值 -1 到 1 之间.
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^obliqueness)(float obliqueness);
 
 
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextBackgroundColor)(UIColor *color);
 /// 指定范围内的 字间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextLetterSpacing)(float spacing);
-/// 指定范围内的 下滑线
+/// 指定范围内的 下划线
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextUnderline)(UIColor *color);
 /// 指定范围内的 删除线
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^nextStrikethough)(UIColor *color);
