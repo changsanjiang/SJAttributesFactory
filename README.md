@@ -7,7 +7,7 @@ pod 'SJAttributesFactory'
 
 ### Example
 
-<img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/SJAttributesFactory/sample1.png" />    
+<img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/SJAttributesFactory/ex.gif" />
 
 
 ```Objective-C
