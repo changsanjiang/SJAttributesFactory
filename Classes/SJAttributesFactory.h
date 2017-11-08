@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block;
 
++ (NSAttributedString *)alterAttrStr:(NSAttributedString *)attrStr block:(void(^)(SJAttributesFactory *worker))block;
+
 #pragma mark - All
 /// 整体 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^font)(UIFont *font);
@@ -79,8 +81,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark - Insert
-/// 指定位置插入图片
+/// 指定位置 插入图片
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertImage)(UIImage *image, CGSize size, NSInteger index);
+/// 指定位置 插入文本
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^insertAttr)(NSAttributedString *attr, NSInteger index);
+/// 指定位置 插入文本
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^insertText)(NSString *text, NSInteger index);
+/// 指定范围 删除文本
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^removeText)(NSRange range);
+/// 指定范围 删除属性
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^removeAttribute)(NSAttributedStringKey key, NSRange range);
+
+
+#pragma mark - Other
+/// 获取当前文本的长度
+@property (nonatomic, assign, readonly) NSInteger length;
+
 @end
 
 NS_ASSUME_NONNULL_END

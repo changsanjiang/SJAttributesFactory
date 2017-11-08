@@ -43,6 +43,12 @@
     return attrStrM;
 }
 
++ (NSAttributedString *)alterAttrStr:(NSAttributedString *)attrStr block:(void(^)(SJAttributesFactory *worker))block {
+    NSMutableAttributedString *attrStrM = attrStr.mutableCopy;
+    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
+    return attrStrM;
+}
+
 - (instancetype)initWithAttr:(NSMutableAttributedString *)attr {
     self = [super init];
     if ( !self ) return nil;
@@ -325,8 +331,35 @@
         NSTextAttachment *attachment = [NSTextAttachment new];
         attachment.image = image;
         attachment.bounds = CGRectMake(0, 0, size.width, size.height);
-        NSAttributedString *attr = [NSAttributedString attributedStringWithAttachment:attachment];
+        self.insertAttr([NSAttributedString attributedStringWithAttachment:attachment], index);
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(NSAttributedString * _Nonnull, NSInteger))insertAttr {
+    return ^ SJAttributesFactory *(NSAttributedString *attr, NSInteger index) {
         [_attrM insertAttributedString:attr atIndex:index];
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(NSString * _Nonnull, NSInteger))insertText {
+    return ^ SJAttributesFactory *(NSString *text, NSInteger index) {
+        self.insertAttr([[NSAttributedString alloc] initWithString:text], index);
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(NSRange))removeText {
+    return ^ SJAttributesFactory *(NSRange range) {
+        [_attrM deleteCharactersInRange:range];
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(NSAttributedStringKey _Nonnull, NSRange))removeAttribute {
+    return ^ SJAttributesFactory *(NSAttributedStringKey key, NSRange range) {
+        [_attrM removeAttribute:key range:range];
         return self;
     };
 }
@@ -342,6 +375,11 @@
     if ( _style ) return _style;
     _style = [NSMutableParagraphStyle new];
     return _style;
+}
+
+#pragma mark - Other
+- (NSInteger)length {
+    return _attrM.length;
 }
 
 #pragma mark -

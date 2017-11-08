@@ -97,11 +97,32 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 worker.letterpress().obliqueness(0.2);
             }];
         }
+            break;
+        case 6: {
+            tips = @"指定位置插入文本";
+            attr = [SJAttributesFactory alterStr:@"我的故乡" block:^(SJAttributesFactory * _Nonnull worker) {
+                NSLog(@"插入前: %zd", worker.length);
+                
+                worker.insertText(@", 在哪里?", 4);
+                
+                NSLog(@"插入后: %zd", worker.length);
+            }];
+        }
+            break;
+        case 7: {
+            tips = @"指定范围删除文本";
+            attr = [SJAttributesFactory alterStr:@"我的故乡" block:^(SJAttributesFactory * _Nonnull worker) {
+                worker.removeText(NSMakeRange(0, 2));
+            }];
+        }
+            break;
     }
     
     if ( !attr ) return;
     _tipsLabel.text = tips;
     [_testBtn setAttributedTitle:attr forState:UIControlStateNormal];
+    
+    NSLog(@"------------- end -------------");
 }
 
 #pragma mark -
@@ -110,7 +131,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
