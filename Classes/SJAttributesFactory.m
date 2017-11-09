@@ -117,6 +117,41 @@
     };
 }
 
+- (SJAttributesFactory * _Nonnull (^)(float))paragraphSpacing {
+    return ^ SJAttributesFactory *(float paragraphSpacing) {
+        self.style.paragraphSpacing = paragraphSpacing;
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(float))paragraphSpacingBefore {
+    return ^ SJAttributesFactory *(float paragraphSpacingBefore) {
+        self.style.paragraphSpacingBefore = paragraphSpacingBefore;
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(float))firstLineHeadIndent {
+    return ^ SJAttributesFactory *(float firstLineHeadIndent) {
+        self.style.firstLineHeadIndent = firstLineHeadIndent;
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(float))headIndent {
+    return ^ SJAttributesFactory *(float headIndent) {
+        self.style.headIndent = headIndent;
+        return self;
+    };
+}
+
+- (SJAttributesFactory * _Nonnull (^)(float))tailIndent {
+    return ^ SJAttributesFactory *(float tailIndent) {
+        self.style.tailIndent = tailIndent;
+        return self;
+    };
+}
+
 - (SJAttributesFactory *(^)(float))letterSpacing {
     return ^ SJAttributesFactory *(float spacing) {
         [_attrM addAttribute:NSKernAttributeName value:@(spacing) range:_rangeAll(_attrM)];
@@ -416,6 +451,22 @@
 #pragma mark - Other
 - (NSInteger)length {
     return _attrM.length;
+}
+
+- (CGFloat (^)(NSRange))width {
+    return ^ CGFloat (NSRange range) {
+        NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
+        __block BOOL isSetFont = NO;
+        [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+            [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                if ( ![key isEqualToString:NSFontAttributeName] ) return;
+                isSetFont = YES;
+                *stop = YES;
+            }];
+        }];
+        NSAssert(isSetFont, @"未设置字体, 无法计算宽度");
+        return [attr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.width;
+    };
 }
 
 #pragma mark -

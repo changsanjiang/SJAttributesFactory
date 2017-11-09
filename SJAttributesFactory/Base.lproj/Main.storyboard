@@ -6,6 +6,7 @@
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,10 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1H3-rW-ofT">
-                                <rect key="frame" x="160.5" y="70" width="54" height="34"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ze9-9K-CwX">
                                 <rect key="frame" x="20" y="447" width="335" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,7 +27,16 @@
                                 </constraints>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tips" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psG-fA-mIA">
-                                <rect key="frame" x="171.5" y="143" width="32.5" height="21"/>
+                                <rect key="frame" x="171.5" y="422" width="32.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXE-TD-v3Z">
+                                <rect key="frame" x="37" y="70" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Lro-9k-9c1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,19 +44,20 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="psG-fA-mIA" firstAttribute="top" secondItem="1H3-rW-ofT" secondAttribute="bottom" constant="39" id="Aho-Wl-PNF"/>
-                            <constraint firstItem="1H3-rW-ofT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IEr-Bd-ssI"/>
+                            <constraint firstItem="DXE-TD-v3Z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="1mh-oB-v6h"/>
+                            <constraint firstItem="psG-fA-mIA" firstAttribute="centerX" secondItem="DXE-TD-v3Z" secondAttribute="centerX" id="Qhj-KS-ahY"/>
+                            <constraint firstItem="psG-fA-mIA" firstAttribute="top" secondItem="DXE-TD-v3Z" secondAttribute="bottom" constant="52" id="ZTZ-R5-TaM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ze9-9K-CwX" secondAttribute="bottom" constant="20" id="ecz-Dk-ZfU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ze9-9K-CwX" secondAttribute="trailing" constant="20" id="hpo-Hw-IUx"/>
                             <constraint firstItem="ze9-9K-CwX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lTx-7i-Hkx"/>
-                            <constraint firstItem="1H3-rW-ofT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="uXt-Pu-HpM"/>
-                            <constraint firstItem="psG-fA-mIA" firstAttribute="centerX" secondItem="1H3-rW-ofT" secondAttribute="centerX" id="xtX-9h-sX9"/>
+                            <constraint firstItem="DXE-TD-v3Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ojd-2Q-Q8a"/>
+                            <constraint firstItem="DXE-TD-v3Z" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="tXA-6c-BLG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="ze9-9K-CwX" id="msx-nY-YB6"/>
-                        <outlet property="testBtn" destination="1H3-rW-ofT" id="lgG-DJ-TO4"/>
+                        <outlet property="testLabel" destination="DXE-TD-v3Z" id="bjh-VZ-BmD"/>
                         <outlet property="tipsLabel" destination="psG-fA-mIA" id="eeY-Hf-lW4"/>
                     </connections>
                 </viewController>

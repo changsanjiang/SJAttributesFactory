@@ -13,7 +13,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIButton *testBtn;
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *tipsLabel;
 
@@ -29,10 +29,11 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 - (void)_setupViews {
     
     // test btn
-    self.testBtn.layer.cornerRadius = 8;
-    self.testBtn.backgroundColor = [UIColor lightGrayColor];
-    self.testBtn.titleLabel.numberOfLines = 0;
-    [self.testBtn setTitle:@"请选择 demo " forState:UIControlStateNormal];
+    self.testLabel.layer.cornerRadius = 8;
+    self.testLabel.clipsToBounds = YES;
+    self.testLabel.backgroundColor = [UIColor lightGrayColor];
+    self.testLabel.numberOfLines = 0;
+    self.testLabel.text = @"请选择 demo ";
     
     // table view
     [self.tableView registerClass:NSClassFromString(UITableViewCellID) forCellReuseIdentifier:UITableViewCellID];
@@ -69,10 +70,17 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         }
             break;
         case 2: {
-            tips = @"下划线 + 删除线";
-            attr = [SJAttributesFactory alterStr:@"$ 999" block:^(SJAttributesFactory * _Nonnull worker) {
-                worker.font([UIFont systemFontOfSize:40]);
-                worker.underline(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor yellowColor]).strikethrough(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor redColor]);
+            tips = @"头缩进 + 尾缩进";
+            attr = [SJAttributesFactory alterStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。" block:^(SJAttributesFactory * _Nonnull worker) {
+                worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
+                
+                // 获取开头宽度
+                CGFloat startW = worker.width(NSMakeRange(0, 3));
+                
+                worker
+                .firstLineHeadIndent(8) // 首行缩进
+                .headIndent(startW + 8) // 左缩进
+                .tailIndent(-12);       // 右缩进
             }];
         }
             break;
@@ -85,13 +93,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         }
             break;
         case 4: {
-            tips = @"字体阴影";
-            attr = [SJAttributesFactory alterStr:@"我的故乡" block:^(SJAttributesFactory * _Nonnull worker) {
-                NSShadow *shadow = [NSShadow new];
-                shadow.shadowColor = [UIColor greenColor];
-                shadow.shadowOffset = CGSizeMake(1, 1);
-                worker.font([UIFont boldSystemFontOfSize:40])
-                .shadow(shadow);
+            tips = @"下划线 + 删除线";
+            attr = [SJAttributesFactory alterStr:@"$ 999" block:^(SJAttributesFactory * _Nonnull worker) {
+                worker.font([UIFont systemFontOfSize:40]);
+                worker.underline(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor yellowColor]).strikethrough(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor redColor]);
             }];
         }
             break;
@@ -130,17 +135,45 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             break;
         case 9: {
             tips = @"清除";
-            attr = _testBtn.currentAttributedTitle;
+            attr = _testLabel.attributedText;
             attr = [SJAttributesFactory alterAttrStr:attr block:^(SJAttributesFactory * _Nonnull worker) {
                 worker.clean();
             }];
+        }
+            break;
+        case 10: {
+            tips = @"段前间隔 and 段后间隔";
+            attr = [SJAttributesFactory alterStr:@"谁谓河广？一苇杭之。谁谓宋远？跂予望之。\n 谁谓河广？曾不容刀。\n 谁谓宋远？曾不崇朝。\n" block:^(SJAttributesFactory * _Nonnull worker) {
+                worker
+                .paragraphSpacingBefore(10)
+                .paragraphSpacing(10);
+            }];
+        }
+            break;
+        case 11: {
+            tips = @"效果同上";
+            attr = [SJAttributesFactory alterStr:@"谁谓河广？一苇杭之。谁谓宋远？跂予望之。谁谓河广？曾不容刀。\n 谁谓宋远？曾不崇朝。\n" block:^(SJAttributesFactory * _Nonnull worker) {
+                worker
+                .paragraphSpacing(20);
+            }];
+        }
+            break;
+        case 12: {
+            tips = @"字体阴影";
+            attr = [SJAttributesFactory alterStr:@"我的故乡" block:^(SJAttributesFactory * _Nonnull worker) {
+                NSShadow *shadow = [NSShadow new];
+                shadow.shadowColor = [UIColor greenColor];
+                shadow.shadowOffset = CGSizeMake(1, 1);
+                worker.font([UIFont boldSystemFontOfSize:40])
+                .shadow(shadow);
+            }];    
         }
             break;
     }
     
     if ( !attr ) return;
     _tipsLabel.text = tips;
-    [_testBtn setAttributedTitle:attr forState:UIControlStateNormal];
+    _testLabel.attributedText = attr;
     
     NSLog(@"------------- end -------------");
 }

@@ -44,6 +44,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^backgroundColor)(UIColor *color);
 /// 整体 每行间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^lineSpacing)(float spacing);
+/// 整体 段后间隔(\n)
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^paragraphSpacing)(float paragraphSpacing);
+/// 整体 段前间隔(\n)
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^paragraphSpacingBefore)(float paragraphSpacingBefore);
+/// 首行头缩进
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^firstLineHeadIndent)(float padding);
+/// 左缩进
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^headIndent)(float headIndent);
+/// 右缩进(正值从左算起, 负值从右算起)
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^tailIndent)(float tailIndent);
 /// 整体 字间隔
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterSpacing)(float spacing);
 /// 整体 对齐方式
@@ -151,6 +161,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Other
 /// 获取当前文本的长度
 @property (nonatomic, assign, readonly) NSInteger length;
+/// 获取指定范围文本宽度. (必须设置过字体)
+@property (nonatomic, copy, readonly) CGFloat(^width)(NSRange range);
 
 @end
 
