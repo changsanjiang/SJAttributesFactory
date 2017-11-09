@@ -128,6 +128,14 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             }];
         }
             break;
+        case 9: {
+            tips = @"清除";
+            attr = _testBtn.currentAttributedTitle;
+            attr = [SJAttributesFactory alterAttrStr:attr block:^(SJAttributesFactory * _Nonnull worker) {
+                worker.clean();
+            }];
+        }
+            break;
     }
     
     if ( !attr ) return;

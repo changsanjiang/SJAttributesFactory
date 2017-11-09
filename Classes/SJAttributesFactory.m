@@ -62,6 +62,10 @@
     return [NSAttributedString attributedStringWithAttachment:attachment];
 }
 
++ (NSAttributedString *)alterWithBlock:(void(^)(SJAttributesFactory *worker))block {
+    return [self alterStr:@"" block:block];
+}
+
 - (instancetype)initWithAttr:(NSMutableAttributedString *)attr {
     self = [super init];
     if ( !self ) return nil;
@@ -371,6 +375,18 @@
     return ^ SJAttributesFactory *(NSAttributedStringKey key, NSRange range) {
         [_attrM removeAttribute:key range:range];
         return self;
+    };
+}
+
+- (void (^)(void))clean {
+    return ^ () {
+        [_attrM enumerateAttributesInRange:_rangeAll(_attrM) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+            [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                // 字体大小保持不变
+                if ( [key isEqualToString:NSFontAttributeName] ) return;
+                self.removeAttribute(key, range);
+            }];
+        }];
     };
 }
 

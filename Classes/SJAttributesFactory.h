@@ -21,8 +21,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSAttributedString *)alterWithImage:(UIImage *)image size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block;
 
++ (NSAttributedString *)alterWithBlock:(void(^)(SJAttributesFactory *worker))block;
+
 
 #pragma mark - All
+/*!
+ *  Setting the whole may affect the local range properties,
+ *  please set the whole first, and then set the local range properties.
+ *
+ *  设置整体可能会影响局部范围属性, 请先设置整体, 然后再设置局部范围属性.
+ *
+ **/
 /// 整体 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^font)(UIFont *font);
 /// 整体 放大
@@ -39,9 +48,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterSpacing)(float spacing);
 /// 整体 对齐方式
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^alignment)(NSTextAlignment alignment);
-/// 整体 下划线 ex: worker.underline(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor blueColor])
+/*!
+ *  整体 添加下划线
+ *  ex:
+ *  worker.underline(NSUnderlineByWord |
+ *                   NSUnderlinePatternSolid |
+ *                   NSUnderlineStyleDouble, [UIColor blueColor])
+ */
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^underline)(NSUnderlineStyle style, UIColor *color);
-/// 整体 删除线 ex: worker.strikethrough(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor redColor])
+/*!
+ *  整体 添加删除线
+ *  ex:
+ *  worker.strikethrough(NSUnderlineByWord |
+ *                       NSUnderlinePatternSolid |
+ *                       NSUnderlineStyleDouble, [UIColor blueColor])
+ */
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^strikethrough)(NSUnderlineStyle style, UIColor *color);
 /// border 如果大于0, 则显示的是空心字体. 如果小于0, 则显示实心字体(就像正常字体那样, 只不过是描边了).
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^stroke)(float border, UIColor *color);
@@ -98,6 +119,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^removeText)(NSRange range);
 /// 指定范围 删除属性
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^removeAttribute)(NSAttributedStringKey key, NSRange range);
+/// 除字体大小, 清除文本其他属性
+@property (nonatomic, copy, readonly) void (^clean)(void);
 
 
 #pragma mark - Other
