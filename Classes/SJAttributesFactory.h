@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  worker.underline(NSUnderlineByWord |
  *                   NSUnderlinePatternSolid |
  *                   NSUnderlineStyleDouble, [UIColor blueColor])
- */
+ **/
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^underline)(NSUnderlineStyle style, UIColor *color);
 /*!
  *  整体 添加删除线
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  worker.strikethrough(NSUnderlineByWord |
  *                       NSUnderlinePatternSolid |
  *                       NSUnderlineStyleDouble, [UIColor blueColor])
- */
+ **/
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^strikethrough)(NSUnderlineStyle style, UIColor *color);
 /// border 如果大于0, 则显示的是空心字体. 如果小于0, 则显示实心字体(就像正常字体那样, 只不过是描边了).
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^stroke)(float border, UIColor *color);
@@ -106,11 +106,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark - Insert
-/// 指定位置 插入图片
+/*!
+ *  Insert a image at the specified position.
+ *  You can get the length of the text through [worker.length].
+ *  If index = -1, it will be inserted at the end of the text.
+ *
+ *  可以通过 worker.length 来获取文本的length
+ *  指定位置 插入图片.
+ *  如果 index = -1, 将会插到文本最后
+ **/
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertImage)(UIImage *image, CGSize size, NSInteger index);
-/// 指定位置 插入文本
+/*!
+ *  You can get the length of the text through [worker.length].
+ *  If index = -1, it will be inserted at the end of the text.
+ *
+ *  可以通过 worker.length 来获取文本的length
+ *  指定位置 插入文本.
+ *  如果 index = -1, 将会插到文本最后.
+ **/
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertAttr)(NSAttributedString *attr, NSInteger index);
-/// 指定位置 插入文本
+/*!
+ *  You can get the length of the text through [worker.length].
+ *  If index = -1, it will be inserted at the end of the text.
+ *
+ *  可以通过 worker.length 来获取文本的length
+ *  指定位置 插入文本.
+ *  如果 index = -1, 将会插到文本最后
+ **/
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertText)(NSString *text, NSInteger index);
 
 

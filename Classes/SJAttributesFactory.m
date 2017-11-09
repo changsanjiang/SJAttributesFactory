@@ -345,6 +345,7 @@
 
 - (SJAttributesFactory *(^)(UIImage *, CGSize, NSInteger))insertImage {
     return ^ SJAttributesFactory *(UIImage *image, CGSize size, NSInteger index) {
+        if ( -1 == index ) index = _attrM.length;
         self.insertAttr([[self class] attrStrWithImage:image size:size], index);
         return self;
     };
@@ -352,6 +353,7 @@
 
 - (SJAttributesFactory * _Nonnull (^)(NSAttributedString * _Nonnull, NSInteger))insertAttr {
     return ^ SJAttributesFactory *(NSAttributedString *attr, NSInteger index) {
+        if ( -1 == index ) index = _attrM.length;
         [_attrM insertAttributedString:attr atIndex:index];
         return self;
     };
@@ -359,6 +361,7 @@
 
 - (SJAttributesFactory * _Nonnull (^)(NSString * _Nonnull, NSInteger))insertText {
     return ^ SJAttributesFactory *(NSString *text, NSInteger index) {
+        if ( -1 == index ) index = _attrM.length;
         self.insertAttr([[NSAttributedString alloc] initWithString:text], index);
         return self;
     };
