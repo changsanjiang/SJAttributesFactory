@@ -131,6 +131,13 @@
     };
 }
 
+- (SJAttributesFactory * _Nonnull (^)(NSLineBreakMode))lineBreakMode {
+    return ^ SJAttributesFactory *(NSLineBreakMode mode) {
+        self.style.lineBreakMode = mode;
+        return self;
+    };
+}
+
 - (SJAttributesFactory * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))underline {
     return ^ SJAttributesFactory *(NSUnderlineStyle style, UIColor *color) {
         [_attrM addAttribute:NSUnderlineStyleAttributeName value:@(style) range:_rangeAll(_attrM)];

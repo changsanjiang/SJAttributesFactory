@@ -48,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^letterSpacing)(float spacing);
 /// 整体 对齐方式
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^alignment)(NSTextAlignment alignment);
+/// line break mode
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^lineBreakMode)(NSLineBreakMode mode);
+
 /*!
  *  整体 添加下划线
  *  ex:

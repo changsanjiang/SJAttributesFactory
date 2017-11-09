@@ -47,9 +47,9 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     switch (indexPath.row) {
         case 0: {
             tips = @"左右图文";
-            attr = [SJAttributesFactory alterStr:@"9999" block:^(SJAttributesFactory * _Nonnull worker) {
+            attr = [SJAttributesFactory alterStr:@"9999\n9999999" block:^(SJAttributesFactory * _Nonnull worker) {
                 worker
-                .insertImage([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50), 0)
+                .insertImage([UIImage imageNamed:@"sample2"], CGPointMake(0, -20), CGSizeMake(50, 50), 0)
                 .font([UIFont boldSystemFontOfSize:14])
                 .fontColor([UIColor whiteColor]);
             }];
