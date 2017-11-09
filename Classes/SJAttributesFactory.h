@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  please set the whole first, and then set the local range properties.
  *
  *  设置整体可能会影响局部范围属性, 请先设置整体, 然后再设置局部范围属性.
- *
+ *  也可不设置整体, 只设置局部属性.
  **/
 /// 整体 字体
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^font)(UIFont *font);
