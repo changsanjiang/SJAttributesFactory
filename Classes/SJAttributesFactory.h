@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSAttributedString *)alterAttrStr:(NSAttributedString *)attrStr block:(void(^)(SJAttributesFactory *worker))block;
 
-+ (NSAttributedString *)alterWithImage:(UIImage *)image size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block;
++ (NSAttributedString *)alterWithImage:(UIImage *)image offset:(CGPoint)offset size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block;
 
 + (NSAttributedString *)alterWithBlock:(void(^)(SJAttributesFactory *worker))block;
 
@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  指定位置 插入图片.
  *  如果 index = -1, 将会插到文本最后
  **/
-@property (nonatomic, copy, readonly) SJAttributesFactory *(^insertImage)(UIImage *image, CGSize size, NSInteger index);
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^insertImage)(UIImage *image, CGPoint offset, CGSize size, NSInteger index);
 /*!
  *  You can get the length of the text through [worker.length].
  *  If index = -1, it will be inserted at the end of the text.

@@ -49,16 +49,16 @@
     return attrStrM;
 }
 
-+ (NSAttributedString *)alterWithImage:(UIImage *)image size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block {
-    NSMutableAttributedString *attrStrM = [self attrStrWithImage:image size:size].mutableCopy;
++ (NSAttributedString *)alterWithImage:(UIImage *)image offset:(CGPoint)offset size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block {
+    NSMutableAttributedString *attrStrM = [self attrStrWithImage:image offset:offset size:size].mutableCopy;
     if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
     return attrStrM;
 }
 
-+ (NSAttributedString *)attrStrWithImage:(UIImage *)image size:(CGSize)size {
++ (NSAttributedString *)attrStrWithImage:(UIImage *)image offset:(CGPoint)offset size:(CGSize)size {
     NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
     attachment.image = image;
-    attachment.bounds = CGRectMake(0, 0, size.width, size.height);
+    attachment.bounds = CGRectMake(offset.x, offset.y, size.width, size.height);
     return [NSAttributedString attributedStringWithAttachment:attachment];
 }
 
@@ -343,10 +343,10 @@
 
 #pragma mark -
 
-- (SJAttributesFactory *(^)(UIImage *, CGSize, NSInteger))insertImage {
-    return ^ SJAttributesFactory *(UIImage *image, CGSize size, NSInteger index) {
+- (SJAttributesFactory *(^)(UIImage *, CGPoint, CGSize, NSInteger))insertImage {
+    return ^ SJAttributesFactory *(UIImage *image, CGPoint offset, CGSize size, NSInteger index) {
         if ( -1 == index ) index = _attrM.length;
-        self.insertAttr([[self class] attrStrWithImage:image size:size], index);
+        self.insertAttr([[self class] attrStrWithImage:image offset:offset size:size], index);
         return self;
     };
 }

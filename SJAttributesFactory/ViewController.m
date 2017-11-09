@@ -49,7 +49,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             tips = @"左右图文";
             attr = [SJAttributesFactory alterStr:@"9999" block:^(SJAttributesFactory * _Nonnull worker) {
                 worker
-                .insertImage([UIImage imageNamed:@"sample2"], CGSizeMake(50, 50), 0)
+                .insertImage([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50), 0)
                 .font([UIFont boldSystemFontOfSize:14])
                 .fontColor([UIColor whiteColor]);
             }];
@@ -60,7 +60,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             attr = [SJAttributesFactory alterStr:@"9999" block:^(SJAttributesFactory * _Nonnull worker) {
                 worker
                 .insertText(@"\n", 0)
-                .insertImage([UIImage imageNamed:@"sample2"], CGSizeMake(50, 50), 0)
+                .insertImage([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50), 0)
                 .lineSpacing(8) // 加点行间隔
                 .alignment(NSTextAlignmentCenter)
                 .font([UIFont boldSystemFontOfSize:14])
