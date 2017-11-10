@@ -409,6 +409,18 @@
     };
 }
 
+- (SJAttributesFactory * _Nonnull (^)(NSRange, id value))replace {
+    return ^ SJAttributesFactory *(NSRange range, id value) {
+        if ( [value isKindOfClass:[NSString class]] ) {
+            [_attrM replaceCharactersInRange:range withString:value];
+        }
+        else if ( [value isKindOfClass:[NSAttributedString class]] ) {
+            [_attrM replaceCharactersInRange:range withAttributedString:value];
+        }
+        return self;
+    };
+}
+
 - (SJAttributesFactory * _Nonnull (^)(NSRange))removeText {
     return ^ SJAttributesFactory *(NSRange range) {
         [_attrM deleteCharactersInRange:range];
@@ -438,7 +450,7 @@
 #pragma mark -
 
 - (void)dealloc {
-    if ( _style ) [_attrM addAttribute:NSParagraphStyleAttributeName value:_style range:_rangeAll(_attrM)];
+    if ( _style ) self.paragraphStyle(_style);
     self.range(_rangeAll(_attrM));
 }
 
@@ -455,18 +467,41 @@
 
 - (CGFloat (^)(NSRange))width {
     return ^ CGFloat (NSRange range) {
-        NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
-        __block BOOL isSetFont = NO;
-        [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
-            [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                if ( ![key isEqualToString:NSFontAttributeName] ) return;
-                isSetFont = YES;
-                *stop = YES;
-            }];
-        }];
-        NSAssert(isSetFont, @"未设置字体, 无法计算宽度");
-        return [attr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.width;
+        return self.size(range).width;
     };
+}
+
+- (CGSize (^)(NSRange))size {
+    return ^ CGSize (NSRange range) {
+        NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
+        return [self attr:attr boundsWithWidth:CGFLOAT_MAX height:CGFLOAT_MAX].size;
+    };
+}
+
+- (CGRect (^)(CGFloat))boundsForMaxWidth {
+    return ^ CGRect (CGFloat maxWidth) {
+        return [self attr:_attrM boundsWithWidth:maxWidth height:CGFLOAT_MAX];
+    };
+}
+
+- (CGRect (^)(CGFloat))boundsForMaxHeight {
+    return ^ CGRect (CGFloat maxHeight) {
+        return [self attr:_attrM boundsWithWidth:CGFLOAT_MAX height:maxHeight];
+    };
+}
+
+- (CGRect)attr:(NSAttributedString *)attr boundsWithWidth:(CGFloat)width height:(CGFloat)height {
+    if ( _style ) self.paragraphStyle(_style);
+    __block BOOL isSetFont = NO;
+    [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+        [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ( ![key isEqualToString:NSFontAttributeName] ) return;
+            isSetFont = YES;
+            *stop = YES;
+        }];
+    }];
+    NSAssert(isSetFont, @"未设置字体, 无法计算宽度");
+    return [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
 }
 
 #pragma mark -

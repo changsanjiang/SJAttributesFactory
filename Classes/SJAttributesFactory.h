@@ -149,6 +149,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^insertText)(NSString *text, NSInteger index);
 
 
+#pragma mark - Replace
+/// value == NSString Or NSAttributedString
+@property (nonatomic, copy, readonly) SJAttributesFactory *(^replace)(NSRange range, id value);
+
+
 #pragma mark - Remove
 /// 指定范围 删除文本
 @property (nonatomic, copy, readonly) SJAttributesFactory *(^removeText)(NSRange range);
@@ -161,8 +166,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Other
 /// 获取当前文本的长度
 @property (nonatomic, assign, readonly) NSInteger length;
-/// 获取指定范围文本宽度. (必须设置过字体)
+/// 获取指定范围的宽度. (必须设置过字体)
 @property (nonatomic, copy, readonly) CGFloat(^width)(NSRange range);
+/// 获取指定范围的大小. (必须设置过字体)
+@property (nonatomic, copy, readonly) CGSize(^size)(NSRange range);
+/// 获取指定范围的大小. (必须设置过字体)
+@property (nonatomic, copy, readonly) CGRect(^boundsForMaxWidth)(CGFloat maxWidth);
+/// 获取指定范围的大小. (必须设置过字体)
+@property (nonatomic, copy, readonly) CGRect(^boundsForMaxHeight)(CGFloat maxHeight);
 
 @end
 
