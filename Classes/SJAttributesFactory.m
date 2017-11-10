@@ -499,6 +499,7 @@
             isSetFont = YES;
             *stop = YES;
         }];
+        if ( isSetFont ) *stop = YES;
     }];
     NSAssert(isSetFont, @"未设置字体, 无法计算宽度");
     return [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
