@@ -13,7 +13,7 @@ pod 'SJAttributesFactory'
 由于最近常用富文本, 可是编辑一个富文本需要操作很多的属性, 书写起来很不方便. 所以我将富文本的相关属性整理并使用链式方式将它简化了一下. 效果请看下面Demo.
 ___
 ###上下图文效果:
-![上下图文.jpg](http://upload-images.jianshu.io/upload_images/2318691-e92f48d24e29ae61.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![上下图文.jpg](http://upload-images.jianshu.io/upload_images/2318691-e92f48d24e29ae61.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)    
 之前:
 ```Objective-C
    // 文本字典
@@ -53,7 +53,7 @@ ___
 ___
 
 ###左缩进 + 右缩进
-![左缩进 + 右缩进.jpeg](http://upload-images.jianshu.io/upload_images/2318691-9823aa20d6789463.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![左缩进 + 右缩进.jpeg](http://upload-images.jianshu.io/upload_images/2318691-9823aa20d6789463.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)    
 之前:
 ```Objective-C
     NSString *str = @"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。";
@@ -88,7 +88,7 @@ ___
 ```
 ___
 ###下划线 + 删除线
-![下划线 + 删除线.jpg](http://upload-images.jianshu.io/upload_images/2318691-f9babe81194300fa.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![下划线 + 删除线.jpg](http://upload-images.jianshu.io/upload_images/2318691-f9babe81194300fa.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)    
 
 之前:
 ```Objective-C
