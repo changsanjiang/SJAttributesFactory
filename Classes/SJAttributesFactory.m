@@ -38,21 +38,24 @@
 @synthesize style = _style;
 
 + (NSAttributedString *)alterStr:(NSString *)str block:(void(^)(SJAttributesFactory *worker))block {
-    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:str];
-    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
-    return attrStrM;
+    return [self alterAttrStr:[[NSMutableAttributedString alloc] initWithString:str] block:block];
 }
 
 + (NSAttributedString *)alterAttrStr:(NSAttributedString *)attrStr block:(void(^)(SJAttributesFactory *worker))block {
+    NSAssert(attrStr, @"param must not be empty!");
     NSMutableAttributedString *attrStrM = attrStr.mutableCopy;
-    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
+    SJAttributesFactory *worker = [[SJAttributesFactory alloc] initWithAttr:attrStrM];
+    block(worker);
+    [worker finishingOperation];
     return attrStrM;
 }
 
 + (NSAttributedString *)alterWithImage:(UIImage *)image offset:(CGPoint)offset size:(CGSize)size block:(void(^)(SJAttributesFactory *worker))block {
-    NSMutableAttributedString *attrStrM = [self attrStrWithImage:image offset:offset size:size].mutableCopy;
-    if ( block ) block([[SJAttributesFactory alloc] initWithAttr:attrStrM]);
-    return attrStrM;
+    return [self alterAttrStr:[self attrStrWithImage:image offset:offset size:size] block:block];
+}
+
++ (NSAttributedString *)alterWithBlock:(void(^)(SJAttributesFactory *worker))block {
+    return [self alterStr:@"" block:block];
 }
 
 + (NSAttributedString *)attrStrWithImage:(UIImage *)image offset:(CGPoint)offset size:(CGSize)size {
@@ -62,15 +65,15 @@
     return [NSAttributedString attributedStringWithAttachment:attachment];
 }
 
-+ (NSAttributedString *)alterWithBlock:(void(^)(SJAttributesFactory *worker))block {
-    return [self alterStr:@"" block:block];
-}
-
 - (instancetype)initWithAttr:(NSMutableAttributedString *)attr {
     self = [super init];
     if ( !self ) return nil;
     _attrM = attr;
     return self;
+}
+
+- (void)finishingOperation {
+    if ( _style ) self.paragraphStyle(_style);
 }
 
 #pragma mark -
@@ -449,11 +452,6 @@
 
 #pragma mark -
 
-- (void)dealloc {
-    if ( _style ) self.paragraphStyle(_style);
-    self.range(_rangeAll(_attrM));
-}
-
 - (NSMutableParagraphStyle *)style {
     if ( _style ) return _style;
     _style = [NSMutableParagraphStyle new];
@@ -501,7 +499,7 @@
         }];
         if ( isSetFont ) *stop = YES;
     }];
-    NSAssert(isSetFont, @"未设置字体, 无法计算宽度");
+    NSAssert(isSetFont, @"You need to set it font!");
     return [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
 }
 
