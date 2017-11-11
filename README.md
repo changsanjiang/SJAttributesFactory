@@ -9,8 +9,6 @@ pod 'SJAttributesFactory'
 
 <img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/SJAttributesFactory/ex.gif" />
 
-
-由于最近常用富文本, 可是编辑一个富文本需要操作很多的属性, 书写起来很不方便. 所以我将富文本的相关属性整理并使用链式方式将它简化了一下. 效果请看下面Demo.
 ___
 ###上下图文效果:
 ![上下图文.jpg](http://upload-images.jianshu.io/upload_images/2318691-e92f48d24e29ae61.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)    
