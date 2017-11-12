@@ -9,7 +9,7 @@ ___
 ### 上下图文效果:
 ![上下图文.jpg](http://upload-images.jianshu.io/upload_images/2318691-e92f48d24e29ae61.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-之前:
+before:
 ```Objective-C
    // 文本字典
     NSDictionary *titleDict = @{NSFontAttributeName: [UIFont systemFontOfSize:fontSize],
@@ -33,7 +33,7 @@ ___
     [attM appendAttributedString:lineText];
     [attM appendAttributedString:text];
 ```
-现在:
+now:
 ```Objective-C
 [SJAttributesFactory alteringStr:@"9999" task:^(SJAttributesFactory * _Nonnull worker) {
         worker
@@ -50,7 +50,7 @@ ___
 ### 左缩进 + 右缩进
 ![左缩进 + 右缩进.jpeg](http://upload-images.jianshu.io/upload_images/2318691-9823aa20d6789463.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-之前:
+before:
 ```Objective-C
     NSString *str = @"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。";
 
@@ -70,7 +70,7 @@ ___
                   value:style
                   range:NSMakeRange(0, str.length)];
 ```
-现在:
+now:
 ```Objective-C
     [SJAttributesFactory alteringStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。" task:^(SJAttributesFactory * _Nonnull worker) {
         worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
@@ -86,7 +86,7 @@ ___
 ### 下划线 + 删除线
 ![下划线 + 删除线.jpg](http://upload-images.jianshu.io/upload_images/2318691-f9babe81194300fa.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-之前:
+before:
 ```Objective-C
     NSString *price = @"$ 999";
     NSMutableAttributedString *attrM = [[NSMutableAttributedString alloc] initWithString:price];
@@ -107,7 +107,7 @@ ___
                   value:[UIColor redColor]
                   range:range];
 ```
-现在:
+now:
 ```Objective-C
     [SJAttributesFactory alteringStr:@"$ 999" task:^(SJAttributesFactory * _Nonnull worker) {
         worker.font([UIFont systemFontOfSize:40]);
