@@ -12,6 +12,7 @@
 		7774D7AE1FB1603F00787173 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AD1FB1603F00787173 /* README.md */; };
 		779A59E51FB33AB100F88DEC /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E41FB33AB100F88DEC /* sample2.png */; };
 		779A59E71FB3466D00F88DEC /* ex.gif in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E61FB3466D00F88DEC /* ex.gif */; };
+		A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = A628B7111FB83EC800F55074 /* SJAttributeWorker.m */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
 		A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF71FB09BDC00EB65B5 /* ViewController.m */; };
 		A69E5BFB1FB09BDC00EB65B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BF91FB09BDC00EB65B5 /* Main.storyboard */; };
@@ -28,6 +29,8 @@
 		779A59E41FB33AB100F88DEC /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
 		779A59E61FB3466D00F88DEC /* ex.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ex.gif; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
+		A628B7101FB83EC800F55074 /* SJAttributeWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
+		A628B7111FB83EC800F55074 /* SJAttributeWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
 		A69E5BF01FB09BDC00EB65B5 /* SJAttributesFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJAttributesFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69E5BF31FB09BDC00EB65B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +59,8 @@
 			children = (
 				7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */,
 				7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */,
+				A628B7101FB83EC800F55074 /* SJAttributeWorker.h */,
+				A628B7111FB83EC800F55074 /* SJAttributeWorker.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -177,6 +182,7 @@
 				A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
+				A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,8 +324,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "acd2453e-e396-4ccf-bf56-508276824c6c";
-				PROVISIONING_PROFILE_SPECIFIER = SanJiangDevelopment;
+				PROVISIONING_PROFILE = "a317fe74-1a78-4494-b955-994f23dd28be";
+				PROVISIONING_PROFILE_SPECIFIER = sanjiang17macDev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
