@@ -225,8 +225,8 @@
 #pragma mark -
 
 - (SJAttributeWorker * _Nonnull (^)(NSRange, void (^ _Nonnull)(SJAttributeWorker * _Nonnull)))rangeEdit {
-    return ^ SJAttributeWorker *(NSRange range, void(^worker)(SJAttributeWorker *rangeWorker)) {
-        worker(self);
+    return ^ SJAttributeWorker *(NSRange range, void(^task)(SJAttributeWorker *rangeWorker)) {
+        task(self);
         self.range(range);
         return self;
     };

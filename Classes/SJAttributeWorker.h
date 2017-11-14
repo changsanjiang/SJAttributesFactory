@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  *      });
  *  }];
  **/
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^rangeEdit)(NSRange range, void(^alter)(SJAttributeWorker *range));
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^rangeEdit)(NSRange range, void(^task)(SJAttributeWorker *range));
 /*!
  *  range Edit 2:
  *  [SJAttributesFactory alteringStr:[NSString stringWithFormat:@"%@%@%@", pre, mid, end] task:^(SJAttributeWorker * _Nonnull worker) {
