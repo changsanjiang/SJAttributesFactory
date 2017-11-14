@@ -231,7 +231,29 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         }
             break;
         case 13: {
-            
+            tips = @"Altering Range Sample";
+            attr = [SJAttributesFactory alteringStr:@"I am a bad man!" task:^(SJAttributeWorker * _Nonnull worker) {
+                worker.font([UIFont boldSystemFontOfSize:18]);
+                
+                // 修改 I
+                worker.rangeEdit(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
+                    range
+                    .nextFont([UIFont boldSystemFontOfSize:30])
+                    .nextFontColor([UIColor orangeColor]);
+                });
+                
+                // 修改 bad
+                worker.rangeEdit(NSMakeRange(7, 3), ^(SJAttributeWorker * _Nonnull range) {
+                   range
+                    .nextFont([UIFont boldSystemFontOfSize:30])
+                    .nextFontColor([UIColor purpleColor])
+                    .nextObliqueness(0.3);
+                });
+                
+                CGSize size = worker.boundsForMaxWidth(self.view.bounds.size.width * 0.8).size;
+                [self updateConstraintsWithSize:size];
+
+            }];
         }
             break;
     }

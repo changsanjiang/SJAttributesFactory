@@ -81,7 +81,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark - Range
-/// must set it up. 如果只修改一部分, 最后必须设置他. 这个很重要.
+/*!
+ *  range Edit 1:
+ *  [SJAttributesFactory alteringStr:@"I am a bad man!" task:^(SJAttributeWorker * _Nonnull worker) {
+ *      worker.alteringRange(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
+ *           range
+ *              .nextFont([UIFont boldSystemFontOfSize:30])
+ *              .nextFontColor([UIColor orangeColor]);
+ *      });
+ *  }];
+ **/
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^rangeEdit)(NSRange range, void(^alter)(SJAttributeWorker *range));
+/*!
+ *  range Edit 2:
+ *  [SJAttributesFactory alteringStr:[NSString stringWithFormat:@"%@%@%@", pre, mid, end] task:^(SJAttributeWorker * _Nonnull worker) {
+ *      worker
+ *      .nextFont([UIFont boldSystemFontOfSize:12])
+ *      .nextFontColor([UIColor yellowColor])
+ *      .nextAlignment(NSTextAlignmentRight)
+ *      .range(NSMakeRange(pre.length, mid.length));  // -->>>>> must set it up.
+ *  }];
+ **/
 @property (nonatomic, copy, readonly) void(^range)(NSRange range);
 /// 指定范围内的 字体
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextFont)(UIFont *font);

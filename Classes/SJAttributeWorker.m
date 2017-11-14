@@ -224,6 +224,14 @@
 
 #pragma mark -
 
+- (SJAttributeWorker * _Nonnull (^)(NSRange, void (^ _Nonnull)(SJAttributeWorker * _Nonnull)))rangeEdit {
+    return ^ SJAttributeWorker *(NSRange range, void(^worker)(SJAttributeWorker *rangeWorker)) {
+        worker(self);
+        self.range(range);
+        return self;
+    };
+}
+
 - (void (^)(NSRange))range {
     return ^(NSRange range) {
         if ( _r_nextFont ) {
