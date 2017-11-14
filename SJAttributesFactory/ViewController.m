@@ -244,8 +244,8 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 }
 
 - (void)updateConstraintsWithSize:(CGSize)size {
-    _widthConstraint.constant = ceil(size.width);
-    _heightConstraint.constant = ceil(size.height);
+    _widthConstraint.constant = size.width;
+    _heightConstraint.constant = size.height;
 }
 
 #pragma mark -

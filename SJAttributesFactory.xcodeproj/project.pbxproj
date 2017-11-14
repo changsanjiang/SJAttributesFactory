@@ -31,6 +31,7 @@
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A628B7101FB83EC800F55074 /* SJAttributeWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
 		A628B7111FB83EC800F55074 /* SJAttributeWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
+		A62A4CA11FBB511B00410019 /* SJAttributesFactoryHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactoryHeader.h; sourceTree = "<group>"; };
 		A69E5BF01FB09BDC00EB65B5 /* SJAttributesFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJAttributesFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69E5BF31FB09BDC00EB65B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		7774D7A71FB15BAA00787173 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A62A4CA11FBB511B00410019 /* SJAttributesFactoryHeader.h */,
 				7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */,
 				7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */,
 				A628B7101FB83EC800F55074 /* SJAttributeWorker.h */,
