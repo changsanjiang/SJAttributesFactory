@@ -548,25 +548,25 @@
 
 - (CGSize (^)(NSRange))size {
     return ^ CGSize (NSRange range) {
-        NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
-        return [self attr:attr boundsWithWidth:CGFLOAT_MAX height:CGFLOAT_MAX].size;
+        return [self boundsWithWidth:CGFLOAT_MAX height:CGFLOAT_MAX range:range].size;
     };
 }
 
 - (CGRect (^)(CGFloat))boundsForMaxWidth {
     return ^ CGRect (CGFloat maxWidth) {
-        return [self attr:_attrM boundsWithWidth:maxWidth height:CGFLOAT_MAX];
+        return [self boundsWithWidth:maxWidth height:CGFLOAT_MAX range:_rangeAll(_attrM)];
     };
 }
 
 - (CGRect (^)(CGFloat))boundsForMaxHeight {
     return ^ CGRect (CGFloat maxHeight) {
-        return [self attr:_attrM boundsWithWidth:CGFLOAT_MAX height:maxHeight];
+        return [self boundsWithWidth:CGFLOAT_MAX height:maxHeight range:_rangeAll(_attrM)];
     };
 }
 
-- (CGRect)attr:(NSAttributedString *)attr boundsWithWidth:(CGFloat)width height:(CGFloat)height {
+- (CGRect)boundsWithWidth:(CGFloat)width height:(CGFloat)height range:(NSRange)range {
     [self _pauseTask];
+    NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
     __block BOOL isSetFont = NO;
     [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
         [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -577,7 +577,10 @@
         if ( isSetFont ) *stop = YES;
     }];
     NSAssert(isSetFont, @"You need to set it font!");
-    return [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    CGRect bounds = [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    bounds.size.width = ceil(bounds.size.width);
+    bounds.size.height = ceil(bounds.size.height);
+    return bounds;
 }
 
 #pragma mark -

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,6 +35,7 @@
                                 <rect key="frame" x="37" y="70" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Lro-9k-9c1"/>
+                                    <constraint firstAttribute="width" constant="300" id="jMc-El-vVM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -51,14 +51,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ze9-9K-CwX" secondAttribute="trailing" constant="20" id="hpo-Hw-IUx"/>
                             <constraint firstItem="ze9-9K-CwX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lTx-7i-Hkx"/>
                             <constraint firstItem="DXE-TD-v3Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ojd-2Q-Q8a"/>
-                            <constraint firstItem="DXE-TD-v3Z" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="tXA-6c-BLG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="heightConstraint" destination="Lro-9k-9c1" id="0dv-dK-Vkl"/>
                         <outlet property="tableView" destination="ze9-9K-CwX" id="msx-nY-YB6"/>
                         <outlet property="testLabel" destination="DXE-TD-v3Z" id="bjh-VZ-BmD"/>
                         <outlet property="tipsLabel" destination="psG-fA-mIA" id="eeY-Hf-lW4"/>
+                        <outlet property="widthConstraint" destination="jMc-El-vVM" id="TIT-zM-hZj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
