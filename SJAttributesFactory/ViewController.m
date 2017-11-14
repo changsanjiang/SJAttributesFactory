@@ -179,23 +179,20 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             tips = @"局部段落样式";
             attr = [SJAttributesFactory alteringStr:@"采薇采薇,薇亦作止.\n曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.\n曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.\n曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故." task:^(SJAttributeWorker * _Nonnull worker) {
                 worker
-                .alignment(NSTextAlignmentCenter)
+//                .alignment(NSTextAlignmentCenter)
                 .font([UIFont boldSystemFontOfSize:8])
                 .fontColor([UIColor orangeColor]);
                 
-                
-#warning Next ... 有 全局的 aligment 设置问题, 导致局部设置不管用. 回家解决!
-                
                 worker
-                .nextFont([UIFont systemFontOfSize:40])
+                .nextFont([UIFont systemFontOfSize:25])
                 .nextFontColor([UIColor yellowColor])
                 .nextLineSpacing(8)
                 .nextParagraphSpacing(20)
                 .nextParagraphSpacingBefore(20)
-                .nextFirstLineHeadIndent(80)
+                .nextFirstLineHeadIndent(8)
                 .nextHeadIndent(40)
                 .nextTailIndent(-4)
-                .nextAlignment(NSTextAlignmentRight)
+//                .nextAlignment(NSTextAlignmentRight)
                 .range(NSMakeRange(11, 30));
             }];
         }

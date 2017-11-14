@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong, readonly) NSMutableAttributedString *attrM;
 @property (nonatomic, strong, readonly) NSMutableParagraphStyle *style;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSValue *, NSParagraphStyle *> *localParagraphStyleDictM;
 
 @property (nonatomic, strong, readwrite) UIFont *r_nextFont;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextExpansion;
@@ -23,7 +24,7 @@
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrikethoughColor;
 @property (nonatomic, strong, readwrite) UIColor *r_nextBackgroundColor;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextLetterSpacing;
-@property (nonatomic, strong, readwrite) NSMutableDictionary *r_paragraphStyleDictM;
+@property (nonatomic, strong, readwrite) NSMutableDictionary<NSString *, NSNumber *> *r_paragraphStylePropertiesM;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextStrokeBorder;
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrokeColor;
 @property (nonatomic, assign, readwrite) BOOL r_nextLetterpress;
@@ -37,6 +38,7 @@
 
 @synthesize attrM = _attrM;
 @synthesize style = _style;
+@synthesize localParagraphStyleDictM = _localParagraphStyleDictM;
 
 - (instancetype)init {
     self = [super init];
@@ -50,13 +52,23 @@
 }
 
 - (NSAttributedString *)endTask {
-    [self finishingOperation];
+    [self _finishingOperation];
     return _attrM;
 }
 
 #pragma mark -
-- (void)finishingOperation {
+- (void)_finishingOperation {
     if ( _style ) self.paragraphStyle(_style);
+    if ( _localParagraphStyleDictM ) {
+        [_localParagraphStyleDictM enumerateKeysAndObjectsUsingBlock:^(NSValue * _Nonnull key, NSParagraphStyle * _Nonnull obj, BOOL * _Nonnull stop) {
+            NSRange range = [key rangeValue];
+            [_attrM addAttribute:NSParagraphStyleAttributeName value:obj range:range];
+        }];
+    }
+}
+
+- (void)_pauseTask {
+    [self _finishingOperation];
 }
 
 #pragma mark -
@@ -262,11 +274,11 @@
             [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:range];
             _r_nextLetterpress = NO;
         }
-        if ( _r_paragraphStyleDictM ) {
+        if ( _r_paragraphStylePropertiesM ) {
             NSMutableParagraphStyle *styleM = [NSMutableParagraphStyle new];
-            [styleM setValuesForKeysWithDictionary:_r_paragraphStyleDictM];
-            [_attrM addAttribute:NSParagraphStyleAttributeName value:styleM range:range];
-            _r_paragraphStyleDictM = nil;
+            [styleM setValuesForKeysWithDictionary:_r_paragraphStylePropertiesM];
+            [self.localParagraphStyleDictM setObject:styleM forKey:[NSValue valueWithRange:range]];
+            _r_paragraphStylePropertiesM = nil;
         }
         if ( _r_nextLink ) {
             [_attrM addAttribute:NSLinkAttributeName value:@(1) range:range];
@@ -331,49 +343,49 @@
 
 - (SJAttributeWorker * _Nonnull (^)(float))nextLineSpacing {
     return ^ SJAttributeWorker *(float nextLineSpacing) {
-        self.r_paragraphStyleDictM[@"lineSpacing"] = @(nextLineSpacing);
+        self.r_paragraphStylePropertiesM[@"lineSpacing"] = @(nextLineSpacing);
         return self;
     };
 }
 
 - (SJAttributeWorker * _Nonnull (^)(float))nextParagraphSpacing {
     return ^ SJAttributeWorker *(float nextParagraphSpacing) {
-        self.r_paragraphStyleDictM[@"paragraphSpacing"] = @(nextParagraphSpacing);
+        self.r_paragraphStylePropertiesM[@"paragraphSpacing"] = @(nextParagraphSpacing);
         return self;
     };
 }
 
 - (SJAttributeWorker * _Nonnull (^)(float))nextParagraphSpacingBefore {
     return ^ SJAttributeWorker *(float nextParagraphSpacingBefore) {
-        self.r_paragraphStyleDictM[@"paragraphSpacingBefore"] = @(nextParagraphSpacingBefore);
+        self.r_paragraphStylePropertiesM[@"paragraphSpacingBefore"] = @(nextParagraphSpacingBefore);
         return self;
     };
 }
 
 - (SJAttributeWorker * _Nonnull (^)(float))nextFirstLineHeadIndent {
     return ^ SJAttributeWorker *(float nextFirstLineHeadIndent) {
-        self.r_paragraphStyleDictM[@"firstLineHeadIndent"] = @(nextFirstLineHeadIndent);
+        self.r_paragraphStylePropertiesM[@"firstLineHeadIndent"] = @(nextFirstLineHeadIndent);
         return self;
     };
 }
 
 - (SJAttributeWorker * _Nonnull (^)(float))nextHeadIndent {
     return ^ SJAttributeWorker *(float nextHeadIndent) {
-        self.r_paragraphStyleDictM[@"headIndent"] = @(nextHeadIndent);
+        self.r_paragraphStylePropertiesM[@"headIndent"] = @(nextHeadIndent);
         return self;
     };
 }
 
 - (SJAttributeWorker * _Nonnull (^)(float))nextTailIndent {
     return ^ SJAttributeWorker *(float nextTailIndent) {
-        self.r_paragraphStyleDictM[@"tailIndent"] = @(nextTailIndent);
+        self.r_paragraphStylePropertiesM[@"tailIndent"] = @(nextTailIndent);
         return self;
     };
 }
 
 - (SJAttributeWorker * _Nonnull (^)(NSTextAlignment))nextAlignment {
     return ^ SJAttributeWorker *(NSTextAlignment nextAlignment) {
-        self.r_paragraphStyleDictM[@"alignment"] = @(nextAlignment);
+        self.r_paragraphStylePropertiesM[@"alignment"] = @(nextAlignment);
         return self;
     };
 }
@@ -554,7 +566,7 @@
 }
 
 - (CGRect)attr:(NSAttributedString *)attr boundsWithWidth:(CGFloat)width height:(CGFloat)height {
-    if ( _style ) self.paragraphStyle(_style);
+    [self _pauseTask];
     __block BOOL isSetFont = NO;
     [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
         [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -574,10 +586,16 @@ inline static NSRange _rangeAll(NSAttributedString *attr) {
     return NSMakeRange(0, attr.length);
 }
 
-- (NSMutableDictionary *)r_paragraphStyleDictM {
-    if ( _r_paragraphStyleDictM ) return _r_paragraphStyleDictM;
-    _r_paragraphStyleDictM = [NSMutableDictionary new];
-    return _r_paragraphStyleDictM;
+- (NSMutableDictionary<NSString *, NSNumber *> *)r_paragraphStylePropertiesM {
+    if ( _r_paragraphStylePropertiesM ) return _r_paragraphStylePropertiesM;
+    _r_paragraphStylePropertiesM = [NSMutableDictionary new];
+    return _r_paragraphStylePropertiesM;
+}
+
+- (NSMutableDictionary<NSValue *,NSParagraphStyle *> *)localParagraphStyleDictM {
+    if ( _localParagraphStyleDictM ) return _localParagraphStyleDictM;
+    _localParagraphStyleDictM = [NSMutableDictionary new];
+    return _localParagraphStyleDictM;
 }
 
 @end
