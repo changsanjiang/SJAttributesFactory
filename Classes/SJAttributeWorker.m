@@ -23,6 +23,7 @@
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrikethoughColor;
 @property (nonatomic, strong, readwrite) UIColor *r_nextBackgroundColor;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextLetterSpacing;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *r_paragraphStyleDictM;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextStrokeBorder;
 @property (nonatomic, strong, readwrite) UIColor *r_nextStrokeColor;
 @property (nonatomic, assign, readwrite) BOOL r_nextLetterpress;
@@ -188,6 +189,13 @@
     };
 }
 
+- (SJAttributeWorker * _Nonnull (^)(void))link {
+    return ^ SJAttributeWorker *(void) {
+        [_attrM addAttribute:NSLinkAttributeName value:@(1) range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 - (SJAttributeWorker *(^)(NSParagraphStyle *))paragraphStyle {
     return ^ SJAttributeWorker *(NSParagraphStyle *style) {
         [_attrM addAttribute:NSParagraphStyleAttributeName value:style range:_rangeAll(_attrM)];
@@ -254,6 +262,12 @@
             [_attrM addAttribute:NSTextEffectAttributeName value:NSTextEffectLetterpressStyle range:range];
             _r_nextLetterpress = NO;
         }
+        if ( _r_paragraphStyleDictM ) {
+            NSMutableParagraphStyle *styleM = [NSMutableParagraphStyle new];
+            [styleM setValuesForKeysWithDictionary:_r_paragraphStyleDictM];
+            [_attrM addAttribute:NSParagraphStyleAttributeName value:styleM range:range];
+            _r_paragraphStyleDictM = nil;
+        }
         if ( _r_nextLink ) {
             [_attrM addAttribute:NSLinkAttributeName value:@(1) range:range];
             _r_nextLink = NO;
@@ -311,6 +325,55 @@
 - (SJAttributeWorker *(^)(float))nextLetterSpacing {
     return ^ SJAttributeWorker *(float spacing) {
         _r_nextLetterSpacing = @(spacing);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(float))nextLineSpacing {
+    return ^ SJAttributeWorker *(float nextLineSpacing) {
+        self.r_paragraphStyleDictM[@"lineSpacing"] = @(nextLineSpacing);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(float))nextParagraphSpacing {
+    return ^ SJAttributeWorker *(float nextParagraphSpacing) {
+        self.r_paragraphStyleDictM[@"paragraphSpacing"] = @(nextParagraphSpacing);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(float))nextParagraphSpacingBefore {
+    return ^ SJAttributeWorker *(float nextParagraphSpacingBefore) {
+        self.r_paragraphStyleDictM[@"paragraphSpacingBefore"] = @(nextParagraphSpacingBefore);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(float))nextFirstLineHeadIndent {
+    return ^ SJAttributeWorker *(float nextFirstLineHeadIndent) {
+        self.r_paragraphStyleDictM[@"firstLineHeadIndent"] = @(nextFirstLineHeadIndent);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(float))nextHeadIndent {
+    return ^ SJAttributeWorker *(float nextHeadIndent) {
+        self.r_paragraphStyleDictM[@"headIndent"] = @(nextHeadIndent);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(float))nextTailIndent {
+    return ^ SJAttributeWorker *(float nextTailIndent) {
+        self.r_paragraphStyleDictM[@"tailIndent"] = @(nextTailIndent);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(NSTextAlignment))nextAlignment {
+    return ^ SJAttributeWorker *(NSTextAlignment nextAlignment) {
+        self.r_paragraphStyleDictM[@"alignment"] = @(nextAlignment);
         return self;
     };
 }
@@ -499,6 +562,7 @@
             isSetFont = YES;
             *stop = YES;
         }];
+        if ( isSetFont ) *stop = YES;
     }];
     NSAssert(isSetFont, @"You need to set it font!");
     return [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
@@ -508,6 +572,12 @@
 
 inline static NSRange _rangeAll(NSAttributedString *attr) {
     return NSMakeRange(0, attr.length);
+}
+
+- (NSMutableDictionary *)r_paragraphStyleDictM {
+    if ( _r_paragraphStyleDictM ) return _r_paragraphStyleDictM;
+    _r_paragraphStyleDictM = [NSMutableDictionary new];
+    return _r_paragraphStyleDictM;
 }
 
 @end

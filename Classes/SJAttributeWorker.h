@@ -52,7 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^alignment)(NSTextAlignment alignment);
 /// line break mode
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^lineBreakMode)(NSLineBreakMode mode);
-
 /*!
  *  整体 添加下划线
  *  ex:
@@ -73,6 +72,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^stroke)(float border, UIColor *color);
 /// 整体 凸版
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^letterpress)(void);
+/// 整体 链接
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^link)(void);
 /// 整体 段落样式
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^paragraphStyle)(NSParagraphStyle *style);
 /// 整体 倾斜. 建议值 -1 到 1 之间.
@@ -94,6 +95,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextBackgroundColor)(UIColor *color);
 /// 指定范围内的 字间隔
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextLetterSpacing)(float spacing);
+/// 指定范围内的 行间隔
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextLineSpacing)(float lineSpacing);
+/// 指定范围内的 段后间隔(\n)
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextParagraphSpacing)(float paragraphSpacing);
+/// 指定范围内的 段前间隔(\n)
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextParagraphSpacingBefore)(float paragraphSpacingBefore);
+/// 指定范围内的 首行头缩进
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextFirstLineHeadIndent)(float padding);
+/// 指定范围内的 左缩进
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextHeadIndent)(float headIndent);
+/// 指定范围内的 右缩进(正值从左算起, 负值从右算起)
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextTailIndent)(float tailIndent);
+/// 指定范围内的 对齐方式
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextAlignment)(NSTextAlignment alignment);
 /// 指定范围内的 下划线
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextUnderline)(NSUnderlineStyle style, UIColor *color);
 /// 指定范围内的 删除线
@@ -129,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  指定位置 插入文本.
  *  如果 index = -1, 将会插到文本最后.
  **/
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^insertAttr)(NSAttributedString *attr, NSInteger index);
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^insertAttr)(NSAttributedString *attrStr, NSInteger index);
 /*!
  *  You can get the length of the text through [worker.length].
  *  If index = -1, it will be inserted at the end of the text.
@@ -145,12 +160,12 @@ NS_ASSUME_NONNULL_BEGIN
  *  insert(attributedString, 0)
  *  insert([UIImage imageNamed:name], 10, CGPointMake(0, -20), CGSizeMake(50, 50))
  */
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^insert)(id insert, ...);
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^insert)(id strOrAttrStrOrImg, ...);
 
 
 #pragma mark - Replace
 /// value == NSString Or NSAttributedString
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^replace)(NSRange range, id value);
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^replace)(NSRange range, id strOrAttrStr);
 
 
 #pragma mark - Remove

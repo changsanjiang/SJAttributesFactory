@@ -73,7 +73,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             break;
         case 2: {
             tips = @"头缩进 + 尾缩进";
-            attr = [SJAttributesFactory alteringStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。" task:^(SJAttributeWorker * _Nonnull worker) {
+            attr = [SJAttributesFactory alteringStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观." task:^(SJAttributeWorker * _Nonnull worker) {
                 worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
                 
                 // 获取开头宽度
@@ -105,8 +105,12 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 5: {
             tips = @"背景颜色 + 字体间隔";
             attr = [SJAttributesFactory alteringStr:@"我的故乡\n我的故乡" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker.backgroundColor([UIColor orangeColor]).alignment(NSTextAlignmentCenter);
-                worker.nextLetterSpacing(8).range(NSMakeRange(0, 4));
+                worker.alignment(NSTextAlignmentCenter);
+                
+                worker
+                .nextBackgroundColor([UIColor orangeColor])
+                .nextLetterSpacing(8)       // 字体间隔
+                .range(NSMakeRange(0, 4));
             }];
         }
             break;
@@ -145,7 +149,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             break;
         case 10: {
             tips = @"段前间隔 and 段后间隔";
-            attr = [SJAttributesFactory alteringStr:@"谁谓河广？一苇杭之。谁谓宋远？跂予望之。\n 谁谓河广？曾不容刀。\n 谁谓宋远？曾不崇朝。\n" task:^(SJAttributeWorker * _Nonnull worker) {
+            attr = [SJAttributesFactory alteringStr:@"谁谓河广？一苇杭之.谁谓宋远？跂予望之.\n 谁谓河广？曾不容刀.\n 谁谓宋远？曾不崇朝.\n" task:^(SJAttributeWorker * _Nonnull worker) {
                 worker
                 .paragraphSpacingBefore(10)
                 .paragraphSpacing(10);
@@ -154,7 +158,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             break;
         case 11: {
             tips = @"效果同上";
-            attr = [SJAttributesFactory alteringStr:@"谁谓河广？一苇杭之。谁谓宋远？跂予望之。谁谓河广？曾不容刀。\n 谁谓宋远？曾不崇朝。\n" task:^(SJAttributeWorker * _Nonnull worker) {
+            attr = [SJAttributesFactory alteringStr:@"谁谓河广？一苇杭之.谁谓宋远？跂予望之.谁谓河广？曾不容刀.\n 谁谓宋远？曾不崇朝.\n" task:^(SJAttributeWorker * _Nonnull worker) {
                 worker
                 .paragraphSpacing(20);
             }];
@@ -169,6 +173,31 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 worker.font([UIFont boldSystemFontOfSize:40])
                 .shadow(shadow);
             }];    
+        }
+            break;
+        case 13: {
+            tips = @"局部段落样式";
+            attr = [SJAttributesFactory alteringStr:@"采薇采薇,薇亦作止.\n曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.\n曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.\n曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故." task:^(SJAttributeWorker * _Nonnull worker) {
+                worker
+                .alignment(NSTextAlignmentCenter)
+                .font([UIFont boldSystemFontOfSize:8])
+                .fontColor([UIColor orangeColor]);
+                
+                
+#warning Next ... 有 全局的 aligment 设置问题, 导致局部设置不管用. 回家解决!
+                
+                worker
+                .nextFont([UIFont systemFontOfSize:40])
+                .nextFontColor([UIColor yellowColor])
+                .nextLineSpacing(8)
+                .nextParagraphSpacing(20)
+                .nextParagraphSpacingBefore(20)
+                .nextFirstLineHeadIndent(80)
+                .nextHeadIndent(40)
+                .nextTailIndent(-4)
+                .nextAlignment(NSTextAlignmentRight)
+                .range(NSMakeRange(11, 30));
+            }];
         }
             break;
     }
