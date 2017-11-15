@@ -84,7 +84,8 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 2: {
             tips = @"头缩进 + 尾缩进";
             attr = [SJAttributesFactory alteringStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观." task:^(SJAttributeWorker * _Nonnull worker) {
-                worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
+                
+                worker.font([UIFont systemFontOfSize:14]);
                 
                 // 获取开头宽度
                 CGFloat startW = worker.width(NSMakeRange(0, 3));
@@ -94,8 +95,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 .headIndent(startW + 8) // 左缩进
                 .tailIndent(-12);       // 右缩进
                 
+
+                worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
                 
-                CGSize size = worker.boundsForMaxWidth(self.view.frame.size.width * 0.8).size;
+                CGSize size = worker.boundsByMaxWidth(self.view.frame.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
             }];
         }
@@ -151,7 +154,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 .nextFontColor([UIColor blueColor])
                 .range(NSMakeRange(pre.length, 2));
 
-                CGSize size = worker.boundsForMaxWidth(self.view.bounds.size.width * 0.8).size;
+                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
             }];
         }
@@ -250,7 +253,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                     .nextObliqueness(0.3);
                 });
                 
-                CGSize size = worker.boundsForMaxWidth(self.view.bounds.size.width * 0.8).size;
+                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
 
             }];

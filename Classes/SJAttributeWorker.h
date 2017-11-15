@@ -205,9 +205,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取指定范围的大小. (必须设置过字体)
 @property (nonatomic, copy, readonly) CGSize(^size)(NSRange range);
 /// 获取指定范围的大小. (必须设置过字体)
-@property (nonatomic, copy, readonly) CGRect(^boundsForMaxWidth)(CGFloat maxWidth);
+@property (nonatomic, copy, readonly) CGRect(^boundsByMaxWidth)(CGFloat maxWidth);
 /// 获取指定范围的大小. (必须设置过字体)
-@property (nonatomic, copy, readonly) CGRect(^boundsForMaxHeight)(CGFloat maxHeight);
+@property (nonatomic, copy, readonly) CGRect(^boundsByMaxHeight)(CGFloat maxHeight);
 /// 获取指定范围的文本
 @property (nonatomic, copy, readonly) NSAttributedString *(^attrStrByRange)(NSRange range);
 

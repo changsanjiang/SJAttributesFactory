@@ -560,13 +560,13 @@
     };
 }
 
-- (CGRect (^)(CGFloat))boundsForMaxWidth {
+- (CGRect (^)(CGFloat))boundsByMaxWidth {
     return ^ CGRect (CGFloat maxWidth) {
         return [self boundsWithWidth:maxWidth height:CGFLOAT_MAX range:_rangeAll(_attrM)];
     };
 }
 
-- (CGRect (^)(CGFloat))boundsForMaxHeight {
+- (CGRect (^)(CGFloat))boundsByMaxHeight {
     return ^ CGRect (CGFloat maxHeight) {
         return [self boundsWithWidth:CGFLOAT_MAX height:maxHeight range:_rangeAll(_attrM)];
     };
