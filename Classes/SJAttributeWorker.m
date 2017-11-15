@@ -573,22 +573,28 @@
 }
 
 - (CGRect)boundsWithWidth:(CGFloat)width height:(CGFloat)height range:(NSRange)range {
-    [self _pauseTask];
-    NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
-    __block BOOL isSetFont = NO;
+    NSAttributedString *attr = self.attrStrForRange(range);
     [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+        __block BOOL isSetFont = NO;
         [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ( ![key isEqualToString:NSFontAttributeName] ) return;
             isSetFont = YES;
             *stop = YES;
         }];
-        if ( isSetFont ) *stop = YES;
+       NSAssert(isSetFont, @"You need to set it font! Range = %@", NSStringFromRange(range));
     }];
-    NSAssert(isSetFont, @"You need to set it font!");
     CGRect bounds = [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
     bounds.size.width = ceil(bounds.size.width);
     bounds.size.height = ceil(bounds.size.height);
     return bounds;
+}
+
+- (NSAttributedString * _Nonnull (^)(NSRange))attrStrByRange {
+    return ^ NSAttributedString *(NSRange range) {
+        [self _pauseTask];
+        NSAttributedString *attr = [_attrM attributedSubstringFromRange:range];
+        return attr;
+    };
 }
 
 #pragma mark -
