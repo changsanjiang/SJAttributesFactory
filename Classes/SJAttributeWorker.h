@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  range Edit 1:
  *  [SJAttributesFactory alteringStr:@"I am a bad man!" task:^(SJAttributeWorker * _Nonnull worker) {
- *      worker.alteringRange(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
+ *      worker.rangeEdit(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
  *           range
  *              .nextFont([UIFont boldSystemFontOfSize:30])
  *              .nextFontColor([UIColor orangeColor]);

@@ -573,7 +573,7 @@
 }
 
 - (CGRect)boundsWithWidth:(CGFloat)width height:(CGFloat)height range:(NSRange)range {
-    NSAttributedString *attr = self.attrStrForRange(range);
+    NSAttributedString *attr = self.attrStrByRange(range);
     [attr enumerateAttributesInRange:_rangeAll(attr) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
         __block BOOL isSetFont = NO;
         [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
