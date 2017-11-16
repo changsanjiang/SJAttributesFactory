@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  range Edit 1:
  *  [SJAttributesFactory alteringStr:@"I am a bad man!" task:^(SJAttributeWorker * _Nonnull worker) {
- *      worker.rangeEdit(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
+ *      worker.alteringRange(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
  *           range
  *              .nextFont([UIFont boldSystemFontOfSize:30])
  *              .nextFontColor([UIColor orangeColor]);
@@ -186,6 +186,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Replace
 /// value == NSString Or NSAttributedString
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^replace)(NSRange range, id strOrAttrStr);
+/// oldPart and newPart == NSString Or NSAttributedString
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^replaceIt)(id oldPart, id newPart);
 
 
 #pragma mark - Remove
@@ -195,6 +197,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^removeAttribute)(NSAttributedStringKey key, NSRange range);
 /// 除字体大小, 清除文本其他属性
 @property (nonatomic, copy, readonly) void (^clean)(void);
+
+
+#pragma mark - Regular Expression
+/// 正则匹配
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^regexp)(NSString *ex, void(^task)(SJAttributeWorker *regexp));
+/// 正则匹配
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^regexpRanges)(NSString *ex, void(^task)(NSArray<NSValue *> *ranges));
 
 
 #pragma mark - Other

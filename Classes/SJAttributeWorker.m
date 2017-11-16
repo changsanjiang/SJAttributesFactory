@@ -8,6 +8,17 @@
 
 #import "SJAttributeWorker.h"
 
+
+@interface NSString (SJAdd)
+@end
+
+@implementation NSString (SJAdd)
+- (NSString *)string {
+    return self;
+}
+@end
+
+
 @interface SJAttributeWorker ()
 
 @property (nonatomic, strong, readonly) NSMutableAttributedString *attrM;
@@ -509,6 +520,19 @@
     };
 }
 
+- (SJAttributeWorker * _Nonnull (^)(id _Nonnull, id _Nonnull))replaceIt {
+    return ^ SJAttributeWorker *(id oldValue, id newValue) {
+        if ( !_isStrOrAttrStr(oldValue) ) return self;
+        if ( !_isStrOrAttrStr(newValue) ) return self;
+        self.regexpRanges([oldValue string], ^(NSArray<NSValue *> * _Nonnull ranges) {
+            [ranges enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                self.replace([obj rangeValue], newValue);
+            }];
+        });
+        return self;
+    };
+}
+
 - (SJAttributeWorker * _Nonnull (^)(NSRange))removeText {
     return ^ SJAttributeWorker *(NSRange range) {
         [_attrM deleteCharactersInRange:range];
@@ -536,11 +560,34 @@
 }
 
 #pragma mark -
+- (SJAttributeWorker * _Nonnull (^)(NSString * _Nonnull, void (^ _Nonnull)(SJAttributeWorker * _Nonnull)))regexp {
+    return ^ SJAttributeWorker *(NSString *ex, void(^task)(SJAttributeWorker *worker)) {
+        self.regexpRanges(ex, ^(NSArray<NSValue *> * _Nonnull ranges) {
+            [ranges enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                task(self);
+                self.range(obj.rangeValue);
+            }];
+        });
+        return self;
+    };
+}
 
-- (NSMutableParagraphStyle *)style {
-    if ( _style ) return _style;
-    _style = [NSMutableParagraphStyle new];
-    return _style;
+- (SJAttributeWorker * _Nonnull (^)(NSString * _Nonnull, void (^ _Nonnull)(NSArray<NSValue *> * _Nonnull)))regexpRanges {
+    return ^ SJAttributeWorker *(NSString *ex, void(^task)(NSArray<NSValue *> *ranges)) {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:ex options:kNilOptions error:nil];
+        NSMutableArray *rangesM = [NSMutableArray new];
+        [regex enumerateMatchesInString:_attrM.string options:NSMatchingWithoutAnchoringBounds range:_rangeAll(_attrM) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+            [rangesM addObject:[NSValue valueWithRange:result.range]];
+        }];
+        if ( 0 != rangesM.count ) task(rangesM);
+        else task(nil);
+        return self;
+    };
+}
+
+#pragma mark -
+inline static BOOL _isStrOrAttrStr(id target) {
+    return [target isKindOfClass:[NSString class]] || [target isKindOfClass:[NSAttributedString class]];
 }
 
 #pragma mark - Other
@@ -581,7 +628,7 @@
             isSetFont = YES;
             *stop = YES;
         }];
-       NSAssert(isSetFont, @"You need to set it font! Range = %@", NSStringFromRange(range));
+        NSAssert(isSetFont, @"You need to set it font! Range = %@", NSStringFromRange(range));
     }];
     CGRect bounds = [attr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
     bounds.size.width = ceil(bounds.size.width);
@@ -601,6 +648,12 @@
 
 inline static NSRange _rangeAll(NSAttributedString *attr) {
     return NSMakeRange(0, attr.length);
+}
+
+- (NSMutableParagraphStyle *)style {
+    if ( _style ) return _style;
+    _style = [NSMutableParagraphStyle new];
+    return _style;
 }
 
 - (NSMutableDictionary<NSString *, NSNumber *> *)r_paragraphStylePropertiesM {

@@ -95,7 +95,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 .headIndent(startW + 8) // 左缩进
                 .tailIndent(-12);       // 右缩进
                 
-
+                
                 worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
                 
                 CGSize size = worker.boundsByMaxWidth(self.view.frame.size.width * 0.8).size;
@@ -153,7 +153,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 worker
                 .nextFontColor([UIColor blueColor])
                 .range(NSMakeRange(pre.length, 2));
-
+                
                 CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
             }];
@@ -230,7 +230,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 worker
                 .font([UIFont boldSystemFontOfSize:40])
                 .shadow(shadow);
-            }];    
+            }];
         }
             break;
         case 13: {
@@ -256,6 +256,35 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
 
+            }];
+        }
+            break;
+        case 14: {
+            tips = @"正则";
+            attr = [SJAttributesFactory alteringStr:@"广告1，即广而告之之意. 广告是为了某种特定的需要, 通过一定形式的媒体, 公开而广泛地向公众传递信息的宣传手段, http://www.baidu.com 广告有广义和狭义之分. 广义广告包括非经济广告1和经济广告, 非经1济广告1指不以盈利为目的的广告, 又称效应广告." task:^(SJAttributeWorker * _Nonnull worker) {
+                worker.font([UIFont systemFontOfSize:14]);
+                worker.fontColor([UIColor blackColor])
+                .alignment(NSTextAlignmentLeft);
+                
+                worker.regexp(@"广告", ^(SJAttributeWorker * _Nonnull regexp) {
+                    regexp
+                    .nextFont([UIFont boldSystemFontOfSize:16])
+                    .nextFontColor([UIColor redColor])
+                    .nextStrikethough(NSUnderlineStyleDouble, [UIColor redColor])
+                    .nextUnderline(NSUnderlineStyleDouble, [UIColor redColor]);
+                });
+                
+                worker.regexp(@"http://www.baidu.com", ^(SJAttributeWorker * _Nonnull regexp) {
+                    regexp
+                    .nextFont([UIFont boldSystemFontOfSize:16])
+                    .nextFontColor([UIColor blueColor])
+                    .nextLink();
+                });
+
+                worker.replaceIt(@"1", @"");
+                
+                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
+                [self updateConstraintsWithSize:size];
             }];
         }
             break;
