@@ -266,6 +266,8 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 worker.fontColor([UIColor blackColor])
                 .alignment(NSTextAlignmentLeft);
                 
+                worker.replaceIt(@"1", @"");
+
                 worker.regexp(@"广告", ^(SJAttributeWorker * _Nonnull regexp) {
                     regexp
                     .nextFont([UIFont boldSystemFontOfSize:16])
@@ -280,9 +282,14 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                     .nextFontColor([UIColor blueColor])
                     .nextLink();
                 });
-
-                worker.replaceIt(@"1", @"");
                 
+                worker.regexpRanges(@"\\. ", ^(NSArray<NSValue *> * _Nonnull ranges) {
+                    NSLog(@"%@", ranges);
+                    [ranges enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        worker.replace([obj rangeValue], @".\n");
+                    }];
+                });
+
                 CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
             }];
