@@ -8,6 +8,10 @@
 
 #import "SJAttributeMaker.h"
 
+@interface SJAttributeMaker ()
+
+@end
+
 @implementation SJAttributeMaker
 
 - (SJAttributeMaker *(^)(NSUInteger, NSUInteger))range {

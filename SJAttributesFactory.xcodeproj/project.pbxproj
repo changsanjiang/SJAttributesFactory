@@ -18,6 +18,7 @@
 		779FC6E81FBF1CFF00F6CD04 /* SJAttributeBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6E71FBF1CFF00F6CD04 /* SJAttributeBounds.m */; };
 		779FC6EB1FBF1D2F00F6CD04 /* SJAttributeProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6EA1FBF1D2F00F6CD04 /* SJAttributeProperty.m */; };
 		779FC6EE1FBF1E4700F6CD04 /* SJAttributeFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6ED1FBF1E4700F6CD04 /* SJAttributeFont.m */; };
+		779FC6F21FBF311000F6CD04 /* SJAttributeRegularExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6F11FBF311000F6CD04 /* SJAttributeRegularExpression.m */; };
 		A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = A628B7111FB83EC800F55074 /* SJAttributeWorker.m */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
 		A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF71FB09BDC00EB65B5 /* ViewController.m */; };
@@ -46,6 +47,8 @@
 		779FC6EA1FBF1D2F00F6CD04 /* SJAttributeProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeProperty.m; sourceTree = "<group>"; };
 		779FC6EC1FBF1E4700F6CD04 /* SJAttributeFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeFont.h; sourceTree = "<group>"; };
 		779FC6ED1FBF1E4700F6CD04 /* SJAttributeFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeFont.m; sourceTree = "<group>"; };
+		779FC6F01FBF311000F6CD04 /* SJAttributeRegularExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeRegularExpression.h; sourceTree = "<group>"; };
+		779FC6F11FBF311000F6CD04 /* SJAttributeRegularExpression.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeRegularExpression.m; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A628B7101FB83EC800F55074 /* SJAttributeWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
 		A628B7111FB83EC800F55074 /* SJAttributeWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
@@ -79,18 +82,26 @@
 				A62A4CA11FBB511B00410019 /* SJAttributesFactoryHeader.h */,
 				7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */,
 				7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */,
-				A628B7101FB83EC800F55074 /* SJAttributeWorker.h */,
-				A628B7111FB83EC800F55074 /* SJAttributeWorker.m */,
+				779FC6EF1FBF29AF00F6CD04 /* Worker */,
 				77F7E3E91FBEA32100EFFB42 /* Markup */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
 		};
+		779FC6EF1FBF29AF00F6CD04 /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				A628B7101FB83EC800F55074 /* SJAttributeWorker.h */,
+				A628B7111FB83EC800F55074 /* SJAttributeWorker.m */,
+				779FC6CE1FBF10FD00F6CD04 /* SJAttributeMaker.h */,
+				779FC6CF1FBF10FD00F6CD04 /* SJAttributeMaker.m */,
+			);
+			path = Worker;
+			sourceTree = SOURCE_ROOT;
+		};
 		77F7E3E91FBEA32100EFFB42 /* Markup */ = {
 			isa = PBXGroup;
 			children = (
-				779FC6CE1FBF10FD00F6CD04 /* SJAttributeMaker.h */,
-				779FC6CF1FBF10FD00F6CD04 /* SJAttributeMaker.m */,
 				779FC6EC1FBF1E4700F6CD04 /* SJAttributeFont.h */,
 				779FC6ED1FBF1E4700F6CD04 /* SJAttributeFont.m */,
 				779FC6E01FBF1C3D00F6CD04 /* SJAttributeParagraph.h */,
@@ -101,6 +112,8 @@
 				779FC6E71FBF1CFF00F6CD04 /* SJAttributeBounds.m */,
 				779FC6E91FBF1D2F00F6CD04 /* SJAttributeProperty.h */,
 				779FC6EA1FBF1D2F00F6CD04 /* SJAttributeProperty.m */,
+				779FC6F01FBF311000F6CD04 /* SJAttributeRegularExpression.h */,
+				779FC6F11FBF311000F6CD04 /* SJAttributeRegularExpression.m */,
 			);
 			path = Markup;
 			sourceTree = "<group>";
@@ -226,6 +239,7 @@
 				779FC6D01FBF10FD00F6CD04 /* SJAttributeMaker.m in Sources */,
 				779FC6E81FBF1CFF00F6CD04 /* SJAttributeBounds.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
+				779FC6F21FBF311000F6CD04 /* SJAttributeRegularExpression.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
 				779FC6E21FBF1C3D00F6CD04 /* SJAttributeParagraph.m in Sources */,
 				A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */,

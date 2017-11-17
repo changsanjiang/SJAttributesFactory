@@ -13,6 +13,9 @@
 /// 字体
 @property (nonatomic, copy, readonly) SJAttributeFont *(^face)(UIFont *font);
 
+/// 字体间隔
+@property (nonatomic, copy, readonly) SJAttributeFont *(^letterSpace)(CGFloat letterSpace);
+
 /// 字体颜色
 @property (nonatomic, copy, readonly) SJAttributeFont *(^color)(UIColor *color);
 
@@ -24,9 +27,5 @@
 
 /// 阴影颜色
 @property (nonatomic, copy, readonly) SJAttributeFont *(^shadowColor)(UIColor *shadowColor);
-
-/// 字体间隔
-@property (nonatomic, copy, readonly) SJAttributeFont *(^letterSpace)(CGFloat letterSpace);
-
 
 @end

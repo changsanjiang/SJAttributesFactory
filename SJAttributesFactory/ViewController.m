@@ -296,23 +296,21 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             break;
         case 15: {
             break;
-            [SJAttributesFactory input:@"I am a bad man!" makeAttributes:^(SJAttributeMaker * _Nonnull make) {
+            [SJAttributesFactory input:@"I am a bad MAN!" makeAttributes:^(SJAttributeMaker * _Nonnull make) {
                 
                 /// 局部
-                make.range(0, 1).edit.insert(@"h", 0);
-                make.range(0, 1).property.backgroundColor([UIColor blackColor]);
-                make.range(0, 1).font.face([UIFont systemFontOfSize:14]);
-                make.range(0, 1).paragraph.lineSpacing(8).headIndent(20);
+                make.range(0, 5, ^(SJAttributeMaker *range) {
+                    range.font.face([UIFont systemFontOfSize:15]);
+                    range.edit.insertText(@"dd", 0);
+                });
                 
-                /// 整体
-                make.font.face([UIFont systemFontOfSize:14]);
-                make.property.backgroundColor([UIColor redColor]);
-                make.paragraph.firstLineHeadIndent(10);
-                make.edit.insert(@"dd", 0);
+                make.range(0, 10, ^(SJAttributeMaker *range) {
+                    
+                });
                 
                 /// bounds
-                CGRect bounds = make.bounds.byMaxWidth(200);
-                [self updateConstraintsWithSize:bounds.size];
+//                CGRect bounds = make.bounds.byMaxWidth(200);
+//                [self updateConstraintsWithSize:bounds.size];
             }];
         }
             break;

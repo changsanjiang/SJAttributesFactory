@@ -68,12 +68,4 @@
 /// 除字体大小, 清除文本其他属性
 @property (nonatomic, copy, readonly) void (^clean)(void);
 
-
-#pragma mark - Regular Expression
-/// 正则匹配
-@property (nonatomic, copy, readonly) SJAttributeEditContent *(^regexp)(NSString *ex, void(^task)(SJAttributeEditContent *regexp));
-/// 正则匹配
-@property (nonatomic, copy, readonly) SJAttributeEditContent *(^regexpRanges)(NSString *ex, void(^task)(NSArray<NSValue *> *ranges));
-
-
 @end
