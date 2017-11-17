@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SJAttributesFactory.h"
-#import "SJAttributeWorker.h"
+#import "SJAttributesFactoryHeader.h"
 
 static NSString *UITableViewCellID = @"UITableViewCell";
 
@@ -292,6 +291,28 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 
                 CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
+            }];
+        }
+            break;
+        case 15: {
+            break;
+            [SJAttributesFactory input:@"I am a bad man!" makeAttributes:^(SJAttributeMaker * _Nonnull make) {
+                
+                /// 局部
+                make.range(0, 1).edit.insert(@"h", 0);
+                make.range(0, 1).property.backgroundColor([UIColor blackColor]);
+                make.range(0, 1).font.face([UIFont systemFontOfSize:14]);
+                make.range(0, 1).paragraph.lineSpacing(8).headIndent(20);
+                
+                /// 整体
+                make.font.face([UIFont systemFontOfSize:14]);
+                make.property.backgroundColor([UIColor redColor]);
+                make.paragraph.firstLineHeadIndent(10);
+                make.edit.insert(@"dd", 0);
+                
+                /// bounds
+                CGRect bounds = make.bounds.byMaxWidth(200);
+                [self updateConstraintsWithSize:bounds.size];
             }];
         }
             break;

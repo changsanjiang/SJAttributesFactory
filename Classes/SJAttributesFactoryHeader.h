@@ -12,4 +12,6 @@
 #import "SJAttributesFactory.h"
 #import "SJAttributeWorker.h"
 
+#import "SJAttributeMaker.h"
+
 #endif /* SJAttributesFactoryHeader_h */

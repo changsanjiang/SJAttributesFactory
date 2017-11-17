@@ -12,10 +12,12 @@
 		7774D7AE1FB1603F00787173 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AD1FB1603F00787173 /* README.md */; };
 		779A59E51FB33AB100F88DEC /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E41FB33AB100F88DEC /* sample2.png */; };
 		779A59E71FB3466D00F88DEC /* ex.gif in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E61FB3466D00F88DEC /* ex.gif */; };
-		779FC6CA1FBF07EF00F6CD04 /* SJAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6C91FBF07EF00F6CD04 /* SJAttribute.m */; };
-		77F7E3EF1FBEA60500EFFB42 /* SJAttribute_H.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7E3EE1FBEA60500EFFB42 /* SJAttribute_H.m */; };
-		77F7E3F21FBEA60E00EFFB42 /* SJAttribute_P.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7E3F11FBEA60E00EFFB42 /* SJAttribute_P.m */; };
-		77F7E3F51FBEA61E00EFFB42 /* SJAttribute_Img.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F7E3F41FBEA61E00EFFB42 /* SJAttribute_Img.m */; };
+		779FC6D01FBF10FD00F6CD04 /* SJAttributeMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6CF1FBF10FD00F6CD04 /* SJAttributeMaker.m */; };
+		779FC6E21FBF1C3D00F6CD04 /* SJAttributeParagraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6E11FBF1C3D00F6CD04 /* SJAttributeParagraph.m */; };
+		779FC6E51FBF1C7100F6CD04 /* SJAttributeEditContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6E41FBF1C7100F6CD04 /* SJAttributeEditContent.m */; };
+		779FC6E81FBF1CFF00F6CD04 /* SJAttributeBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6E71FBF1CFF00F6CD04 /* SJAttributeBounds.m */; };
+		779FC6EB1FBF1D2F00F6CD04 /* SJAttributeProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6EA1FBF1D2F00F6CD04 /* SJAttributeProperty.m */; };
+		779FC6EE1FBF1E4700F6CD04 /* SJAttributeFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 779FC6ED1FBF1E4700F6CD04 /* SJAttributeFont.m */; };
 		A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = A628B7111FB83EC800F55074 /* SJAttributeWorker.m */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
 		A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF71FB09BDC00EB65B5 /* ViewController.m */; };
@@ -32,14 +34,18 @@
 		7774D7AD1FB1603F00787173 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		779A59E41FB33AB100F88DEC /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
 		779A59E61FB3466D00F88DEC /* ex.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ex.gif; sourceTree = "<group>"; };
-		779FC6C81FBF07EF00F6CD04 /* SJAttribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttribute.h; sourceTree = "<group>"; };
-		779FC6C91FBF07EF00F6CD04 /* SJAttribute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttribute.m; sourceTree = "<group>"; };
-		77F7E3ED1FBEA60500EFFB42 /* SJAttribute_H.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttribute_H.h; sourceTree = "<group>"; };
-		77F7E3EE1FBEA60500EFFB42 /* SJAttribute_H.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttribute_H.m; sourceTree = "<group>"; };
-		77F7E3F01FBEA60E00EFFB42 /* SJAttribute_P.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttribute_P.h; sourceTree = "<group>"; };
-		77F7E3F11FBEA60E00EFFB42 /* SJAttribute_P.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttribute_P.m; sourceTree = "<group>"; };
-		77F7E3F31FBEA61E00EFFB42 /* SJAttribute_Img.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttribute_Img.h; sourceTree = "<group>"; };
-		77F7E3F41FBEA61E00EFFB42 /* SJAttribute_Img.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttribute_Img.m; sourceTree = "<group>"; };
+		779FC6CE1FBF10FD00F6CD04 /* SJAttributeMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeMaker.h; sourceTree = "<group>"; };
+		779FC6CF1FBF10FD00F6CD04 /* SJAttributeMaker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeMaker.m; sourceTree = "<group>"; };
+		779FC6E01FBF1C3D00F6CD04 /* SJAttributeParagraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeParagraph.h; sourceTree = "<group>"; };
+		779FC6E11FBF1C3D00F6CD04 /* SJAttributeParagraph.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeParagraph.m; sourceTree = "<group>"; };
+		779FC6E31FBF1C7100F6CD04 /* SJAttributeEditContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeEditContent.h; sourceTree = "<group>"; };
+		779FC6E41FBF1C7100F6CD04 /* SJAttributeEditContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeEditContent.m; sourceTree = "<group>"; };
+		779FC6E61FBF1CFF00F6CD04 /* SJAttributeBounds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeBounds.h; sourceTree = "<group>"; };
+		779FC6E71FBF1CFF00F6CD04 /* SJAttributeBounds.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeBounds.m; sourceTree = "<group>"; };
+		779FC6E91FBF1D2F00F6CD04 /* SJAttributeProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeProperty.h; sourceTree = "<group>"; };
+		779FC6EA1FBF1D2F00F6CD04 /* SJAttributeProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeProperty.m; sourceTree = "<group>"; };
+		779FC6EC1FBF1E4700F6CD04 /* SJAttributeFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeFont.h; sourceTree = "<group>"; };
+		779FC6ED1FBF1E4700F6CD04 /* SJAttributeFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeFont.m; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A628B7101FB83EC800F55074 /* SJAttributeWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
 		A628B7111FB83EC800F55074 /* SJAttributeWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
@@ -83,14 +89,18 @@
 		77F7E3E91FBEA32100EFFB42 /* Markup */ = {
 			isa = PBXGroup;
 			children = (
-				779FC6C81FBF07EF00F6CD04 /* SJAttribute.h */,
-				779FC6C91FBF07EF00F6CD04 /* SJAttribute.m */,
-				77F7E3ED1FBEA60500EFFB42 /* SJAttribute_H.h */,
-				77F7E3EE1FBEA60500EFFB42 /* SJAttribute_H.m */,
-				77F7E3F01FBEA60E00EFFB42 /* SJAttribute_P.h */,
-				77F7E3F11FBEA60E00EFFB42 /* SJAttribute_P.m */,
-				77F7E3F31FBEA61E00EFFB42 /* SJAttribute_Img.h */,
-				77F7E3F41FBEA61E00EFFB42 /* SJAttribute_Img.m */,
+				779FC6CE1FBF10FD00F6CD04 /* SJAttributeMaker.h */,
+				779FC6CF1FBF10FD00F6CD04 /* SJAttributeMaker.m */,
+				779FC6EC1FBF1E4700F6CD04 /* SJAttributeFont.h */,
+				779FC6ED1FBF1E4700F6CD04 /* SJAttributeFont.m */,
+				779FC6E01FBF1C3D00F6CD04 /* SJAttributeParagraph.h */,
+				779FC6E11FBF1C3D00F6CD04 /* SJAttributeParagraph.m */,
+				779FC6E31FBF1C7100F6CD04 /* SJAttributeEditContent.h */,
+				779FC6E41FBF1C7100F6CD04 /* SJAttributeEditContent.m */,
+				779FC6E61FBF1CFF00F6CD04 /* SJAttributeBounds.h */,
+				779FC6E71FBF1CFF00F6CD04 /* SJAttributeBounds.m */,
+				779FC6E91FBF1D2F00F6CD04 /* SJAttributeProperty.h */,
+				779FC6EA1FBF1D2F00F6CD04 /* SJAttributeProperty.m */,
 			);
 			path = Markup;
 			sourceTree = "<group>";
@@ -208,14 +218,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				779FC6EE1FBF1E4700F6CD04 /* SJAttributeFont.m in Sources */,
+				779FC6EB1FBF1D2F00F6CD04 /* SJAttributeProperty.m in Sources */,
 				7774D7AA1FB15BAA00787173 /* SJAttributesFactory.m in Sources */,
-				77F7E3F51FBEA61E00EFFB42 /* SJAttribute_Img.m in Sources */,
+				779FC6E51FBF1C7100F6CD04 /* SJAttributeEditContent.m in Sources */,
 				A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */,
-				779FC6CA1FBF07EF00F6CD04 /* SJAttribute.m in Sources */,
-				77F7E3F21FBEA60E00EFFB42 /* SJAttribute_P.m in Sources */,
+				779FC6D01FBF10FD00F6CD04 /* SJAttributeMaker.m in Sources */,
+				779FC6E81FBF1CFF00F6CD04 /* SJAttributeBounds.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
-				77F7E3EF1FBEA60500EFFB42 /* SJAttribute_H.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
+				779FC6E21FBF1C3D00F6CD04 /* SJAttributeParagraph.m in Sources */,
 				A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,8 +370,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a317fe74-1a78-4494-b955-994f23dd28be";
-				PROVISIONING_PROFILE_SPECIFIER = sanjiang17macDev;
+				PROVISIONING_PROFILE = "acd2453e-e396-4ccf-bf56-508276824c6c";
+				PROVISIONING_PROFILE_SPECIFIER = SanJiangDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;

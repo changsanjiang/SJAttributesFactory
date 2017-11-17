@@ -8,6 +8,7 @@
 
 #import "SJAttributesFactory.h"
 #import "SJAttributeWorker.h"
+#import "SJAttributeMaker.h"
 
 /*
  *  1. 派发任务
@@ -49,5 +50,19 @@
     return [self alteringStr:@"" task:task];
 }
 
-@end
+#pragma mark -
++ (NSAttributedString *)input:(id)input makeAttributes:(void(^)(SJAttributeMaker *make))block {
+    if ( ![self isStrOrAttrStrOrImage:input] ) return nil;
+    SJAttributeMaker *maker = [SJAttributeMaker new];
+    block(maker);
+    return [maker endTask];
+}
 
++ (BOOL)isStrOrAttrStrOrImage:(id)input {
+    return
+    [input isKindOfClass:[NSString class]] ||
+    [input isKindOfClass:[NSAttributedString class]] ||
+    [input isKindOfClass:[UIImage class]];
+}
+
+@end

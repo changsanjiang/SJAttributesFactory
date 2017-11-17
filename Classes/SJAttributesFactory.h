@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class SJAttributeWorker;
+@class SJAttributeWorker, SJAttributeMaker;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSAttributedString *)producingWithImage:(UIImage *)image size:(CGSize)size task:(void(^)(SJAttributeWorker *worker))task;
 
 + (NSAttributedString *)producingWithTask:(void(^)(SJAttributeWorker *worker))task;
+
+
+#pragma mark -
++ (NSAttributedString *)input:(id)input makeAttributes:(void(^)(SJAttributeMaker *make))block;
 
 @end
 

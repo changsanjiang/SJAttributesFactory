@@ -1,13 +1,13 @@
 //
-//  SJAttribute_P.m
+//  SJAttributeFont.m
 //  SJAttributesFactory
 //
 //  Created by BlueDancer on 2017/11/17.
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
 
-#import "SJAttribute_P.h"
+#import "SJAttributeFont.h"
 
-@implementation SJAttribute_P
+@implementation SJAttributeFont
 
 @end
