@@ -1,13 +1,13 @@
 //
-//  SJAttribute_Ref.h
+//  SJAttribute.m
 //  SJAttributesFactory
 //
 //  Created by BlueDancer on 2017/11/17.
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
 
-#import "SJBaseAttribute.h"
+#import "SJAttribute.h"
 
-@interface SJAttribute_Ref : SJBaseAttribute
+@implementation SJAttribute
 
 @end

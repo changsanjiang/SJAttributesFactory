@@ -6,8 +6,8 @@
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
 
-#import "SJBaseAttribute.h"
+#import "SJAttribute.h"
 
-@interface SJAttribute_Img : SJBaseAttribute
+@interface SJAttribute_Img : SJAttribute
 
 @end
