@@ -14,11 +14,6 @@
 - 改变了项目结构, 使其更合逻辑(变更较大)
 - 新增可变参(insert)插入方法   
 
-### 期望的Code方向:
-- 仿照HTML+CSS, 例如:
-```Objective-C
-  worker.range(0, 4).h1.color([UIColor redColor]);
-```
 
 附 富文本属性:
 http://www.jianshu.com/p/ebbcfc24f9cb
