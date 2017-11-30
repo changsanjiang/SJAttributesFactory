@@ -266,8 +266,6 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 worker.fontColor([UIColor blackColor])
                 .alignment(NSTextAlignmentLeft);
                 
-                worker.replaceIt(@"1", @"");
-
                 worker.regexp(@"广告", ^(SJAttributeWorker * _Nonnull regexp) {
                     regexp
                     .nextFont([UIFont boldSystemFontOfSize:16])
@@ -289,7 +287,20 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                         worker.replace([obj rangeValue], @".\n");
                     }];
                 });
+                
+                worker.regexp(@"的", ^(SJAttributeWorker * _Nonnull regexp) {
+                    worker.nextFont([UIFont boldSystemFontOfSize:25]).nextFontColor([UIColor yellowColor]);
+                });
 
+                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
+                [self updateConstraintsWithSize:size];
+            }];
+        }
+            break;
+        case 15: {
+            tips = @"调试";
+            attr = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
+                worker.insert(@"爱老虎油", 0);                
                 CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
                 [self updateConstraintsWithSize:size];
             }];
