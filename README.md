@@ -4,6 +4,8 @@
   pod 'SJAttributesFactory'
 ```
 ### 最近动态:
+- 完善参数错误的相关提示
+- 修复了insert方法插入-1时的Bug
 - 增加了正则相关的方法
 - 新增了一个替换方法
 - 新增了一个范围获取AttrStr的方法
