@@ -306,6 +306,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             }];
         }
             break;
+        case 16: {
+             
+        }
+            break;
     }
     
     if ( !attr ) return;
