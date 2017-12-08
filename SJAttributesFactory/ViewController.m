@@ -307,7 +307,30 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         }
             break;
         case 16: {
-             
+            tips = @"修改最后插入的Str";
+            attr = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
+                worker.insert(@"修改最后插入的字符串", 0);
+                worker.insert(@"就是我", -1);
+                worker
+                .font([UIFont systemFontOfSize:14])
+                .fontColor([UIColor whiteColor]);
+                
+                worker.lastInserted(^(SJAttributeWorker * _Nonnull worker) {
+                    worker
+                    .nextFont([UIFont boldSystemFontOfSize:20])
+                    .nextFontColor([UIColor blueColor]);
+                });
+                
+                worker.insert(@" recur ", worker.lastInsertedRange.location);
+                worker.lastInserted(^(SJAttributeWorker * _Nonnull worker) {
+                  worker
+                    .nextFont([UIFont systemFontOfSize:30])
+                    .nextFontColor([UIColor redColor]);
+                });
+                
+                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
+                [self updateConstraintsWithSize:size];
+            }];
         }
             break;
     }

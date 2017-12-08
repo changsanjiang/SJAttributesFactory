@@ -25,6 +25,8 @@
 @property (nonatomic, strong, readonly) NSMutableParagraphStyle *style;
 @property (nonatomic, strong, readonly) NSMutableDictionary<NSValue *, NSParagraphStyle *> *localParagraphStyleDictM;
 
+@property (nonatomic, assign, readwrite) NSRange lastInsertedRange;
+
 @property (nonatomic, strong, readwrite) UIFont *r_nextFont;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextExpansion;
 @property (nonatomic, strong, readwrite) UIColor *r_nextFontColor;
@@ -522,6 +524,7 @@
         }
         if ( -1 == index || index > _attrM.length ) index = _attrM.length;
         [_attrM insertAttributedString:attr atIndex:index];
+        _lastInsertedRange = NSMakeRange(index, attr.length);
         return self;
     };
 }
@@ -552,7 +555,15 @@
             self.insertImage(insert, va_arg(args, int), va_arg(args, CGPoint), va_arg(args, CGSize));
         }
         va_end(args);
+        
+//        _lastInsertedRange =
         return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(void (^ _Nonnull)(SJAttributeWorker * _Nonnull)))lastInserted {
+    return ^ SJAttributeWorker *(void(^task)(SJAttributeWorker *worker)) {
+        return self.rangeEdit(_lastInsertedRange, task);
     };
 }
 
