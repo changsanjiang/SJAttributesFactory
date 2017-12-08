@@ -262,7 +262,7 @@
 
 - (void (^)(NSRange))range {
     return ^(NSRange range) {
-        if ( _rangeContains(_rangeAll(_attrM), range) ) {
+        if ( !_rangeContains(_rangeAll(_attrM), range) ) {
             _errorLog(@"Added Attribute Failed! param 'range' is unlawful!", _attrM.string);
             return;
         }
