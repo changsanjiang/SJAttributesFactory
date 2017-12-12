@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
+
 @interface SJAttributeWorker : NSObject
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
