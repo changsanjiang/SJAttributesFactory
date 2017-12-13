@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		776BF5C31FE17AAC0081CD9B /* SJActionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 776BF5BC1FE17AAC0081CD9B /* SJActionLabel.m */; };
+		776BF5C41FE17AAC0081CD9B /* SJCTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 776BF5BE1FE17AAC0081CD9B /* SJCTData.m */; };
+		776BF5C51FE17AAC0081CD9B /* SJCTFrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 776BF5C01FE17AAC0081CD9B /* SJCTFrameParser.m */; };
+		776BF5C61FE17AAC0081CD9B /* SJCTFrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 776BF5C21FE17AAC0081CD9B /* SJCTFrameParserConfig.m */; };
 		7774D7AA1FB15BAA00787173 /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */; };
 		7774D7AC1FB15DB900787173 /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */; };
 		7774D7AE1FB1603F00787173 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7774D7AD1FB1603F00787173 /* README.md */; };
@@ -22,6 +26,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		776BF5BB1FE17AAC0081CD9B /* SJActionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJActionLabel.h; sourceTree = "<group>"; };
+		776BF5BC1FE17AAC0081CD9B /* SJActionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJActionLabel.m; sourceTree = "<group>"; };
+		776BF5BD1FE17AAC0081CD9B /* SJCTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTData.h; sourceTree = "<group>"; };
+		776BF5BE1FE17AAC0081CD9B /* SJCTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTData.m; sourceTree = "<group>"; };
+		776BF5BF1FE17AAC0081CD9B /* SJCTFrameParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTFrameParser.h; sourceTree = "<group>"; };
+		776BF5C01FE17AAC0081CD9B /* SJCTFrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTFrameParser.m; sourceTree = "<group>"; };
+		776BF5C11FE17AAC0081CD9B /* SJCTFrameParserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTFrameParserConfig.h; sourceTree = "<group>"; };
+		776BF5C21FE17AAC0081CD9B /* SJCTFrameParserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTFrameParserConfig.m; sourceTree = "<group>"; };
 		7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
 		7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
 		7774D7AB1FB15DB900787173 /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SJAttributesFactory.podspec; sourceTree = "<group>"; };
@@ -55,6 +67,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		776BF5BA1FE17AAC0081CD9B /* ActionLabel */ = {
+			isa = PBXGroup;
+			children = (
+				776BF5BB1FE17AAC0081CD9B /* SJActionLabel.h */,
+				776BF5BC1FE17AAC0081CD9B /* SJActionLabel.m */,
+				776BF5BD1FE17AAC0081CD9B /* SJCTData.h */,
+				776BF5BE1FE17AAC0081CD9B /* SJCTData.m */,
+				776BF5BF1FE17AAC0081CD9B /* SJCTFrameParser.h */,
+				776BF5C01FE17AAC0081CD9B /* SJCTFrameParser.m */,
+				776BF5C11FE17AAC0081CD9B /* SJCTFrameParserConfig.h */,
+				776BF5C21FE17AAC0081CD9B /* SJCTFrameParserConfig.m */,
+			);
+			path = ActionLabel;
+			sourceTree = "<group>";
+		};
 		7774D7A71FB15BAA00787173 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +120,7 @@
 				A69E5BF61FB09BDC00EB65B5 /* ViewController.h */,
 				A69E5BF71FB09BDC00EB65B5 /* ViewController.m */,
 				779A59E61FB3466D00F88DEC /* ex.gif */,
+				776BF5BA1FE17AAC0081CD9B /* ActionLabel */,
 				7774D7A71FB15BAA00787173 /* Classes */,
 				A61066CC1FB0D08A00A67DF9 /* sample1.png */,
 				779A59E41FB33AB100F88DEC /* sample2.png */,
@@ -180,11 +208,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				776BF5C51FE17AAC0081CD9B /* SJCTFrameParser.m in Sources */,
 				7774D7AA1FB15BAA00787173 /* SJAttributesFactory.m in Sources */,
 				A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */,
+				776BF5C61FE17AAC0081CD9B /* SJCTFrameParserConfig.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
+				776BF5C31FE17AAC0081CD9B /* SJActionLabel.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
 				A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */,
+				776BF5C41FE17AAC0081CD9B /* SJCTData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
