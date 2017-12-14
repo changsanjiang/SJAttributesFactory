@@ -176,13 +176,16 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
  *  如果 index = -1, 将会插到文本最后
  **/
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^insertText)(NSString *text, NSInteger index);
+
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^insertSpace)(CGFloat width, NSInteger index);
+
 /**
  *  insert = NSString or NSAttributedString or UIImage
  *  insert(string, 0)
  *  insert(attributedString, 0)
  *  insert([UIImage imageNamed:name], 10, CGPointMake(0, -20), CGSizeMake(50, 50))
  */
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^insert)(id strOrAttrStrOrImg, ...);
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^insert)(id strOrAttrStrOrImg, NSInteger index, ...);
 /*!
  *  worker.insert(@" recur ", worker.lastInsertedRange.location);
  *  worker.lastInserted(^(SJAttributeWorker * _Nonnull worker) {

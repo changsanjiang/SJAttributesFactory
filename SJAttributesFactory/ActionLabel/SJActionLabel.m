@@ -7,7 +7,6 @@
 //
 
 #import "SJActionLabel.h"
-#import <SJUIFactoryHeader.h>
 #import <CoreFoundation/CoreFoundation.h>
 #import <CoreText/CoreText.h>
 
