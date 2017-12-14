@@ -176,9 +176,6 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
  *  如果 index = -1, 将会插到文本最后
  **/
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^insertText)(NSString *text, NSInteger index);
-
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^insertSpace)(CGFloat width, NSInteger index);
-
 /**
  *  insert = NSString or NSAttributedString or UIImage
  *  insert(string, 0)

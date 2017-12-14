@@ -541,29 +541,6 @@
     };
 }
 
-- (SJAttributeWorker * _Nonnull (^)(CGFloat, NSInteger))insertSpace {
-    return ^ SJAttributeWorker *(CGFloat width, NSInteger index) {
-        NSDictionary *dict = @{@"width":@(width), @"height":@(8)};
-        CTRunDelegateCallbacks callbacks;
-        memset(&callbacks, 0, sizeof(CTRunDelegateCallbacks));
-        callbacks.version = kCTRunDelegateVersion1;
-        callbacks.getAscent = ascentCallback;
-        callbacks.getDescent = descentCallback;
-        callbacks.getWidth = widthCallback;
-        CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(dict));
-        unichar objectReplacementChar = 0xFFFC;
-        NSString *content = [NSString stringWithCharacters:&objectReplacementChar length:1];
-        NSMutableAttributedString *space = [[NSMutableAttributedString alloc] initWithString:content];
-        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)space,
-                                       CFRangeMake(0, 1),
-                                       kCTRunDelegateAttributeName,
-                                       delegate);
-        CFRelease(delegate);
-        self.insertAttr(space, index);
-        return self;
-    };
-}
-
 - (SJAttributeWorker * _Nonnull (^)(id, NSInteger, ...))insert {
     return ^ SJAttributeWorker *(id insert, NSInteger index, ...) {
         va_list args;
@@ -761,18 +738,6 @@ inline static BOOL _rangeContains(NSRange range, NSRange range2) {
 
 inline static void _errorLog(NSString *msg, NSString *target) {
     NSLog(@"\n__Error__: %@\nTarget: %@", msg, target);
-}
-
-static CGFloat ascentCallback(void *ref){
-    return [[(__bridge NSDictionary *)ref objectForKey:@"height"] floatValue];
-}
-
-static CGFloat descentCallback(void *ref){
-    return 0;
-}
-
-static CGFloat widthCallback(void* ref){
-    return [[(__bridge NSDictionary *)ref objectForKey:@"width"] floatValue];
 }
 
 - (NSMutableParagraphStyle *)style {

@@ -334,19 +334,6 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         }
             break;
         case 17: {
-//            tips = @"插入 指定间隔";
-//            attr = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
-//                worker.insertText(@"插入指定间隔", 0);
-//
-//                // insert
-//                worker.insertSpace(80, 2);
-//                
-//                worker
-//                .font([UIFont systemFontOfSize:14])
-//                .fontColor([UIColor whiteColor]);
-//                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
-//                [self updateConstraintsWithSize:size];
-//            }];
         }
             break;
     }
