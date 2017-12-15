@@ -11,7 +11,7 @@
 #import "SJCTImageData.h"
 #import "SJCTLinkData.h"
 
-@interface SJCTData : NSObject
+@interface SJCTData : NSObject<NSCopying>
 
 @property (nonatomic, assign) CTFrameRef frameRef;
 @property (nonatomic, assign) CGFloat height;

@@ -21,4 +21,13 @@
     if ( _frameRef ) CFRelease(_frameRef);
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    SJCTData *data = [SJCTData new];
+    data.frameRef = self.frameRef;
+    data.height = self.height;
+    data.imageDataArray = self.imageDataArray;
+    data.linkDataArray = self.linkDataArray;
+    return data;
+}
+
 @end

@@ -65,6 +65,10 @@
     return self.config.lineSpacing;
 }
 
+- (CGFloat)height {
+    return self.data.height;
+}
+
 - (SJCTFrameParserConfig *)config {
     if ( _config ) return _config;
     _config = [SJCTFrameParserConfig new];
