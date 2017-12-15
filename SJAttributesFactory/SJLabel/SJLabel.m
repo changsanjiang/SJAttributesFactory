@@ -43,6 +43,7 @@
 
 - (void)setFont:(UIFont *)font {
     self.config.font = font;
+    [self.layer setNeedsDisplay];
 }
 
 - (UIFont *)font {
@@ -51,6 +52,7 @@
 
 - (void)setTextColor:(UIColor *)textColor {
     self.config.textColor = textColor;
+    [self.layer setNeedsDisplay];
 }
 
 - (UIColor *)textColor {
@@ -59,6 +61,7 @@
 
 - (void)setLineSpacing:(CGFloat)lineSpacing {
     self.config.lineSpacing = lineSpacing;
+    [self.layer setNeedsDisplay];
 }
 
 - (CGFloat)lineSpacing {
@@ -81,6 +84,7 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
+    NSLog(@"%zd - %s", __LINE__, __func__);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);

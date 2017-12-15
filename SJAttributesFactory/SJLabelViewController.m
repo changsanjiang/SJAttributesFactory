@@ -29,4 +29,11 @@
     // Do any additional setup after loading the view.
 }
 
+
+- (IBAction)change:(id)sender {
+    _label.text = @"// Do any additional setup after loading the view.";
+    _label.font = [UIFont systemFontOfSize:20];
+    _label.textColor = [UIColor redColor];
+}
+
 @end
