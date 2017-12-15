@@ -18,6 +18,8 @@
 @property (nonatomic, strong, readonly) SJCTFrameParserConfig *config;
 @property (nonatomic, strong, readwrite) SJCTData *data;
 
+@property (nonatomic, assign) BOOL needsUpdate;
+
 @end
 
 @implementation SJLabel

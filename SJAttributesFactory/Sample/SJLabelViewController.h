@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SJLabelViewController : UIViewController
+@interface SJLabelViewController : UITableViewController
 
 @end

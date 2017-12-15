@@ -37,8 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
  **/
 @property (nonatomic, assign, readwrite) CGFloat lineSpacing;
 
-@property (nonatomic, assign, readonly) CGFloat height;
-
 @end
 
 NS_ASSUME_NONNULL_END
