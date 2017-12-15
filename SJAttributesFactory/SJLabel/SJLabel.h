@@ -25,15 +25,15 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  default is systemFont(14).
  **/
-@property (nonatomic, strong, readwrite) UIFont *font;
+@property (nonatomic, strong, readwrite, null_resettable) UIFont *font;
 
 /*!
  *  default is black.
  **/
-@property (nonatomic, strong, readwrite) UIColor *textColor;
+@property (nonatomic, strong, readwrite, null_resettable) UIColor *textColor;
 
 /*!
- *  default is 3.
+ *  default is 8.
  **/
 @property (nonatomic, assign, readwrite) CGFloat lineSpacing;
 
