@@ -10,6 +10,8 @@
 
 @interface SJTableViewCell ()
 
+@property (nonatomic, strong) NSLayoutConstraint *heightConstraint;
+
 @end
 
 @implementation SJTableViewCell
@@ -22,11 +24,25 @@
     return self;
 }
 
+- (void)updateHeight {
+    if ( _label.height == _heightConstraint.constant ) return;
+    _heightConstraint.constant = _label.height;
+}
+
 - (void)_cellSetupView {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:self.label];
     _label.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_label]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_label]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
+    _label.backgroundColor = [UIColor colorWithRed:1.0 * (arc4random() % 256 / 255.0)
+                                                       green:1.0 * (arc4random() % 256 / 255.0)
+                                                        blue:1.0 * (arc4random() % 256 / 255.0)
+                                                       alpha:1];
+    
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:_label attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44];
+    _heightConstraint.priority = UILayoutPriorityRequired;
+    [_label addConstraint:_heightConstraint];
 }
 
 - (SJLabel *)label {

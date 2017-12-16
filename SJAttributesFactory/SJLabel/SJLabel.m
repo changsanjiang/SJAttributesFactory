@@ -16,19 +16,21 @@
 @interface SJLabel ()
 
 @property (nonatomic, strong, readonly) SJCTFrameParserConfig *config;
-@property (nonatomic, strong, readwrite) SJCTData *data;
 
-@property (nonatomic, assign) BOOL needsUpdate;
+@property (nonatomic, assign) BOOL needsDrawing;
+
+@property (nonatomic, strong, readwrite) SJCTData *drawData;
 
 @end
 
 @implementation SJLabel
 
 @synthesize text = _text;
-@synthesize font = _font;
-@synthesize textColor = _textColor;
-@synthesize lineSpacing = _lineSpacing;
 @synthesize config = _config;
+
+- (instancetype)init {
+    return [self initWithText:nil font:nil textColor:nil lineSpacing:8];
+}
 
 - (instancetype)initWithText:(NSString *)text
                         font:(UIFont *)font
@@ -36,6 +38,7 @@
                  lineSpacing:(CGFloat)lineSpacing {
     self = [super initWithFrame:CGRectZero];
     if ( !self ) return nil;
+    _config = [self __defaultConfig];
     self.text = text;
     self.font = font;
     self.textColor = textColor;
@@ -43,9 +46,57 @@
     return self;
 }
 
-- (void)setFont:(UIFont *)font {
-    self.config.font = font;
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    if ( !_needsDrawing ) return;
+    NSLog(@"%zd - %s", __LINE__, __func__);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CTFrameDraw(_drawData.frameRef, context);
+    for ( SJCTImageData *imageData in _drawData.imageDataArray ) {
+        UIImage *image = imageData.imageAttachment.image;
+        if ( image ) { CGContextDrawImage(context, imageData.imagePosition, image.CGImage);}
+    }
+    _needsDrawing = NO;
+}
+
+#pragma mark - Private
+
+- (void)_considerUpdating {
+    if ( 0 == _text.length ) {
+        _drawData = nil;
+    }
+    else {
+        _needsDrawing = YES;
+        _drawData = [SJCTFrameParser parserContent:_text config:_config];
+    }
     [self.layer setNeedsDisplay];
+}
+
+#pragma mark - Property
+
+- (void)setText:(NSString *)text {
+    if ( [text isEqualToString:_text] ) return;
+    _text = text;
+    [self _considerUpdating];
+}
+
+- (void)setTextAlignment:(NSTextAlignment)textAlignment {
+    if ( textAlignment == _config.textAlignment ) return;
+    self.config.textAlignment = textAlignment;
+    [self _considerUpdating];
+}
+
+- (NSTextAlignment)textAlignment {
+    return self.config.textAlignment;
+}
+
+- (void)setFont:(UIFont *)font {
+    if ( !font || font == _config.font || [font isEqual:_config.font] ) return;
+    self.config.font = font;
+    [self _considerUpdating];
 }
 
 - (UIFont *)font {
@@ -53,8 +104,9 @@
 }
 
 - (void)setTextColor:(UIColor *)textColor {
+    if ( !textColor || textColor == _config.textColor ) return;
     self.config.textColor = textColor;
-    [self.layer setNeedsDisplay];
+    [self _considerUpdating];
 }
 
 - (UIColor *)textColor {
@@ -62,8 +114,9 @@
 }
 
 - (void)setLineSpacing:(CGFloat)lineSpacing {
+    if ( lineSpacing == _config.lineSpacing ) return;
     self.config.lineSpacing = lineSpacing;
-    [self.layer setNeedsDisplay];
+    [self _considerUpdating];
 }
 
 - (CGFloat)lineSpacing {
@@ -71,32 +124,17 @@
 }
 
 - (CGFloat)height {
-    return self.data.height;
+    return ceil(self.drawData.height);
 }
 
-- (SJCTFrameParserConfig *)config {
-    if ( _config ) return _config;
-    _config = [SJCTFrameParserConfig new];
-    _config.font = [UIFont systemFontOfSize:14];
-    _config.textColor = [UIColor blackColor];
-    _config.lineSpacing = 8;
-    _config.maxWidth = [UIScreen mainScreen].bounds.size.width;
-    return _config;
-}
-
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-    NSLog(@"%zd - %s", __LINE__, __func__);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, self.bounds.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    _data = [SJCTFrameParser parserContent:_text config:_config];
-    if ( _data ) { CTFrameDraw(_data.frameRef, context);}
-    for ( SJCTImageData *imageData in _data.imageDataArray ) {
-        UIImage *image = imageData.imageAttachment.image;
-        if ( image ) { CGContextDrawImage(context, imageData.imagePosition, image.CGImage);}
-    }
+- (SJCTFrameParserConfig *)__defaultConfig {
+    SJCTFrameParserConfig *defaultConfig = [SJCTFrameParserConfig new];
+    defaultConfig.font = [UIFont systemFontOfSize:14];
+    defaultConfig.textColor = [UIColor blackColor];
+    defaultConfig.lineSpacing = 8;
+    defaultConfig.maxWidth = [UIScreen mainScreen].bounds.size.width;
+    defaultConfig.textAlignment = NSTextAlignmentLeft;
+    return defaultConfig;
 }
 
 @end

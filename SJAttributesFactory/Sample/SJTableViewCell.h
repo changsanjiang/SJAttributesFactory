@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong, readonly) SJLabel *label;
 
+- (void)updateHeight;
+
 @end

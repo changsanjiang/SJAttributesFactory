@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIView.h>
+#import <UIKit/NSText.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readwrite, nullable) NSString *text;
 
 /*!
+ *  default is NSTextAlignmentLeft.
+ **/
+@property(nonatomic)        NSTextAlignment    textAlignment;
+
+/*!
  *  default is systemFont(14).
  **/
 @property (nonatomic, strong, readwrite, null_resettable) UIFont *font;
@@ -36,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  default is 8.
  **/
 @property (nonatomic, assign, readwrite) CGFloat lineSpacing;
+
+@property (nonatomic, assign, readonly) CGFloat height;
 
 @end
 

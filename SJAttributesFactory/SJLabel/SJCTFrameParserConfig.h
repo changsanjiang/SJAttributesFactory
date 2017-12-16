@@ -18,6 +18,7 @@
 
 // 段落style
 @property (nonatomic, assign) CGFloat lineSpacing;
+@property (nonatomic, assign) NSTextAlignment textAlignment;
 
 + (CGFloat)fontSize:(UIFont *)font;
 

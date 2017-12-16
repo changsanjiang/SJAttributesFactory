@@ -20,13 +20,44 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 + (NSDictionary *)_attributesWithConfig:(SJCTFrameParserConfig *)config {
     CTFontRef fontRef = CTFontCreateWithName((CFStringRef)config.font.fontName, [SJCTFrameParserConfig fontSize:config.font], NULL);
     CGFloat lineSpacing = config.lineSpacing;
-    const size_t _kNumberOfSettings = 3;
+    CTTextAlignment textAlignment = kCTTextAlignmentLeft;
+    switch ( config.textAlignment ) {
+        case NSTextAlignmentRight: {
+            textAlignment = kCTTextAlignmentRight;
+        }
+            break;
+        case NSTextAlignmentCenter: {
+            textAlignment = kCTTextAlignmentCenter;
+        }
+            break;
+        default: {
+            textAlignment = (CTTextAlignment)config.textAlignment;
+        }
+            break;
+    }
+    const size_t _kNumberOfSettings = 4;
     CTParagraphStyleSetting paragraphStyleSettings[_kNumberOfSettings] = {
         { kCTParagraphStyleSpecifierLineSpacingAdjustment, sizeof(CGFloat), &lineSpacing },
         { kCTParagraphStyleSpecifierMaximumLineSpacing, sizeof(CGFloat), &lineSpacing },
-        { kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(CGFloat), &lineSpacing}
+        { kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(CGFloat), &lineSpacing},
+        { kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &textAlignment}
     };
-    
+//    kCTTextAlignmentLeft      = 0,
+//    kCTTextAlignmentRight     = 1,
+//    kCTTextAlignmentCenter    = 2,
+//    kCTTextAlignmentJustified = 3,
+//    kCTTextAlignmentNatural   = 4,
+//    NSTextAlignmentLeft      = 0,    // Visually left aligned
+//#if TARGET_OS_IPHONE
+//    NSTextAlignmentCenter    = 1,    // Visually centered
+//    NSTextAlignmentRight     = 2,    // Visually right aligned
+//#else /* !TARGET_OS_IPHONE */
+//    NSTextAlignmentRight     = 1,    // Visually right aligned
+//    NSTextAlignmentCenter    = 2,    // Visually centered
+//#endif
+//    NSTextAlignmentJustified = 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
+//    NSTextAlignmentNatural   = 4,    // Indicates the default alignment for script
+
     CTParagraphStyleRef paragraphRef = CTParagraphStyleCreate(paragraphStyleSettings, _kNumberOfSettings);
     
     UIColor *textColor = config.textColor;
@@ -50,7 +81,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     NSMutableAttributedString *attrStrM = attrStr.mutableCopy;
     NSArray<SJCTImageData *> *imageDataArray =
     [self _findingImageDataWithAttrStr:attrStr findingBlock:^(NSRange range, NSTextAttachment *attachment) {
-        [attrStrM replaceCharactersInRange:range withAttributedString:[self _placeholderWithAttacment:attachment config:config]];
+        [attrStrM replaceCharactersInRange:range withAttributedString:[self _replaceWithAttachment:attachment config:config]];
     }];
     
     NSArray<SJCTLinkData *> *linkDataArray = [self _findingLinkURLWithAttributedString:attrStr];
@@ -203,7 +234,7 @@ static CGFloat widthCallback(void* ref){
     return [(__bridge NSTextAttachment *)ref bounds].size.width;
 }
 
-+ (NSAttributedString *)_placeholderWithAttacment:(NSTextAttachment *)attachment
++ (NSAttributedString *)_replaceWithAttachment:(NSTextAttachment *)attachment
                                           config:(SJCTFrameParserConfig *)config {
     CTRunDelegateCallbacks callbacks;
     memset(&callbacks, 0, sizeof(CTRunDelegateCallbacks));
