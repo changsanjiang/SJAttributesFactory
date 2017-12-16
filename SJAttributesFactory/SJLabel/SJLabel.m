@@ -72,6 +72,7 @@
     else {
         _needsDrawing = YES;
         _drawData = [SJCTFrameParser parserContent:_text config:_config];
+        [_drawData needsDrawing];
     }
     [self.layer setNeedsDisplay];
 }
@@ -97,6 +98,7 @@
 - (void)setNumberOfLines:(NSUInteger)numberOfLines {
     if ( numberOfLines == _config.numberOfLines ) return;
     self.config.numberOfLines = numberOfLines;
+    [self _considerUpdating];
 }
 
 - (NSUInteger)numberOfLines {

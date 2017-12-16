@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSAttributedString *attrStr;
 @property (nonatomic, strong) SJCTFrameParserConfig *config;
 
+
+- (void)needsDrawing;
+
 - (void)drawingWithContext:(CGContextRef)context;
 
 @end

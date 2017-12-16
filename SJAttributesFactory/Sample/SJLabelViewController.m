@@ -35,8 +35,8 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SJTableViewCell *cell = (SJTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SJTableViewCellID forIndexPath:indexPath];
+    cell.label.numberOfLines = arc4random() % 5 + 1;
     cell.label.text = _content;
-    cell.label.numberOfLines = arc4random() % 5;
     [cell updateHeight];
     return cell;
 }
