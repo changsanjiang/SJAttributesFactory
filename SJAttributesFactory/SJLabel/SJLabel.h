@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, null_resettable) UIColor *textColor;
 
 /*!
- *  default is 8.
+ *  default is 0.
  **/
 @property (nonatomic) CGFloat lineSpacing;
 

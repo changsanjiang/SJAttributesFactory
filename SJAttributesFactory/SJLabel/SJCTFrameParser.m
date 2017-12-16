@@ -78,6 +78,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     ctdata.imageDataArray = imageDataArray;
     ctdata.linkDataArray = linkDataArray;
     ctdata.attrStr = attrStr;
+    ctdata.config = config;
     CFRelease(frameRef);
     return ctdata;
 }
