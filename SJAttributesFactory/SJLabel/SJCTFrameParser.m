@@ -22,18 +22,9 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     CGFloat lineSpacing = config.lineSpacing;
     CTTextAlignment textAlignment = kCTTextAlignmentLeft;
     switch ( config.textAlignment ) {
-        case NSTextAlignmentRight: {
-            textAlignment = kCTTextAlignmentRight;
-        }
-            break;
-        case NSTextAlignmentCenter: {
-            textAlignment = kCTTextAlignmentCenter;
-        }
-            break;
-        default: {
-            textAlignment = (CTTextAlignment)config.textAlignment;
-        }
-            break;
+        case NSTextAlignmentRight: { textAlignment = kCTTextAlignmentRight; } break;
+        case NSTextAlignmentCenter: { textAlignment = kCTTextAlignmentCenter; } break;
+        default: { textAlignment = (CTTextAlignment)config.textAlignment; } break;
     }
     const size_t _kNumberOfSettings = 4;
     CTParagraphStyleSetting paragraphStyleSettings[_kNumberOfSettings] = {
@@ -42,22 +33,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
         { kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(CGFloat), &lineSpacing},
         { kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &textAlignment}
     };
-//    kCTTextAlignmentLeft      = 0,
-//    kCTTextAlignmentRight     = 1,
-//    kCTTextAlignmentCenter    = 2,
-//    kCTTextAlignmentJustified = 3,
-//    kCTTextAlignmentNatural   = 4,
-//    NSTextAlignmentLeft      = 0,    // Visually left aligned
-//#if TARGET_OS_IPHONE
-//    NSTextAlignmentCenter    = 1,    // Visually centered
-//    NSTextAlignmentRight     = 2,    // Visually right aligned
-//#else /* !TARGET_OS_IPHONE */
-//    NSTextAlignmentRight     = 1,    // Visually right aligned
-//    NSTextAlignmentCenter    = 2,    // Visually centered
-//#endif
-//    NSTextAlignmentJustified = 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
-//    NSTextAlignmentNatural   = 4,    // Indicates the default alignment for script
-
+    
     CTParagraphStyleRef paragraphRef = CTParagraphStyleCreate(paragraphStyleSettings, _kNumberOfSettings);
     
     UIColor *textColor = config.textColor;
@@ -101,7 +77,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     ctdata.height = height;
     ctdata.imageDataArray = imageDataArray;
     ctdata.linkDataArray = linkDataArray;
-    
+    ctdata.attrStr = attrStr;
     CFRelease(frameRef);
     return ctdata;
 }

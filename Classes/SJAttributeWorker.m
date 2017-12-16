@@ -44,6 +44,8 @@
 @property (nonatomic, assign, readwrite) BOOL r_nextLink;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextOffset;
 @property (nonatomic, strong, readwrite) NSNumber *r_nextObliqueness;
+@property (nonatomic, strong, readwrite) NSString *r_nextKey;
+@property (nonatomic, strong, readwrite) id r_nextValue;
 
 @end
 
@@ -252,6 +254,17 @@
     };
 }
 
+- (SJAttributeWorker * _Nonnull (^)(NSString * _Nonnull, id _Nonnull))addAttribute {
+    return ^ SJAttributeWorker *(NSString *key, id value) {
+        if ( !key || !value ) {
+            _errorLog(@"Added Attribute Failed! param `key or value` is Empty!", _attrM.string);
+            return self;
+        }
+        [_attrM addAttribute:key value:value range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 #pragma mark -
 
 - (SJAttributeWorker * _Nonnull (^)(NSRange, void (^ _Nonnull)(SJAttributeWorker * _Nonnull)))rangeEdit {
@@ -337,6 +350,11 @@
         if ( _r_nextShadow ) {
             [_attrM addAttribute:NSShadowAttributeName value:_r_nextShadow range:range];
             _r_nextShadow = nil;
+        }
+        if ( _r_nextKey && _r_nextValue ) {
+            [_attrM addAttribute:_r_nextKey value:_r_nextValue range:range];
+            _r_nextKey = nil;
+            _r_nextValue = nil;
         }
     };
 }
@@ -493,6 +511,14 @@
 - (SJAttributeWorker *(^)(float))nextObliqueness {
     return ^ SJAttributeWorker *(float nextObliqueness) {
         _r_nextObliqueness = @(nextObliqueness);
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(NSString * _Nonnull, id _Nonnull))next {
+    return ^ SJAttributeWorker *(NSString *key, id value) {
+        _r_nextKey = key;
+        _r_nextValue = value;
         return self;
     };
 }

@@ -80,6 +80,8 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^paragraphStyle)(NSParagraphStyle *style);
 /// 整体 倾斜. 建议值 -1 到 1 之间.
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^obliqueness)(float obliqueness);
+/// key: NSAttributedStringKey
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^addAttribute)(NSString *key, id value);
 
 
 #pragma mark - Range
@@ -145,6 +147,8 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextOffset)(float offset);
 /// 指定范围内倾斜. 建议值 -1 到 1 之间.
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextObliqueness)(float obliqueness);
+/// attrKey: NSAttributedStringKey
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^next)(NSString *attrKey, id value);
 
 
 #pragma mark - Insert

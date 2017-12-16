@@ -107,7 +107,7 @@
                                 <rect key="frame" x="128" y="184" width="119" height="30"/>
                                 <state key="normal" title="AttributesFactory"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="push" id="qKf-cq-ymu"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="4Hg-51-kPV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voi-EG-4tD">

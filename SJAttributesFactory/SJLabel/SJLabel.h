@@ -8,6 +8,7 @@
 
 #import <UIKit/UIView.h>
 #import <UIKit/NSText.h>
+#import <UIKit/NSParagraphStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,29 +22,39 @@ NS_ASSUME_NONNULL_BEGIN
                    textColor:(UIColor * __nullable)textColor
                  lineSpacing:(CGFloat)lineSpacing;
 
-@property (nonatomic, strong, readwrite, nullable) NSString *text;
+@property (nonatomic, strong, nullable) NSString *text;
 
 /*!
  *  default is NSTextAlignmentLeft.
  **/
-@property(nonatomic)        NSTextAlignment    textAlignment;
+@property (nonatomic) NSTextAlignment textAlignment;
+
+/*!
+ *  default is 1.
+ **/
+@property (nonatomic) NSUInteger numberOfLines;
+
+/*!
+ *  default is NSLineBreakByTruncatingTail.
+ **/
+@property (nonatomic) NSLineBreakMode lineBreakMode;
 
 /*!
  *  default is systemFont(14).
  **/
-@property (nonatomic, strong, readwrite, null_resettable) UIFont *font;
+@property (nonatomic, strong, null_resettable) UIFont *font;
 
 /*!
  *  default is black.
  **/
-@property (nonatomic, strong, readwrite, null_resettable) UIColor *textColor;
+@property (nonatomic, strong, null_resettable) UIColor *textColor;
 
 /*!
  *  default is 8.
  **/
-@property (nonatomic, assign, readwrite) CGFloat lineSpacing;
+@property (nonatomic) CGFloat lineSpacing;
 
-@property (nonatomic, assign, readonly) CGFloat height;
+@property (nonatomic, readonly) CGFloat height;
 
 @end
 

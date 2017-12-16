@@ -17,5 +17,6 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, strong) NSArray<SJCTImageData *> *imageDataArray;
 @property (nonatomic, strong) NSArray<SJCTLinkData *> *linkDataArray;
+@property (nonatomic, strong) NSAttributedString *attrStr;
 
 @end

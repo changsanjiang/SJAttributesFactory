@@ -49,6 +49,7 @@
     if ( _label ) return _label;
     _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] lineSpacing:8];
     _label.backgroundColor = [UIColor whiteColor];
+    _label.numberOfLines = 3;
     return _label;
 }
 @end

@@ -11,14 +11,12 @@
 @interface SJCTFrameParserConfig : NSObject
 
 @property (nonatomic, assign) CGFloat maxWidth;
-
-// attributed
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong) UIColor *textColor;
-
-// 段落style
 @property (nonatomic, assign) CGFloat lineSpacing;
 @property (nonatomic, assign) NSTextAlignment textAlignment;
+@property (nonatomic, assign) NSUInteger numberOfLines;
+@property (nonatomic, assign) NSLineBreakMode lineBreakMode;
 
 + (CGFloat)fontSize:(UIFont *)font;
 
