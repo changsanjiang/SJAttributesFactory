@@ -22,8 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
                    textColor:(UIColor * __nullable)textColor
                  lineSpacing:(CGFloat)lineSpacing;
 
-@property (nonatomic, strong, nullable) NSString *text;
+@property (nonatomic, copy, nullable) NSString *text;
 
+@property (nonatomic, copy, nullable) NSAttributedString *attributedText;
 /*!
  *  default is NSTextAlignmentLeft.
  **/
@@ -54,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  **/
 @property (nonatomic) CGFloat lineSpacing;
 
-//@property (nonatomic, readonly) CGFloat height;
+@property (nonatomic, readonly) CGFloat height;
 
 @end
 

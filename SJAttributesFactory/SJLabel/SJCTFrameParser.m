@@ -126,7 +126,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 }
 
 + (void)_findingImagesPositionWithFrameRef:(CTFrameRef)frameRef
-                   imagesDataArrary:(NSArray<SJCTImageData *> *)imageDataArray {
+                          imagesDataArrary:(NSArray<SJCTImageData *> *)imageDataArray {
     
     if ( 0 == imageDataArray.count ) return;
     

@@ -153,5 +153,12 @@
         CGContextSetTextPosition(context, obj.origin.x, obj.origin.y - (_height - _height_t));
         CTLineDraw(obj.line, context);
     }];
+    
+    for ( SJCTImageData *imageData in _imageDataArray ) {
+        UIImage *image = imageData.imageAttachment.image;
+        CGRect position = imageData.imagePosition;
+        position.origin.y -= ( _height - _height_t );
+        if ( image ) { CGContextDrawImage(context, position, image.CGImage);}
+    }
 }
 @end

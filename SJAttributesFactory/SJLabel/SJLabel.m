@@ -65,23 +65,20 @@
     CGContextScaleCTM(context, 1.0, -1.0);
 
     [_drawData drawingWithContext:context];
-
-//    for ( SJCTImageData *imageData in _drawData.imageDataArray ) {
-//        UIImage *image = imageData.imageAttachment.image;
-//        if ( image ) { CGContextDrawImage(context, imageData.imagePosition, image.CGImage);}
-//    }
+    
     _needsDrawing = NO;
 }
 
 #pragma mark - Private
 
 - (void)_considerUpdating {
-    if ( 0 == _text.length ) {
+    if ( 0 == _text.length && 0 == _attributedText.length ) {
         _drawData = nil;
     }
     else {
         _needsDrawing = YES;
-        _drawData = [SJCTFrameParser parserContent:_text config:_config];
+        if ( _text ) _drawData = [SJCTFrameParser parserContent:_text config:_config];
+        if ( _attributedText ) _drawData = [SJCTFrameParser parserAttributedStr:_attributedText config:_config];
         [_drawData needsDrawing];
         [self invalidateIntrinsicContentSize];
     }
@@ -91,7 +88,14 @@
 #pragma mark - Property
 
 - (void)setText:(NSString *)text {
-    _text = text;
+    _text = text.copy;
+    _attributedText = nil;
+    [self _considerUpdating];
+}
+
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+    _attributedText = attributedText.copy;
+    _text = nil;
     [self _considerUpdating];
 }
 

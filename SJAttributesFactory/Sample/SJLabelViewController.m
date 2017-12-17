@@ -9,6 +9,7 @@
 #import "SJLabelViewController.h"
 #import "SJTableViewCell.h"
 #import <Masonry.h>
+#import "SJAttributesFactoryHeader.h"
 
 static NSString *SJTableViewCellID = @"SJTableViewCell";
 
@@ -56,7 +57,24 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
 //    SJTableViewCell *cell = (SJTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 //    cell.label.numberOfLines = 0;
 //    cell.label.textAlignment = NSTextAlignmentRight;
-    _label.numberOfLines = 3;
+//    _label.numberOfLines = 3;
+    _label.attributedText = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
+        worker.insertText(_content, 0);
+        worker.font([UIFont boldSystemFontOfSize:22]);
+        worker.regexp(@"我", ^(SJAttributeWorker * _Nonnull regexp) {
+            regexp.nextFontColor([UIColor yellowColor]);
+        });
+        
+        worker.regexp(@"杨老师", ^(SJAttributeWorker * _Nonnull regexp) {
+            regexp.nextFontColor([UIColor redColor]);
+        });
+        
+        worker.insertImage([UIImage imageNamed:@"sample2"], 5, CGPointZero, CGSizeMake(20, 20));
+        worker.insertImage([UIImage imageNamed:@"sample2"], 10, CGPointZero, CGSizeMake(20, 20));
+        worker.insertImage([UIImage imageNamed:@"sample2"], 15, CGPointZero, CGSizeMake(20, 20));
+        worker.insertImage([UIImage imageNamed:@"sample2"], 20, CGPointZero, CGSizeMake(20, 20));
+        worker.insertImage([UIImage imageNamed:@"sample2"], 25, CGPointZero, CGSizeMake(20, 20));
+    }];
     [UIView animateWithDuration:0.25 animations:^{
        [self.view layoutIfNeeded];
     }];
