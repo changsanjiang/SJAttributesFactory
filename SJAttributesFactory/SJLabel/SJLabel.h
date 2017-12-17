@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  default is NSLineBreakByTruncatingTail.
  **/
-@property (nonatomic) NSLineBreakMode lineBreakMode;
+//@property (nonatomic) NSLineBreakMode lineBreakMode;
 
 /*!
  *  default is systemFont(14).
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  **/
 @property (nonatomic) CGFloat lineSpacing;
 
-@property (nonatomic, readonly) CGFloat height;
+//@property (nonatomic, readonly) CGFloat height;
 
 @end
 

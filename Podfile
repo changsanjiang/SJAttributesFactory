@@ -6,4 +6,5 @@ target 'SJAttributesFactory' do
   # use_frameworks!
 
   # Pods for SJAttributesFactory
+  pod 'Masonry'
 end

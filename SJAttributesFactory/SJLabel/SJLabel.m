@@ -46,16 +46,26 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _config.maxWidth = self.frame.size.width;
+}
+
+- (CGSize)intrinsicContentSize {
+    return CGSizeMake(self.frame.size.width, ceil(_drawData.height_t));
+}
+
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     if ( !_needsDrawing ) return;
-    NSLog(@"%zd - %s", __LINE__, __func__);
+    NSLog(@"%zd - %s - %@", __LINE__, __func__, NSStringFromCGSize(rect.size));
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+    CGContextTranslateCTM(context, 0, _drawData.height_t);
     CGContextScaleCTM(context, 1.0, -1.0);
+
     [_drawData drawingWithContext:context];
-    
+
 //    for ( SJCTImageData *imageData in _drawData.imageDataArray ) {
 //        UIImage *image = imageData.imageAttachment.image;
 //        if ( image ) { CGContextDrawImage(context, imageData.imagePosition, image.CGImage);}
@@ -73,6 +83,7 @@
         _needsDrawing = YES;
         _drawData = [SJCTFrameParser parserContent:_text config:_config];
         [_drawData needsDrawing];
+        [self invalidateIntrinsicContentSize];
     }
     [self.layer setNeedsDisplay];
 }
@@ -80,7 +91,6 @@
 #pragma mark - Property
 
 - (void)setText:(NSString *)text {
-    if ( [text isEqualToString:_text] ) return;
     _text = text;
     [self _considerUpdating];
 }
@@ -136,7 +146,7 @@
 }
 
 - (CGFloat)height {
-    return ceil(self.drawData.height);
+    return ceil(_drawData.height_t);
 }
 
 - (SJCTFrameParserConfig *)__defaultConfig {

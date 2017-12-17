@@ -237,7 +237,7 @@ static CGFloat widthCallback(void* ref){
 + (CGFloat)_contentHeightWithFramesetter:(CTFramesetterRef)framesetter width:(CGFloat)maxWidth {
     CGSize constraints = CGSizeMake(maxWidth, CGFLOAT_MAX);
     CGSize contentSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), NULL, constraints, NULL);
-    return contentSize.height;
+    return ceil(contentSize.height);
 }
 
 @end

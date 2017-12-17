@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) CTFrameRef frameRef;
 @property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat height_t;
 @property (nonatomic, strong) NSArray<SJCTImageData *> *imageDataArray;
 @property (nonatomic, strong) NSArray<SJCTLinkData *> *linkDataArray;
 @property (nonatomic, strong) NSAttributedString *attrStr;
