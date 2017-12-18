@@ -17,8 +17,6 @@
 
 @property (nonatomic, strong, readonly) SJCTFrameParserConfig *config;
 
-@property (nonatomic) BOOL needsDrawing;
-
 @property (nonatomic, strong) SJCTData *drawData;
 
 @end
@@ -63,14 +61,14 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    if ( !_needsDrawing ) return;
     NSLog(@"%zd - %s - %@", __LINE__, __func__, NSStringFromCGSize(rect.size));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, _drawData.height_t);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    [_drawData drawingWithContext:context];
-    _needsDrawing = NO;
+    if ( _drawData ) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+        CGContextTranslateCTM(context, 0, _drawData.height_t);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        [_drawData drawingWithContext:context];
+    }
 }
 
 - (void)_setupGestures {
@@ -94,7 +92,6 @@
         _drawData = nil;
     }
     else {
-        _needsDrawing = YES;
         if ( _text ) _drawData = [SJCTFrameParser parserContent:_text config:_config];
         if ( _attributedText ) _drawData = [SJCTFrameParser parserAttributedStr:_attributedText config:_config];
         [_drawData needsDrawing];
