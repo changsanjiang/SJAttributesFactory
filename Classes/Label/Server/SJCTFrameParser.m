@@ -9,7 +9,6 @@
 #import "SJCTFrameParser.h"
 #import "SJCTData.h"
 #import "SJCTImageData.h"
-#import "SJCTLinkData.h"
 #import "SJCTFrameParserConfig.h"
 #import <CoreText/CoreText.h>
 
@@ -30,7 +29,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     CTParagraphStyleSetting paragraphStyleSettings[_kNumberOfSettings] = {
         { kCTParagraphStyleSpecifierLineSpacingAdjustment, sizeof(CGFloat), &lineSpacing },
         { kCTParagraphStyleSpecifierMaximumLineSpacing, sizeof(CGFloat), &lineSpacing },
-        { kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(CGFloat), &lineSpacing},
+        { kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(CGFloat), &lineSpacing },
         { kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &textAlignment}
     };
     
@@ -60,8 +59,6 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
         [attrStrM replaceCharactersInRange:range withAttributedString:[self _replaceWithAttachment:attachment config:config]];
     }];
     
-    NSArray<SJCTLinkData *> *linkDataArray = [self _findingLinkURLWithAttributedString:attrStr];
-    
     CTFramesetterRef framesetterRef =
     CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attrStrM);
     
@@ -76,7 +73,6 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     ctdata.frameRef = frameRef;
     ctdata.height = height;
     ctdata.imageDataArray = imageDataArray;
-    ctdata.linkDataArray = linkDataArray;
     ctdata.attrStr = attrStr;
     ctdata.config = config;
     CFRelease(frameRef);
@@ -109,20 +105,6 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
         block(range, attachment);
     }];
     return imageDataArrayM;
-}
-
-+ (NSArray<SJCTLinkData *> *)_findingLinkURLWithAttributedString:(NSAttributedString *)attrStr {
-    NSMutableArray<SJCTLinkData *> *linkDataArrM = [NSMutableArray new];
-    [attrStr enumerateAttributesInRange:NSMakeRange(0, attrStr.length) options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
-        id value = attrs[NSLinkAttributeName];
-        if ( value ) {
-            SJCTLinkData *linkData = [SJCTLinkData new];
-            linkData.URLStr = [attrStr attributedSubstringFromRange:range].string;
-            linkData.range = range;
-            [linkDataArrM addObject:linkData];
-        }
-    }];
-    return linkDataArrM;
 }
 
 + (void)_findingImagesPositionWithFrameRef:(CTFrameRef)frameRef

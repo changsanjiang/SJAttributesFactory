@@ -81,6 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^obliqueness)(float obliqueness);
 /// key: NSAttributedStringKey
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^addAttribute)(NSAttributedStringKey key, id value);
+/// 点击触发动作(需要配合 SJLabel 使用)
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^action)(void(^task)(void));
+
 
 
 #pragma mark - Range
@@ -148,6 +151,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextObliqueness)(float obliqueness);
 /// attrKey: NSAttributedStringKey
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^next)(NSAttributedStringKey attrKey, id value);
+/// Action, 需要使用 SJLabel
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextAction)(void(^task)(void));
+
 
 
 #pragma mark - Insert

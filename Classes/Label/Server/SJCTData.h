@@ -9,7 +9,6 @@
 #import <CoreText/CoreText.h>
 #import <UIKit/UIKit.h>
 #import "SJCTImageData.h"
-#import "SJCTLinkData.h"
 #import "SJCTFrameParserConfig.h"
 
 @interface SJCTData : NSObject<NSCopying>
@@ -18,7 +17,6 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat height_t;
 @property (nonatomic, strong) NSArray<SJCTImageData *> *imageDataArray;
-@property (nonatomic, strong) NSArray<SJCTLinkData *> *linkDataArray;
 @property (nonatomic, strong) NSAttributedString *attrStr;
 @property (nonatomic, strong) SJCTFrameParserConfig *config;
 
@@ -27,6 +25,6 @@
 
 - (void)drawingWithContext:(CGContextRef)context;
 
-- (signed long)clickedIndexWithPoint:(CGPoint)point;
+- (signed long)touchIndexWithPoint:(CGPoint)point;
 
 @end

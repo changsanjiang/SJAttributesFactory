@@ -78,21 +78,7 @@
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)tap {
     CGPoint point = [tap locationInView:self];
-    
-    [_drawData clickedIndexWithPoint:point];
-    
-//    for ( SJCTImageData *imageData in _drawData.imageDataArray ) {
-//        CGRect imageRect = imageData.imagePosition;
-//        CGPoint imagePosition = imageRect.origin;
-//        imagePosition.y = self.bounds.size.height - imageRect.origin.y - imageRect.size.height;
-//        CGRect rect = (CGRect){imagePosition, imageRect.size};
-//        if ( CGRectContainsPoint(rect, point) ) {
-//            NSLog(@"tapped");
-//            break;
-//        }
-//    }
-//    SJCTLinkData *linkData = [SJCTUtils touchLinkInView:self atPoint:point data:_data];
-//    NSLog(@"%zd", [SJCTUtils touchContentOffsetInView:self atPoint:point data:_data]);
+    [_drawData touchIndexWithPoint:point];
 }
 
 

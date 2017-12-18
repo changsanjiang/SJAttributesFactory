@@ -46,6 +46,7 @@
 @property (nonatomic, strong, readwrite) NSNumber *r_nextObliqueness;
 @property (nonatomic, strong, readwrite) NSString *r_nextKey;
 @property (nonatomic, strong, readwrite) id r_nextValue;
+@property (nonatomic, copy, readwrite) void(^task)(void);
 
 @end
 
@@ -265,6 +266,17 @@
     };
 }
 
+- (SJAttributeWorker * _Nonnull (^)(void (^ _Nonnull)(void)))action {
+    return ^ SJAttributeWorker *(void(^action)(void)) {
+        if ( !action ) {
+            _errorLog(@"Added `Action` Attribute Failed! param `task` is Empty!", _attrM.string);
+            return self;
+        }
+        [_attrM addAttribute:SJActionAttributeName value:action range:_rangeAll(_attrM)];
+        return self;
+    };
+}
+
 #pragma mark -
 
 - (SJAttributeWorker * _Nonnull (^)(NSRange, void (^ _Nonnull)(SJAttributeWorker * _Nonnull)))rangeEdit {
@@ -355,6 +367,10 @@
             [_attrM addAttribute:_r_nextKey value:_r_nextValue range:range];
             _r_nextKey = nil;
             _r_nextValue = nil;
+        }
+        if ( _task ) {
+            [_attrM addAttribute:SJActionAttributeName value:_task range:range];
+            _task = nil;
         }
     };
 }
@@ -519,6 +535,13 @@
     return ^ SJAttributeWorker *(NSString *key, id value) {
         _r_nextKey = key;
         _r_nextValue = value;
+        return self;
+    };
+}
+
+- (SJAttributeWorker * _Nonnull (^)(void (^ _Nonnull)(void)))nextAction {
+    return ^ SJAttributeWorker *(void(^task)(void)) {
+        _task = task;
         return self;
     };
 }

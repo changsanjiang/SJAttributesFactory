@@ -7,6 +7,7 @@
 //
 
 #import "SJCTData.h"
+#import "SJAttributesFactoryHeader.h"
 
 @interface SJLineModel : NSObject
 @property (nonatomic, assign) CGPoint origin;
@@ -72,7 +73,6 @@
     data.frameRef = self.frameRef;
     data.height = self.height;
     data.imageDataArray = self.imageDataArray;
-    data.linkDataArray = self.linkDataArray;
     return data;
 }
 
@@ -86,8 +86,10 @@
     CGPoint baseLineOrigins[numberOfLines];
     CTFrameGetLineOrigins(frameRef, CFRangeMake(0, numberOfLines), baseLineOrigins);
     
+//    CGFloat lineH = ABS(_config.font.descender) + _config.font.ascender + _config.font.leading + _config.lineSpacing;
+//    CGFloat ori_frist = _config.font.ascender;
     for ( CFIndex lineIndex = 0 ; lineIndex < numberOfLines ; lineIndex ++ ) {
-        // 获取每一行的起始位置
+        
         CGPoint lineOrigin = baseLineOrigins[lineIndex];
         CTLineRef nextLine = CFArrayGetValueAtIndex(linesArr, lineIndex);
         CGFloat ascent = 0;
@@ -100,10 +102,9 @@
         recordLine.ascent = ascent;
         recordLine.descent = descent;
         recordLine.leading = leading;
-        recordLine.height = ascent + descent;
+        recordLine.height = ABS(descent) + ascent + leading;
         recordLine.range = CTLineGetStringRange(nextLine);
         [_drawingLinesM addObject:recordLine];
-        
     }
     
     if ( 0 != _config.numberOfLines && _config.numberOfLines < lines ) {
@@ -114,7 +115,7 @@
         NSUInteger truncationAttributePosition = lastLineRange.location + lastLineRange.length - 1;
         
         NSDictionary *lastAttributes = [_attrStr attributesAtIndex:truncationAttributePosition effectiveRange:NULL];
-        NSAttributedString *ellipsisAttrStr = [[NSAttributedString alloc] initWithString:@"..." attributes:lastAttributes];
+        NSAttributedString *ellipsisAttrStr = [[NSAttributedString alloc] initWithString:@"\u2026" attributes:lastAttributes];
         CTLineRef ellipsisLineRef = CTLineCreateWithAttributedString((CFAttributedStringRef)ellipsisAttrStr);
         
         NSMutableAttributedString *lastLineAttrStr =
@@ -168,7 +169,7 @@
 
 - (void)drawingWithContext:(CGContextRef)context {
     [_drawingLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGContextSetTextPosition(context, obj.origin.x, obj.origin.y - obj.descent - _config.font.descender);
+        CGContextSetTextPosition(context, obj.origin.x, obj.origin.y);
         CTLineDraw(obj.line, context);
     }];
     
@@ -178,8 +179,7 @@
     }
 }
 
-- (signed long)clickedIndexWithPoint:(CGPoint)point {
-    
+- (signed long)touchIndexWithPoint:(CGPoint)point {
     __block CFIndex index = kCFNotFound;
     [_drawingLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         CGPoint origin = obj.origin;
@@ -189,10 +189,21 @@
         
         if ( point.y > head && point.y < tail ) {
             index = CTLineGetStringIndexForPosition(obj.line, point);
-            NSLog(@"%zd", index);
+            NSDictionary *dict = [_attrStr attributesAtIndex:index effectiveRange:nil];
+            void(^block)(void) = dict[SJActionAttributeName];
+            if ( block ) block();
+            *stop = YES;
         }
     }];
     return index;
 }
 
++ (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint)point {
+    CGFloat ascent = 0.0f;
+    CGFloat descent = 0.0f;
+    CGFloat leading = 0.0f;
+    CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
+    CGFloat height = ascent + descent;
+    return CGRectMake(point.x, point.y - descent, width, height);
+}
 @end
