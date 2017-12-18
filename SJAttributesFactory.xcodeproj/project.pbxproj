@@ -29,6 +29,7 @@
 		A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BFC1FB09BDC00EB65B5 /* Assets.xcassets */; };
 		A69E5C001FB09BDC00EB65B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BFE1FB09BDC00EB65B5 /* LaunchScreen.storyboard */; };
 		A69E5C031FB09BDC00EB65B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5C021FB09BDC00EB65B5 /* main.m */; };
+		A6FC9AD31FE6CC14008F318B /* SJAttributedStringKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FC9AD21FE6CC14008F318B /* SJAttributedStringKeys.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,8 @@
 		A69E5BFF1FB09BDC00EB65B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A69E5C011FB09BDC00EB65B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A69E5C021FB09BDC00EB65B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A6FC9AD11FE6CC14008F318B /* SJAttributedStringKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributedStringKeys.h; sourceTree = "<group>"; };
+		A6FC9AD21FE6CC14008F318B /* SJAttributedStringKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJAttributedStringKeys.m; sourceTree = "<group>"; };
 		A9D887137C8F564BA68B72DB /* Pods-SJAttributesFactory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SJAttributesFactory.release.xcconfig"; path = "Pods/Target Support Files/Pods-SJAttributesFactory/Pods-SJAttributesFactory.release.xcconfig"; sourceTree = "<group>"; };
 		BC64684C1803C091BA7E813A /* libPods-SJAttributesFactory.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SJAttributesFactory.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +142,8 @@
 		7774D7A71FB15BAA00787173 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A6FC9AD11FE6CC14008F318B /* SJAttributedStringKeys.h */,
+				A6FC9AD21FE6CC14008F318B /* SJAttributedStringKeys.m */,
 				A62A4CA11FBB511B00410019 /* SJAttributesFactoryHeader.h */,
 				7774D7A81FB15BAA00787173 /* SJAttributesFactory.h */,
 				7774D7A91FB15BAA00787173 /* SJAttributesFactory.m */,
@@ -329,6 +334,7 @@
 				776BF62A1FE3865D0081CD9B /* SJCTData.m in Sources */,
 				776BF62D1FE3865D0081CD9B /* SJCTUtils.m in Sources */,
 				776BF60C1FE2D0B50081CD9B /* SJLabel.m in Sources */,
+				A6FC9AD31FE6CC14008F318B /* SJAttributedStringKeys.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
 				776BF60F1FE2D3500081CD9B /* SJLabelViewController.m in Sources */,
 				A628B7121FB83EC800F55074 /* SJAttributeWorker.m in Sources */,

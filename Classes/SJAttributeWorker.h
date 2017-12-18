@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SJAttributedStringKeys.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 
 @interface SJAttributeWorker : NSObject
 
@@ -81,7 +80,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 /// 整体 倾斜. 建议值 -1 到 1 之间.
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^obliqueness)(float obliqueness);
 /// key: NSAttributedStringKey
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^addAttribute)(NSString *key, id value);
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^addAttribute)(NSAttributedStringKey key, id value);
 
 
 #pragma mark - Range
@@ -148,7 +147,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 /// 指定范围内倾斜. 建议值 -1 到 1 之间.
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^nextObliqueness)(float obliqueness);
 /// attrKey: NSAttributedStringKey
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^next)(NSString *attrKey, id value);
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^next)(NSAttributedStringKey attrKey, id value);
 
 
 #pragma mark - Insert

@@ -27,4 +27,6 @@
 
 - (void)drawingWithContext:(CGContextRef)context;
 
+- (signed long)clickedIndexWithPoint:(CGPoint)point;
+
 @end

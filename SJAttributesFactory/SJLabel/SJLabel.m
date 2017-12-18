@@ -43,12 +43,15 @@
     self.font = font;
     self.textColor = textColor;
     self.lineSpacing = lineSpacing;
+    [self _setupGestures];
+    self.userInteractionEnabled = NO;
     return self;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     _config.maxWidth = self.frame.size.width;
+    [self _considerUpdating];
 }
 
 - (CGSize)intrinsicContentSize {
@@ -63,15 +66,41 @@
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, _drawData.height_t);
     CGContextScaleCTM(context, 1.0, -1.0);
-
     [_drawData drawingWithContext:context];
-    
     _needsDrawing = NO;
 }
+
+- (void)_setupGestures {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    self.userInteractionEnabled = YES;
+    [self addGestureRecognizer:tap];
+}
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)tap {
+    CGPoint point = [tap locationInView:self];
+    
+    [_drawData clickedIndexWithPoint:point];
+    
+//    for ( SJCTImageData *imageData in _drawData.imageDataArray ) {
+//        CGRect imageRect = imageData.imagePosition;
+//        CGPoint imagePosition = imageRect.origin;
+//        imagePosition.y = self.bounds.size.height - imageRect.origin.y - imageRect.size.height;
+//        CGRect rect = (CGRect){imagePosition, imageRect.size};
+//        if ( CGRectContainsPoint(rect, point) ) {
+//            NSLog(@"tapped");
+//            break;
+//        }
+//    }
+//    SJCTLinkData *linkData = [SJCTUtils touchLinkInView:self atPoint:point data:_data];
+//    NSLog(@"%zd", [SJCTUtils touchContentOffsetInView:self atPoint:point data:_data]);
+}
+
 
 #pragma mark - Private
 
 - (void)_considerUpdating {
+    if ( 0 == _config.maxWidth ) return;
+    
     if ( 0 == _text.length && 0 == _attributedText.length ) {
         _drawData = nil;
     }
@@ -158,7 +187,6 @@
     defaultConfig.font = [UIFont systemFontOfSize:14];
     defaultConfig.textColor = [UIColor blackColor];
     defaultConfig.lineSpacing = 0;
-    defaultConfig.maxWidth = [UIScreen mainScreen].bounds.size.width;
     defaultConfig.textAlignment = NSTextAlignmentLeft;
     defaultConfig.numberOfLines = 1;
     defaultConfig.lineBreakMode = NSLineBreakByTruncatingTail;

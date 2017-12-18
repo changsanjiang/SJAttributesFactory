@@ -9,8 +9,11 @@
 #import "SJCTData.h"
 
 @interface SJLineModel : NSObject
-
 @property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGFloat ascent;
+@property (nonatomic, assign) CGFloat descent;
+@property (nonatomic, assign) CGFloat leading;
+@property (nonatomic, assign) CFRange range;
 @property (nonatomic, assign) CTLineRef line;
 @property (nonatomic, assign) CGFloat height;
 @end
@@ -33,19 +36,19 @@
 }
 @end
 
+#pragma mark -
 
 @interface SJCTData ()
-
-@property (nonatomic, strong) NSMutableArray<SJLineModel *> *needsDrawLinesM;
-
+@property (nonatomic, strong, readonly) NSMutableArray<SJLineModel *> *drawingLinesM;
 @end
 
 @implementation SJCTData
+@synthesize drawingLinesM = _drawingLinesM;
 
 - (instancetype)init {
     self = [super init];
     if ( !self ) return nil;
-    _needsDrawLinesM = [NSMutableArray array];
+    _drawingLinesM = [NSMutableArray array];
     return self;
 }
 
@@ -74,7 +77,7 @@
 }
 
 - (void)needsDrawing {
-    [_needsDrawLinesM removeAllObjects];
+    [_drawingLinesM removeAllObjects];
     NSUInteger numberOfLines = _config.numberOfLines;
     CTFrameRef frameRef = _frameRef;
     CFArrayRef linesArr = CTFrameGetLines(frameRef);
@@ -89,14 +92,18 @@
         CTLineRef nextLine = CFArrayGetValueAtIndex(linesArr, lineIndex);
         CGFloat ascent = 0;
         CGFloat descent = 0;
-        
-        CTLineGetTypographicBounds(nextLine, &ascent, &descent, NULL);
+        CGFloat leading = 0;
+        CTLineGetTypographicBounds(nextLine, &ascent, &descent, &leading);
         SJLineModel *recordLine = [SJLineModel new];
         recordLine.origin = lineOrigin;
         recordLine.line = nextLine;
+        recordLine.ascent = ascent;
+        recordLine.descent = descent;
+        recordLine.leading = leading;
         recordLine.height = ascent + descent;
+        recordLine.range = CTLineGetStringRange(nextLine);
+        [_drawingLinesM addObject:recordLine];
         
-        [_needsDrawLinesM addObject:recordLine];
     }
     
     if ( 0 != _config.numberOfLines && _config.numberOfLines < lines ) {
@@ -129,7 +136,7 @@
             truncatedLine = CFRetain(ellipsisLineRef);
         }
     
-        SJLineModel *recordLine = _needsDrawLinesM.lastObject;
+        SJLineModel *recordLine = _drawingLinesM.lastObject;
         recordLine.line = truncatedLine;
         
         CFRelease(truncationLine);
@@ -138,10 +145,21 @@
         
         _height_t = 0;
         __block CGFloat height = 0;
-        [_needsDrawLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [_drawingLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             height += obj.height + _config.lineSpacing;
         }];
         _height_t = ceil(height);
+        
+        CGFloat offset = _height - _height_t;
+        [_drawingLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.origin = CGPointMake(obj.origin.x, obj.origin.y - offset);
+        }];
+        
+        [_imageDataArray enumerateObjectsUsingBlock:^(SJCTImageData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CGRect position = obj.imagePosition;
+            position.origin.y -= ( _height - _height_t );
+            obj.imagePosition = position;
+        }];
     }
     else {
         _height_t = _height;
@@ -149,16 +167,32 @@
 }
 
 - (void)drawingWithContext:(CGContextRef)context {
-    [_needsDrawLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGContextSetTextPosition(context, obj.origin.x, obj.origin.y - (_height - _height_t));
+    [_drawingLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGContextSetTextPosition(context, obj.origin.x, obj.origin.y - obj.descent - _config.font.descender);
         CTLineDraw(obj.line, context);
     }];
     
     for ( SJCTImageData *imageData in _imageDataArray ) {
         UIImage *image = imageData.imageAttachment.image;
-        CGRect position = imageData.imagePosition;
-        position.origin.y -= ( _height - _height_t );
-        if ( image ) { CGContextDrawImage(context, position, image.CGImage);}
+        if ( image ) { CGContextDrawImage(context, imageData.imagePosition, image.CGImage);}
     }
 }
+
+- (signed long)clickedIndexWithPoint:(CGPoint)point {
+    
+    __block CFIndex index = kCFNotFound;
+    [_drawingLinesM enumerateObjectsUsingBlock:^(SJLineModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGPoint origin = obj.origin;
+        origin.y = _height_t - origin.y;
+        CGFloat head = origin.y - obj.ascent;
+        CGFloat tail = origin.y + obj.descent + obj.leading;
+        
+        if ( point.y > head && point.y < tail ) {
+            index = CTLineGetStringIndexForPosition(obj.line, point);
+            NSLog(@"%zd", index);
+        }
+    }];
+    return index;
+}
+
 @end

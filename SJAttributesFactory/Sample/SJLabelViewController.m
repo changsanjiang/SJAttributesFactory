@@ -29,16 +29,23 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
     self.tableView.estimatedRowHeight = 150;
     
     _content = @"我被班主任杨老师叫到办公室，当时上课铃刚响，杨老师过来找我，我挺奇怪的，什么事啊，可以连课都不上？当时办公室里就我们两个人。杨老师拿出手机，让我看她拍的一张照片，是我们班最近一次班级活动时照的。我们仨坐在一张椅子上，我坐在中间，皱着个眉头，小喵托着腮帮子，小桐则靠着椅背坐着。";
+    
+    NSLog(@"%zd", _content.length);
 
     _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor blueColor] lineSpacing:0];
     _label.numberOfLines = 0;
     _label.text = _content;
     _label.backgroundColor = [UIColor greenColor];
+    _label.userInteractionEnabled = YES;
     [self.view addSubview:_label];
     [_label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);
         make.width.equalTo(self.view).multipliedBy(0.8);
     }];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
     
     // Do any additional setup after loading the view.
 }
@@ -63,17 +70,19 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
         worker.font([UIFont boldSystemFontOfSize:22]);
         worker.regexp(@"我", ^(SJAttributeWorker * _Nonnull regexp) {
             regexp.nextFontColor([UIColor yellowColor]);
+            regexp.nextUnderline(NSUnderlineStyleSingle, [UIColor yellowColor]);
+            regexp.next(SJActionAttributeName, @(YES));
         });
         
         worker.regexp(@"杨老师", ^(SJAttributeWorker * _Nonnull regexp) {
             regexp.nextFontColor([UIColor redColor]);
         });
         
-        worker.insertImage([UIImage imageNamed:@"sample2"], 5, CGPointZero, CGSizeMake(20, 20));
-        worker.insertImage([UIImage imageNamed:@"sample2"], 10, CGPointZero, CGSizeMake(20, 20));
-        worker.insertImage([UIImage imageNamed:@"sample2"], 15, CGPointZero, CGSizeMake(20, 20));
-        worker.insertImage([UIImage imageNamed:@"sample2"], 20, CGPointZero, CGSizeMake(20, 20));
-        worker.insertImage([UIImage imageNamed:@"sample2"], 25, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 5, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 10, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 15, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 20, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 25, CGPointZero, CGSizeMake(20, 20));
     }];
     [UIView animateWithDuration:0.25 animations:^{
        [self.view layoutIfNeeded];
