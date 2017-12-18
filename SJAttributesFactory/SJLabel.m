@@ -61,7 +61,6 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    NSLog(@"%zd - %s - %@", __LINE__, __func__, NSStringFromCGSize(rect.size));
     if ( _drawData ) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetTextMatrix(context, CGAffineTransformIdentity);
@@ -95,8 +94,8 @@
         if ( _text ) _drawData = [SJCTFrameParser parserContent:_text config:_config];
         if ( _attributedText ) _drawData = [SJCTFrameParser parserAttributedStr:_attributedText config:_config];
         [_drawData needsDrawing];
-        [self invalidateIntrinsicContentSize];
     }
+    [self invalidateIntrinsicContentSize];
     [self.layer setNeedsDisplay];
 }
 
