@@ -87,7 +87,6 @@
     CTFrameGetLineOrigins(frameRef, CFRangeMake(0, numberOfLines), baseLineOrigins);
     
 //    CGFloat lineH = ABS(_config.font.descender) + _config.font.ascender + _config.font.leading + _config.lineSpacing;
-//    CGFloat ori_frist = _config.font.ascender;
     for ( CFIndex lineIndex = 0 ; lineIndex < numberOfLines ; lineIndex ++ ) {
         
         CGPoint lineOrigin = baseLineOrigins[lineIndex];

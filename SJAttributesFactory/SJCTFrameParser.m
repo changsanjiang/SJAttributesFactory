@@ -76,6 +76,7 @@ typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
     ctdata.attrStr = attrStr;
     ctdata.config = config;
     CFRelease(frameRef);
+    CFRelease(framesetterRef);
     return ctdata;
 }
 

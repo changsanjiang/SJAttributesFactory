@@ -7,6 +7,7 @@
 //
 
 #import "SJTableViewCell.h"
+#import <Masonry.h>
 
 @interface SJTableViewCell ()
 
@@ -27,10 +28,17 @@
 - (void)_cellSetupView {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:self.label];
-    _label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_label]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_label]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
+//    _label.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_label]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
+//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_label]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_label)]];
     _label.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    
+//    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.offset(375);
+//    }];
+    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_offset(UIEdgeInsetsMake(8, 8, 8, 8));
+    }];
 }
 
 - (SJLabel *)label {

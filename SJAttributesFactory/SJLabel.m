@@ -51,17 +51,38 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _config.maxWidth = self.frame.size.width;
-    [self _considerUpdating];
+    [self invalidateIntrinsicContentSize];
 }
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(self.frame.size.width, ceil(_drawData.height_t));
+    if ( !self.superview ) return CGSizeZero;
+    if ( 0 == self.superview.frame.size.width ) return CGSizeZero;
+    if ( nil == _drawData ) return CGSizeZero;
+    if ( 0 == _text.length && 0 == _attributedText.length ) return CGSizeZero;
+    __block CGFloat width = self.superview.bounds.size.width;
+    [self.superview.constraints enumerateObjectsUsingBlock:^(__kindof NSLayoutConstraint * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ( obj.firstItem != self ) return;
+        if ( obj.firstAttribute == NSLayoutAttributeLeft ||
+            obj.firstAttribute == NSLayoutAttributeLeading ) {
+            width -= obj.constant;
+        }
+        else if ( obj.firstAttribute == NSLayoutAttributeRight ||
+                 obj.firstAttribute == NSLayoutAttributeTrailing ) {
+            width += obj.constant;
+        }
+        else if ( obj.firstAttribute == NSLayoutAttributeWidth ) {
+            if ( 0 != obj.constant ) width = obj.constant;
+        }
+    }];
+    _config.maxWidth = width;
+    [self _considerUpdating];
+    return CGSizeMake(_config.maxWidth, _drawData.height_t);
 }
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     if ( _drawData ) {
+        NSLog(@"%zd - %s - %@", __LINE__, __func__, NSStringFromCGSize(rect.size));
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetTextMatrix(context, CGAffineTransformIdentity);
         CGContextTranslateCTM(context, 0, _drawData.height_t);
@@ -85,8 +106,6 @@
 #pragma mark - Private
 
 - (void)_considerUpdating {
-    if ( 0 == _config.maxWidth ) return;
-    
     if ( 0 == _text.length && 0 == _attributedText.length ) {
         _drawData = nil;
     }
@@ -95,7 +114,6 @@
         if ( _attributedText ) _drawData = [SJCTFrameParser parserAttributedStr:_attributedText config:_config];
         [_drawData needsDrawing];
     }
-    [self invalidateIntrinsicContentSize];
     [self.layer setNeedsDisplay];
 }
 
