@@ -29,22 +29,25 @@
 @synthesize config = _config;
 
 - (instancetype)init {
-    return [self initWithText:nil font:nil textColor:nil lineSpacing:8];
+    return [self initWithText:nil font:nil textColor:nil lineSpacing:8 userInteractionEnabled:NO];
 }
 
-- (instancetype)initWithText:(NSString *)text
-                        font:(UIFont *)font
-                   textColor:(UIColor *)textColor
-                 lineSpacing:(CGFloat)lineSpacing {
+- (instancetype)initWithText:(NSString * __nullable)text
+                        font:(UIFont * __nullable)font
+                   textColor:(UIColor * __nullable)textColor
+                 lineSpacing:(CGFloat)lineSpacing
+      userInteractionEnabled:(BOOL)userInteractionEnabled {
+    
     self = [super initWithFrame:CGRectZero];
     if ( !self ) return nil;
     _config = [self __defaultConfig];
+    self.backgroundColor = [UIColor clearColor];
     self.text = text;
     self.font = font;
     self.textColor = textColor;
     self.lineSpacing = lineSpacing;
     [self _setupGestures];
-    self.userInteractionEnabled = NO;
+    self.userInteractionEnabled = userInteractionEnabled;
     return self;
 }
 

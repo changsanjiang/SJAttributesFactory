@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithText:(NSString * __nullable)text
                         font:(UIFont * __nullable)font
                    textColor:(UIColor * __nullable)textColor
-                 lineSpacing:(CGFloat)lineSpacing;
+                 lineSpacing:(CGFloat)lineSpacing
+      userInteractionEnabled:(BOOL)userInteractionEnabled;
 
 @property (nonatomic, copy, nullable) NSString *text;
 

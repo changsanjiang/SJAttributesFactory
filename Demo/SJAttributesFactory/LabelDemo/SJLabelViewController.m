@@ -35,7 +35,7 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
     
     NSLog(@"%zd", _content.length);
 
-    _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor blueColor] lineSpacing:0];
+    _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor blueColor] lineSpacing:0 userInteractionEnabled:YES];
     _label.numberOfLines = 0;
     __weak typeof(self) _self = self;
     _label.attributedText = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
@@ -46,7 +46,8 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
         worker.regexp(@"我", ^(SJAttributeWorker * _Nonnull regexp) {
             regexp.nextFontColor([UIColor yellowColor]);
             regexp.nextUnderline(NSUnderlineStyleSingle, [UIColor yellowColor]);
-            regexp.next(SJActionAttributeName, ^() {
+            
+            regexp.nextAction(^{
                 NSLog(@"`我` 被点击了");
                 __strong typeof(_self) self = _self;
                 if ( !self ) return;
@@ -59,6 +60,7 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
         
         worker.regexp(@"杨老师", ^(SJAttributeWorker * _Nonnull regexp) {
             regexp.nextFontColor([UIColor redColor]);
+            
             regexp.next(SJActionAttributeName, ^() {
                 NSLog(@"`杨老师` 被点击了");
                 __strong typeof(_self) self = _self;

@@ -101,7 +101,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		776BF6411FE3F66E0081CD9B /* Sample */ = {
+		776BF6411FE3F66E0081CD9B /* LabelDemo */ = {
 			isa = PBXGroup;
 			children = (
 				776BF60D1FE2D3500081CD9B /* SJLabelViewController.h */,
@@ -109,7 +109,7 @@
 				776BF6421FE3F6860081CD9B /* SJTableViewCell.h */,
 				776BF6431FE3F6860081CD9B /* SJTableViewCell.m */,
 			);
-			path = Sample;
+			path = LabelDemo;
 			sourceTree = "<group>";
 		};
 		77E7E6301FE794950061439B /* SJAttributesFactory */ = {
@@ -164,7 +164,7 @@
 				A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */,
 				A69E5BF61FB09BDC00EB65B5 /* ViewController.h */,
 				A69E5BF71FB09BDC00EB65B5 /* ViewController.m */,
-				776BF6411FE3F66E0081CD9B /* Sample */,
+				776BF6411FE3F66E0081CD9B /* LabelDemo */,
 				77E7E6301FE794950061439B /* SJAttributesFactory */,
 				779A59E61FB3466D00F88DEC /* ex.gif */,
 				A61066CC1FB0D08A00A67DF9 /* sample1.png */,
