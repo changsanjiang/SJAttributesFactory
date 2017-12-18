@@ -127,13 +127,6 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
             
             regexp.nextAction(^(NSRange range, NSAttributedString * _Nonnull matched) {
                 NSLog(@"`%@` 被点击了", matched.string);
-                __strong typeof(_self) self = _self;
-                if ( !self ) return;
-                UIViewController *vc = [UIViewController new];
-                vc.title = matched.string;
-                vc.view.backgroundColor = [UIColor greenColor];
-                [self.navigationController pushViewController:vc animated:YES];
-
             });
         });
         

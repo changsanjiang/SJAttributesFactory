@@ -22,6 +22,7 @@
 		77E7E64A1FE794950061439B /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6401FE794950061439B /* SJAttributesFactory.m */; };
 		77E7E64B1FE794950061439B /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6431FE794950061439B /* SJAttributeWorker.m */; };
 		77E7E64D1FE795680061439B /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */; };
+		77E7E6521FE7A3F60061439B /* action.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E6511FE7A3F60061439B /* action.gif */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
 		A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF71FB09BDC00EB65B5 /* ViewController.m */; };
 		A69E5BFB1FB09BDC00EB65B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69E5BF91FB09BDC00EB65B5 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		77E7E6421FE794950061439B /* SJAttributeWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
 		77E7E6431FE794950061439B /* SJAttributeWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
 		77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SJAttributesFactory.podspec; path = ../SJAttributesFactory.podspec; sourceTree = "<group>"; };
+		77E7E6511FE7A3F60061439B /* action.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = action.gif; sourceTree = "<group>"; };
 		7B5BBDDC8EBE6151143BEA0B /* Pods-SJAttributesFactory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SJAttributesFactory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SJAttributesFactory/Pods-SJAttributesFactory.debug.xcconfig"; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A69E5BF01FB09BDC00EB65B5 /* SJAttributesFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJAttributesFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +169,7 @@
 				776BF6411FE3F66E0081CD9B /* LabelDemo */,
 				77E7E6301FE794950061439B /* SJAttributesFactory */,
 				779A59E61FB3466D00F88DEC /* ex.gif */,
+				77E7E6511FE7A3F60061439B /* action.gif */,
 				A61066CC1FB0D08A00A67DF9 /* sample1.png */,
 				779A59E41FB33AB100F88DEC /* sample2.png */,
 				A69E5BF91FB09BDC00EB65B5 /* Main.storyboard */,
@@ -243,6 +246,7 @@
 				A69E5C001FB09BDC00EB65B5 /* LaunchScreen.storyboard in Resources */,
 				77E7E64D1FE795680061439B /* SJAttributesFactory.podspec in Resources */,
 				A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */,
+				77E7E6521FE7A3F60061439B /* action.gif in Resources */,
 				77E7E62F1FE794860061439B /* README.md in Resources */,
 				A69E5BFB1FB09BDC00EB65B5 /* Main.storyboard in Resources */,
 				779A59E51FB33AB100F88DEC /* sample2.png in Resources */,
