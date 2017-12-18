@@ -35,38 +35,117 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
     
     NSLog(@"%zd", _content.length);
 
-    _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor blueColor] lineSpacing:0 userInteractionEnabled:YES];
-    _label.numberOfLines = 0;
+//    _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor blueColor] lineSpacing:0 userInteractionEnabled:YES];
+//    _label.numberOfLines = 0;
+//    __weak typeof(self) _self = self;
+//    _label.attributedText = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
+//        worker.insertText(_content, 0);
+//        worker.font([UIFont boldSystemFontOfSize:22]);
+//        worker.lineSpacing(8);
+//
+//        worker.regexp(@"我", ^(SJAttributeWorker * _Nonnull regexp) {
+//            regexp.nextFontColor([UIColor yellowColor]);
+//            regexp.nextUnderline(NSUnderlineStyleSingle, [UIColor yellowColor]);
+//
+//            regexp.nextAction(^{
+//                NSLog(@"`我` 被点击了");
+//                __strong typeof(_self) self = _self;
+//                if ( !self ) return;
+//                UIViewController *vc = [UIViewController new];
+//                vc.title = @"我";
+//                vc.view.backgroundColor = [UIColor greenColor];
+//                [self.navigationController pushViewController:vc animated:YES];
+//            });
+//        });
+//
+//        worker.regexp(@"杨老师", ^(SJAttributeWorker * _Nonnull regexp) {
+//            regexp.nextFontColor([UIColor redColor]);
+//
+//            regexp.next(SJActionAttributeName, ^() {
+//                NSLog(@"`杨老师` 被点击了");
+//                __strong typeof(_self) self = _self;
+//                if ( !self ) return;
+//                UIViewController *vc = [UIViewController new];
+//                vc.title = @"杨老师";
+//                vc.view.backgroundColor = [UIColor greenColor];
+//                [self.navigationController pushViewController:vc animated:YES];
+//            });
+//        });
+//
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 10, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 15, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 20, CGPointZero, CGSizeMake(20, 20));
+//        worker.insertImage([UIImage imageNamed:@"sample2"], 25, CGPointZero, CGSizeMake(20, 20));
+//    }];
+//    _label.backgroundColor = [UIColor greenColor];
+//    _label.userInteractionEnabled = YES;
+//    [self.view addSubview:_label];
+//    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.offset(0);
+//        make.width.equalTo(self.view).multipliedBy(0.8);
+//    }];
+//
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+//
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//
+//
+//    _tLabel = [UILabel new];
+//    _tLabel.font = [UIFont systemFontOfSize:14];
+//    _tLabel.textColor = [UIColor blueColor];
+//    _tLabel.backgroundColor = [UIColor greenColor];
+//    _tLabel.text = _content;
+//    _tLabel.numberOfLines = 0;
+//    [self.view addSubview:_tLabel];
+//    [_tLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_label.mas_bottom).offset(8);
+//        make.centerX.offset(0);
+//        make.width.equalTo(self.view).multipliedBy(0.8);
+//        make.height.offset(ceil((ABS(_tLabel.font.descender) + _tLabel.font.ascender + _tLabel.font.leading)) * 7);
+//    }];
+    
+    // Do any additional setup after loading the view.
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 99;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SJTableViewCell *cell = (SJTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SJTableViewCellID forIndexPath:indexPath];
     __weak typeof(self) _self = self;
-    _label.attributedText = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
+    cell.label.attributedText = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
         worker.insertText(_content, 0);
         worker.font([UIFont boldSystemFontOfSize:22]);
         worker.lineSpacing(8);
         
-        worker.regexp(@"我", ^(SJAttributeWorker * _Nonnull regexp) {
+        worker.regexp(@"我们", ^(SJAttributeWorker * _Nonnull regexp) {
             regexp.nextFontColor([UIColor yellowColor]);
             regexp.nextUnderline(NSUnderlineStyleSingle, [UIColor yellowColor]);
             
-            regexp.nextAction(^{
-                NSLog(@"`我` 被点击了");
+            regexp.nextAction(^(NSRange range, NSAttributedString * _Nonnull matched) {
+                NSLog(@"`%@` 被点击了", matched.string);
                 __strong typeof(_self) self = _self;
                 if ( !self ) return;
                 UIViewController *vc = [UIViewController new];
-                vc.title = @"我";
+                vc.title = matched.string;
                 vc.view.backgroundColor = [UIColor greenColor];
                 [self.navigationController pushViewController:vc animated:YES];
+
             });
         });
         
         worker.regexp(@"杨老师", ^(SJAttributeWorker * _Nonnull regexp) {
             regexp.nextFontColor([UIColor redColor]);
             
-            regexp.next(SJActionAttributeName, ^() {
-                NSLog(@"`杨老师` 被点击了");
+            regexp.next(SJActionAttributeName, ^(NSRange range, NSAttributedString *str) {
+                NSLog(@"`%@` 被点击了", str.string);
                 __strong typeof(_self) self = _self;
                 if ( !self ) return;
                 UIViewController *vc = [UIViewController new];
-                vc.title = @"杨老师";
+                vc.title = str.string;
                 vc.view.backgroundColor = [UIColor greenColor];
                 [self.navigationController pushViewController:vc animated:YES];
             });
@@ -76,46 +155,7 @@ static NSString *SJTableViewCellID = @"SJTableViewCell";
         worker.insertImage([UIImage imageNamed:@"sample2"], 15, CGPointZero, CGSizeMake(20, 20));
         worker.insertImage([UIImage imageNamed:@"sample2"], 20, CGPointZero, CGSizeMake(20, 20));
         worker.insertImage([UIImage imageNamed:@"sample2"], 25, CGPointZero, CGSizeMake(20, 20));
-    }];
-    _label.backgroundColor = [UIColor greenColor];
-    _label.userInteractionEnabled = YES;
-    [self.view addSubview:_label];
-    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.offset(0);
-        make.width.equalTo(self.view).multipliedBy(0.8);
-    }];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
-    
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    
-    _tLabel = [UILabel new];
-    _tLabel.font = [UIFont systemFontOfSize:14];
-    _tLabel.textColor = [UIColor blueColor];
-    _tLabel.backgroundColor = [UIColor greenColor];
-    _tLabel.text = _content;
-    _tLabel.numberOfLines = 0;
-    [self.view addSubview:_tLabel];
-    [_tLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_label.mas_bottom).offset(8);
-        make.centerX.offset(0);
-        make.width.equalTo(self.view).multipliedBy(0.8);
-        make.height.offset(ceil((ABS(_tLabel.font.descender) + _tLabel.font.ascender + _tLabel.font.leading)) * 7);
-    }];
-    
-    // Do any additional setup after loading the view.
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SJTableViewCell *cell = (SJTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SJTableViewCellID forIndexPath:indexPath];
-    cell.label.text = _content;
+    }];;
     return cell;
 }
 

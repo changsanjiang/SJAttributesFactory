@@ -188,11 +188,15 @@
         CGFloat tail = origin.y + obj.descent + obj.leading;
         
         if ( point.y > head && point.y < tail ) {
-            index = CTLineGetStringIndexForPosition(obj.line, point);
-            NSDictionary *dict = [_attrStr attributesAtIndex:index effectiveRange:nil];
-            void(^block)(void) = dict[SJActionAttributeName];
-            if ( block ) block();
             *stop = YES;
+            index = CTLineGetStringIndexForPosition(obj.line, point);
+            [_attrStr enumerateAttribute:SJActionAttributeName inRange:NSMakeRange(0, _attrStr.length) options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+                if ( index > range.location && index < range.location + range.length ) {
+                    *stop = YES;
+                    void(^block)(NSRange range, NSAttributedString *str) = value;
+                    if ( block ) block(range, [_attrStr attributedSubstringFromRange:range]);
+                }
+            }];
         }
     }];
     return index;

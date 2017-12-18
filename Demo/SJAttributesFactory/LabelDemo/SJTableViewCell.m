@@ -35,7 +35,7 @@
 
 - (SJLabel *)label {
     if ( _label ) return _label;
-    _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor whiteColor] lineSpacing:0 userInteractionEnabled:NO];
+    _label = [[SJLabel alloc] initWithText:nil font:[UIFont systemFontOfSize:14] textColor:[UIColor whiteColor] lineSpacing:0 userInteractionEnabled:YES];
     _label.numberOfLines = 0;
     return _label;
 }
