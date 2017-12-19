@@ -23,7 +23,7 @@
 
 - (void)setLine:(CTLineRef)line {
     if ( line != _line ) {
-        if ( _line ) CFRetain(_line);
+        if ( _line ) CFRelease(_line);
         _line = nil;
     }
     if ( line ) CFRetain(_line = line);
@@ -199,14 +199,5 @@
         }
     }];
     return index;
-}
-
-+ (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint)point {
-    CGFloat ascent = 0.0f;
-    CGFloat descent = 0.0f;
-    CGFloat leading = 0.0f;
-    CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-    CGFloat height = ascent + descent;
-    return CGRectMake(point.x, point.y - descent, width, height);
 }
 @end
