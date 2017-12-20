@@ -4,7 +4,7 @@
   pod 'SJAttributesFactory'
 ```
 ### 最新动态:
-- 增加了一个可以匹配点击动作的 Label.
+- (增加了一个可以匹配点击动作的 Label)[https://github.com/changsanjiang/SJLabel/releases/tag/v1.0.0].
 
 ### 最近更新:
 - 添加了一个编辑最近(lastInserted)插入的文本的方法.
@@ -24,7 +24,7 @@
 附 富文本属性:
 http://www.jianshu.com/p/ebbcfc24f9cb
 ___
-### 可匹配点击的Label:
+### (可匹配点击的Label)[https://github.com/changsanjiang/SJLabel/releases/tag/v1.0.0]:
 <img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/Demo/SJAttributesFactory/action.gif" />
 
 ### 上下图文效果:
