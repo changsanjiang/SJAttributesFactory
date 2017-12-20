@@ -8,19 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		66AFD0AF4CC3266F99FFEC7C /* libPods-SJAttributesFactory.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC64684C1803C091BA7E813A /* libPods-SJAttributesFactory.a */; };
-		776BF60F1FE2D3500081CD9B /* SJLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 776BF60E1FE2D3500081CD9B /* SJLabelViewController.m */; };
-		776BF6441FE3F6860081CD9B /* SJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 776BF6431FE3F6860081CD9B /* SJTableViewCell.m */; };
 		779A59E51FB33AB100F88DEC /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E41FB33AB100F88DEC /* sample2.png */; };
 		779A59E71FB3466D00F88DEC /* ex.gif in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E61FB3466D00F88DEC /* ex.gif */; };
+		77CD179E1FEA197000B2B54F /* SJAttributedStringKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CD17991FEA196F00B2B54F /* SJAttributedStringKeys.m */; };
+		77CD179F1FEA197000B2B54F /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CD179B1FEA196F00B2B54F /* SJAttributeWorker.m */; };
+		77CD17A01FEA197000B2B54F /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CD179C1FEA196F00B2B54F /* SJAttributesFactory.m */; };
 		77E7E62F1FE794860061439B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E62E1FE794860061439B /* README.md */; };
-		77E7E6441FE794950061439B /* SJCTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6341FE794950061439B /* SJCTData.m */; };
-		77E7E6451FE794950061439B /* SJCTFrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6361FE794950061439B /* SJCTFrameParser.m */; };
-		77E7E6461FE794950061439B /* SJCTFrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6381FE794950061439B /* SJCTFrameParserConfig.m */; };
-		77E7E6471FE794950061439B /* SJCTImageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E63A1FE794950061439B /* SJCTImageData.m */; };
-		77E7E6481FE794950061439B /* SJLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E63C1FE794950061439B /* SJLabel.m */; };
-		77E7E6491FE794950061439B /* SJAttributedStringKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E63E1FE794950061439B /* SJAttributedStringKeys.m */; };
-		77E7E64A1FE794950061439B /* SJAttributesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6401FE794950061439B /* SJAttributesFactory.m */; };
-		77E7E64B1FE794950061439B /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7E6431FE794950061439B /* SJAttributeWorker.m */; };
 		77E7E64D1FE795680061439B /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */; };
 		77E7E6521FE7A3F60061439B /* action.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E6511FE7A3F60061439B /* action.gif */; };
 		A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */; };
@@ -32,30 +25,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		776BF60D1FE2D3500081CD9B /* SJLabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJLabelViewController.h; sourceTree = "<group>"; };
-		776BF60E1FE2D3500081CD9B /* SJLabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJLabelViewController.m; sourceTree = "<group>"; };
-		776BF6421FE3F6860081CD9B /* SJTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJTableViewCell.h; sourceTree = "<group>"; };
-		776BF6431FE3F6860081CD9B /* SJTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SJTableViewCell.m; sourceTree = "<group>"; };
 		779A59E41FB33AB100F88DEC /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
 		779A59E61FB3466D00F88DEC /* ex.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ex.gif; sourceTree = "<group>"; };
+		77CD17971FEA196F00B2B54F /* SJAttributesFactoryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactoryHeader.h; sourceTree = "<group>"; };
+		77CD17981FEA196F00B2B54F /* SJAttributedStringKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributedStringKeys.h; sourceTree = "<group>"; };
+		77CD17991FEA196F00B2B54F /* SJAttributedStringKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributedStringKeys.m; sourceTree = "<group>"; };
+		77CD179A1FEA196F00B2B54F /* SJAttributesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
+		77CD179B1FEA196F00B2B54F /* SJAttributeWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
+		77CD179C1FEA196F00B2B54F /* SJAttributesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
+		77CD179D1FEA196F00B2B54F /* SJAttributeWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
 		77E7E62E1FE794860061439B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		77E7E6331FE794950061439B /* SJCTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTData.h; sourceTree = "<group>"; };
-		77E7E6341FE794950061439B /* SJCTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTData.m; sourceTree = "<group>"; };
-		77E7E6351FE794950061439B /* SJCTFrameParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTFrameParser.h; sourceTree = "<group>"; };
-		77E7E6361FE794950061439B /* SJCTFrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTFrameParser.m; sourceTree = "<group>"; };
-		77E7E6371FE794950061439B /* SJCTFrameParserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTFrameParserConfig.h; sourceTree = "<group>"; };
-		77E7E6381FE794950061439B /* SJCTFrameParserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTFrameParserConfig.m; sourceTree = "<group>"; };
-		77E7E6391FE794950061439B /* SJCTImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCTImageData.h; sourceTree = "<group>"; };
-		77E7E63A1FE794950061439B /* SJCTImageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCTImageData.m; sourceTree = "<group>"; };
-		77E7E63B1FE794950061439B /* SJLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJLabel.h; sourceTree = "<group>"; };
-		77E7E63C1FE794950061439B /* SJLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJLabel.m; sourceTree = "<group>"; };
-		77E7E63D1FE794950061439B /* SJAttributedStringKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributedStringKeys.h; sourceTree = "<group>"; };
-		77E7E63E1FE794950061439B /* SJAttributedStringKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributedStringKeys.m; sourceTree = "<group>"; };
-		77E7E63F1FE794950061439B /* SJAttributesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
-		77E7E6401FE794950061439B /* SJAttributesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributesFactory.m; sourceTree = "<group>"; };
-		77E7E6411FE794950061439B /* SJAttributesFactoryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactoryHeader.h; sourceTree = "<group>"; };
-		77E7E6421FE794950061439B /* SJAttributeWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
-		77E7E6431FE794950061439B /* SJAttributeWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
 		77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SJAttributesFactory.podspec; path = ../SJAttributesFactory.podspec; sourceTree = "<group>"; };
 		77E7E6511FE7A3F60061439B /* action.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = action.gif; sourceTree = "<group>"; };
 		7B5BBDDC8EBE6151143BEA0B /* Pods-SJAttributesFactory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SJAttributesFactory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SJAttributesFactory/Pods-SJAttributesFactory.debug.xcconfig"; sourceTree = "<group>"; };
@@ -103,37 +82,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		776BF6411FE3F66E0081CD9B /* LabelDemo */ = {
-			isa = PBXGroup;
-			children = (
-				776BF60D1FE2D3500081CD9B /* SJLabelViewController.h */,
-				776BF60E1FE2D3500081CD9B /* SJLabelViewController.m */,
-				776BF6421FE3F6860081CD9B /* SJTableViewCell.h */,
-				776BF6431FE3F6860081CD9B /* SJTableViewCell.m */,
-			);
-			path = LabelDemo;
-			sourceTree = "<group>";
-		};
 		77E7E6301FE794950061439B /* SJAttributesFactory */ = {
 			isa = PBXGroup;
 			children = (
-				77E7E6331FE794950061439B /* SJCTData.h */,
-				77E7E6341FE794950061439B /* SJCTData.m */,
-				77E7E6351FE794950061439B /* SJCTFrameParser.h */,
-				77E7E6361FE794950061439B /* SJCTFrameParser.m */,
-				77E7E6371FE794950061439B /* SJCTFrameParserConfig.h */,
-				77E7E6381FE794950061439B /* SJCTFrameParserConfig.m */,
-				77E7E6391FE794950061439B /* SJCTImageData.h */,
-				77E7E63B1FE794950061439B /* SJLabel.h */,
-				77E7E63C1FE794950061439B /* SJLabel.m */,
-				77E7E63A1FE794950061439B /* SJCTImageData.m */,
-				77E7E63D1FE794950061439B /* SJAttributedStringKeys.h */,
-				77E7E63E1FE794950061439B /* SJAttributedStringKeys.m */,
-				77E7E63F1FE794950061439B /* SJAttributesFactory.h */,
-				77E7E6401FE794950061439B /* SJAttributesFactory.m */,
-				77E7E6411FE794950061439B /* SJAttributesFactoryHeader.h */,
-				77E7E6421FE794950061439B /* SJAttributeWorker.h */,
-				77E7E6431FE794950061439B /* SJAttributeWorker.m */,
+				77CD17981FEA196F00B2B54F /* SJAttributedStringKeys.h */,
+				77CD17991FEA196F00B2B54F /* SJAttributedStringKeys.m */,
+				77CD179A1FEA196F00B2B54F /* SJAttributesFactory.h */,
+				77CD179C1FEA196F00B2B54F /* SJAttributesFactory.m */,
+				77CD17971FEA196F00B2B54F /* SJAttributesFactoryHeader.h */,
+				77CD179D1FEA196F00B2B54F /* SJAttributeWorker.h */,
+				77CD179B1FEA196F00B2B54F /* SJAttributeWorker.m */,
 			);
 			name = SJAttributesFactory;
 			path = ../../SJAttributesFactory;
@@ -166,7 +124,6 @@
 				A69E5BF41FB09BDC00EB65B5 /* AppDelegate.m */,
 				A69E5BF61FB09BDC00EB65B5 /* ViewController.h */,
 				A69E5BF71FB09BDC00EB65B5 /* ViewController.m */,
-				776BF6411FE3F66E0081CD9B /* LabelDemo */,
 				77E7E6301FE794950061439B /* SJAttributesFactory */,
 				779A59E61FB3466D00F88DEC /* ex.gif */,
 				77E7E6511FE7A3F60061439B /* action.gif */,
@@ -311,19 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77E7E64A1FE794950061439B /* SJAttributesFactory.m in Sources */,
-				776BF6441FE3F6860081CD9B /* SJTableViewCell.m in Sources */,
-				77E7E6441FE794950061439B /* SJCTData.m in Sources */,
-				77E7E64B1FE794950061439B /* SJAttributeWorker.m in Sources */,
-				77E7E6451FE794950061439B /* SJCTFrameParser.m in Sources */,
-				77E7E6471FE794950061439B /* SJCTImageData.m in Sources */,
+				77CD179E1FEA197000B2B54F /* SJAttributedStringKeys.m in Sources */,
+				77CD179F1FEA197000B2B54F /* SJAttributeWorker.m in Sources */,
 				A69E5BF81FB09BDC00EB65B5 /* ViewController.m in Sources */,
-				77E7E6461FE794950061439B /* SJCTFrameParserConfig.m in Sources */,
+				77CD17A01FEA197000B2B54F /* SJAttributesFactory.m in Sources */,
 				A69E5C031FB09BDC00EB65B5 /* main.m in Sources */,
-				77E7E6481FE794950061439B /* SJLabel.m in Sources */,
-				77E7E6491FE794950061439B /* SJAttributedStringKeys.m in Sources */,
 				A69E5BF51FB09BDC00EB65B5 /* AppDelegate.m in Sources */,
-				776BF60F1FE2D3500081CD9B /* SJLabelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

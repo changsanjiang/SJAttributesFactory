@@ -67,34 +67,6 @@
             </objects>
             <point key="canvasLocation" x="2188" y="-318"/>
         </scene>
-        <!--Label View Controller-->
-        <scene sceneID="CMB-4Q-rTp">
-            <objects>
-                <tableViewController id="pLl-8E-blv" customClass="SJLabelViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="haZ-TX-u77">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jyt-RF-LYB">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jyt-RF-LYB" id="dwS-by-j1c">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="pLl-8E-blv" id="Dwt-3Y-ZMU"/>
-                            <outlet property="delegate" destination="pLl-8E-blv" id="8KA-6O-Cpv"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bth-od-Z4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2185" y="338"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="MpM-Ls-bsT">
             <objects>
@@ -110,19 +82,10 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="4Hg-51-kPV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voi-EG-4tD">
-                                <rect key="frame" x="160" y="250" width="55" height="30"/>
-                                <state key="normal" title="SJLabel"/>
-                                <connections>
-                                    <segue destination="pLl-8E-blv" kind="show" id="WCI-UV-lNg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="voi-EG-4tD" firstAttribute="top" secondItem="K8K-Mu-Ejt" secondAttribute="bottom" constant="36" id="RbX-Df-mHp"/>
                             <constraint firstItem="K8K-Mu-Ejt" firstAttribute="centerX" secondItem="Dow-wA-iWR" secondAttribute="centerX" id="Xxc-cy-yKI"/>
-                            <constraint firstItem="voi-EG-4tD" firstAttribute="centerX" secondItem="K8K-Mu-Ejt" secondAttribute="centerX" id="dDA-dD-DQy"/>
                             <constraint firstItem="K8K-Mu-Ejt" firstAttribute="top" secondItem="f2v-UW-0uZ" secondAttribute="top" constant="120" id="njg-Mr-h0z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f2v-UW-0uZ"/>

@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "SJAttributesFactory"
-  s.version      = "1.1.14"
-  s.summary      = "富文本编辑工厂."
+  s.name         = "SJLabel"
+  s.version      = "1.0.0"
+  s.summary      = "SJLabel."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-    富文本编辑工厂, 为省去繁琐的编辑代码, 所以采用了链式语法去创建一个AttributedString.
+    SJLabel, 支持匹配点击的Label.
                    DESC
 
   s.homepage     = "https://github.com/changsanjiang/SJAttributesFactory"
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "SJAttributesFactory/*.{h,m}"
+  s.source_files  = "SJAttributesFactory/Label/*.{h,m}"
 
   # s.public_header_files = "Classes/**/*.h"
 
