@@ -349,6 +349,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 - (void)updateConstraintsWithSize:(CGSize)size {
     _widthConstraint.constant = size.width;
     _heightConstraint.constant = size.height;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark -

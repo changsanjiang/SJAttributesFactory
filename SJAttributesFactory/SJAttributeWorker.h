@@ -152,7 +152,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// attrKey: NSAttributedStringKey
 @property (nonatomic, copy, readonly) SJAttributeWorker *(^next)(NSAttributedStringKey attrKey, id value);
 /// Action, 需要使用 SJLabel
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextAction)(void(^task)(NSRange range, NSAttributedString *matched));
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^nextAction)(void(^task)(NSRange matchedRange, NSAttributedString *matchedAttrStr));
 
 
 
@@ -200,7 +200,7 @@ NS_ASSUME_NONNULL_BEGIN
  *      .nextFontColor([UIColor redColor]);
  *  });
  */
-@property (nonatomic, copy, readonly) SJAttributeWorker *(^lastInserted)(void(^rangeTask)(SJAttributeWorker *worker));
+@property (nonatomic, copy, readonly) SJAttributeWorker *(^lastInserted)(void(^rangeTask)(SJAttributeWorker *last));
 @property (nonatomic, assign, readonly) NSRange lastInsertedRange;
 
 #pragma mark - Replace
