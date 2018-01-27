@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorker *make)) {
+NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorker *make)) {
     SJAttributeWorker *worker = [SJAttributeWorker new];
     block(worker);
     return worker.endTask;
@@ -70,7 +70,7 @@ inline static void _errorLog(NSString *msg, NSString * __nullable target) {
     [self endTask];
 }
 
-- (NSAttributedString *)endTask {
+- (NSMutableAttributedString *)endTask {
     if ( 0 == self.attrStr.length ) return self.attrStr;
     if ( nil == self.recorder.font ) self.recorder.font = self.defaultFont;
     if ( nil == self.recorder.textColor ) self.recorder.textColor = self.defaultTextColor;
@@ -82,7 +82,7 @@ inline static void _errorLog(NSString *msg, NSString * __nullable target) {
     return self.attrStr;
 }
 
-- (NSAttributedString *)endTaskAndComplete:(void(^)(SJAttributeWorker *worker))block; {
+- (NSMutableAttributedString *)endTaskAndComplete:(void(^)(SJAttributeWorker *worker))block; {
     [self endTask];
     if ( block ) block(self);
     return self.attrStr;
@@ -364,8 +364,8 @@ inline static void _errorLog(NSString *msg, NSString * __nullable target) {
             _errorLog(@"Remove Failed! param 'range' is unlawfulness!", self.attrStr.string);
         }
         else {
-            NSAttributedString *subAttrStr = self.subAttrStr(range);
-            self.replace(range, subAttrStr.string);
+            NSString *subAttrStr = self.subAttrStr(range).string;
+            self.replace(range, subAttrStr);
         }
     };
 }
@@ -411,16 +411,16 @@ inline static void _errorLog(NSString *msg, NSString * __nullable target) {
     };
 }
 /// 下划线
-- (SJAttributesRangeOperator * _Nonnull (^)(SJUnderlineAttribute * _Nonnull))underLine {
-    return ^ SJAttributesRangeOperator *(SJUnderlineAttribute *underLine) {
-        self.recorder.underLine = underLine;
+- (SJAttributesRangeOperator * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))underLine {
+    return ^ SJAttributesRangeOperator *(NSUnderlineStyle style, UIColor *color) {
+        self.recorder.underLine = [SJUnderlineAttribute underLineWithStyle:style color:color];
         return self;
     };
 }
 /// 删除线
-- (SJAttributesRangeOperator * _Nonnull (^)(SJUnderlineAttribute * _Nonnull))strikethrough {
-    return ^ SJAttributesRangeOperator *(SJUnderlineAttribute *strikethrough) {
-        self.recorder.strikethrough = strikethrough;
+- (SJAttributesRangeOperator * _Nonnull (^)(NSUnderlineStyle, UIColor * _Nonnull))strikethrough {
+    return ^ SJAttributesRangeOperator *(NSUnderlineStyle style, UIColor *color) {
+        self.recorder.strikethrough = [SJUnderlineAttribute underLineWithStyle:style color:color];
         return self;
     };
 }

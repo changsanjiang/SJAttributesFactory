@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  *       });
  *   });
  **/
-extern NSAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorker *make));
+extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorker *make));
 
 #pragma mark -
 @interface SJAttributesRangeOperator: NSObject
@@ -49,7 +49,6 @@ extern NSAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorke
 
 
 #pragma mark -
-@protocol NSAttributedStringActionDelegate;
 
 @interface SJAttributeWorker : SJAttributesRangeOperator
 
@@ -57,11 +56,9 @@ extern NSAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorke
 
 @property (nonatomic, assign, readonly) NSRange range;
 
-@property (nonatomic, weak, nullable) id<NSAttributedStringActionDelegate> attrStrActionDelegate;
+- (NSMutableAttributedString *)endTask;
 
-- (NSAttributedString *)endTask;
-
-- (NSAttributedString *)endTaskAndComplete:(void(^)(SJAttributeWorker *worker))block;
+- (NSMutableAttributedString *)endTaskAndComplete:(void(^)(SJAttributeWorker *worker))block;
 
 /*!
  *  default font.
@@ -207,9 +204,9 @@ extern NSAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorke
 /// 背景颜色
 @property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^backgroundColor)(UIColor *color);
 /// 下划线
-@property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^underLine)(SJUnderlineAttribute *underLine);
+@property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^underLine)(NSUnderlineStyle style, UIColor *color);
 /// 删除线
-@property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^strikethrough)(SJUnderlineAttribute *strikethrough);
+@property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^strikethrough)(NSUnderlineStyle style, UIColor *color);
 /// 边界`border`
 @property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^border)(SJBorderAttribute *border);
 /// 倾斜(-1 ... 1)
