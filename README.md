@@ -4,8 +4,8 @@
   // v2.0
   pod 'SJAttributesFactory'
   
-  // v1.0
-  pod 'SJAttributesFactory', '1.1.14'
+  // v1.0. 抱歉各位, 由于结构调整, `v1`和`v2`版本差距较大, 大家可以如下方式, 继续使用`v1`版本的.
+  pod 'SJAttributesFactory', '1.1.14'
 
 ```
 ### 最新动态:
