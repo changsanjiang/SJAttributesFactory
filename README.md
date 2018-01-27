@@ -57,15 +57,11 @@ before:
 ```
 now:
 ```Objective-C
-[SJAttributesFactory alteringStr:@"9999" task:^(SJAttributesFactory * _Nonnull worker) {
-        worker
-        .insertText(@"\n", 0)
-        .insertImage([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50), 0)
-        .lineSpacing(8) // 加点行间隔
-        .alignment(NSTextAlignmentCenter)
-        .font([UIFont boldSystemFontOfSize:14])
-        .fontColor([UIColor whiteColor]);
-    }];
+    sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+        make.insert([UIImage imageNamed:@"sample2"], 0, CGPointZero, CGSizeMake(50, 50));
+        make.insert(@"\n999", -1).alignment(NSTextAlignmentCenter).lineSpacing(8);
+        [self updateConstraintsWithSize:make.size()];
+    });
 ```
 ___
 
@@ -94,15 +90,16 @@ before:
 ```
 now:
 ```Objective-C
-    [SJAttributesFactory alteringStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。" task:^(SJAttributesFactory * _Nonnull worker) {
-        worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
-        CGFloat startW = worker.width(NSMakeRange(0, 3));
-
-        worker
-        .firstLineHeadIndent(8)
-        .headIndent(startW + 8)
-        .tailIndent(-8);       
-    }];
+    sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+        make.insert(@"故事:", 0);
+        CGSize lastSize = make.size();
+        // 左缩进
+        make.headIndent(lastSize.width);
+        // 右缩进
+        make.tailIndent(-12);
+        
+        make.insert(@"可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观。", -1);
+    });
 ```
 ___
 ### 下划线 + 删除线
@@ -131,10 +128,14 @@ before:
 ```
 now:
 ```Objective-C
-    [SJAttributesFactory alteringStr:@"$ 999" task:^(SJAttributesFactory * _Nonnull worker) {
-        worker.font([UIFont systemFontOfSize:40]);
-        worker.underline(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor yellowColor]).strikethrough(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor redColor]);
-    }];
+    sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+        make.insert(@"$ 999", 0).font([UIFont systemFontOfSize:40]);
+        // 下划线
+        make.underLine([UIFont boldSystemFontOfSize:40]).underLine([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor yellowColor]]);
+        // 删除线
+        make.strikethrough([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor redColor]]);
+        [self updateConstraintsWithSize:make.size()];
+    });
 ```
 ___
 

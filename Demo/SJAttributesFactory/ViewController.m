@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "SJAttributesFactory.h"
 #import "SJAttributeWorker.h"
 
 static NSString *UITableViewCellID = @"UITableViewCell";
@@ -37,12 +36,12 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     self.testLabel.backgroundColor = [UIColor lightGrayColor];
     self.testLabel.numberOfLines = 0;
     self.testLabel.text = @"请选择 demo ";
-    
-    
+
     // table view
     [self.tableView registerClass:NSClassFromString(UITableViewCellID) forCellReuseIdentifier:UITableViewCellID];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
 }
 
 #pragma mark -
@@ -51,289 +50,86 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     NSString *tips = nil;
     switch (indexPath.row) {
         case 0: {
-            tips = @"左右图文";
-            attr = [SJAttributesFactory alteringStr:@"9999\n9999999" task:^(SJAttributeWorker * _Nonnull worker) {
+            tips = @"正则";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。银白的烟灰已经结成了长长一串，但在叶秋挥舞着鼠标敲打着键盘施展操作的过程中却没有被震落分毫。摘下的烟头很快被掐灭在了桌上的一个形状古怪的烟灰缸里，叶秋的手飞快地回到了键盘，正准备对对手说点什么，房门却突得咣一声被人打开了。", 0);
+                make.font([UIFont boldSystemFontOfSize:14]).textColor([UIColor blueColor]);
                 
-                worker
-                .insert([UIImage imageNamed:@"sample2"], 0, CGPointMake(0, -20), CGSizeMake(50, 50))
-                .font([UIFont boldSystemFontOfSize:14])
-                .fontColor([UIColor whiteColor]);
+                // 匹配所有`叶秋`
+                make.regexp(@"叶秋", ^(SJAttributesRangeOperator * _Nonnull matched) {
+                    matched.textColor([UIColor redColor]);
+                    matched.underLine([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor orangeColor]]);
+                });
                 
-                CGSize size = worker.size(NSMakeRange(0, worker.length));
-                [self updateConstraintsWithSize:size];
-            }];
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+            });
         }
             break;
         case 1: {
-            tips = @"上下图文";
-            attr = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .insert(@"9999\n999\n999", 0)
-                .insert(@"\n", 0)
-                .insert([UIImage imageNamed:@"sample2"], 0, CGPointZero, CGSizeMake(50, 50))
-                .lineSpacing(8)
-                .alignment(NSTextAlignmentCenter)
-                .font([UIFont boldSystemFontOfSize:14])
-                .fontColor([UIColor whiteColor]);
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
                 
-                CGSize size = worker.size(NSMakeRange(0, worker.length));
-                [self updateConstraintsWithSize:size];
-            }];
+            });
         }
             break;
         case 2: {
-            tips = @"头缩进 + 尾缩进";
-            attr = [SJAttributesFactory alteringStr:@"故事:可以解释为旧事、旧业、先例、典故等涵义,同时,也是文学体裁的一种,侧重于事情过程的描述,强调情节跌宕起伏,从而阐发道理或者价值观." task:^(SJAttributeWorker * _Nonnull worker) {
-                
-                worker.font([UIFont systemFontOfSize:14]);
-                
-                // 获取开头宽度
-                CGFloat startW = worker.width(NSMakeRange(0, 3));
-                
-                worker
-                .firstLineHeadIndent(8) // 首行缩进
-                .headIndent(startW + 8) // 左缩进
-                .tailIndent(-12);       // 右缩进
-                
-                
-                worker.nextFont([UIFont boldSystemFontOfSize:14]).range(NSMakeRange(0, 3));
-                
-                CGSize size = worker.boundsByMaxWidth(self.view.frame.size.width * 0.8).size;
-                [self updateConstraintsWithSize:size];
-            }];
+            tips = @"上下图文";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.insert([UIImage imageNamed:@"sample2"], 0, CGPointZero, CGSizeMake(50, 50));
+                make.insert(@"\n  上下图文  ", -1).alignment(NSTextAlignmentCenter).lineSpacing(8);
+                [self updateConstraintsWithSize:make.size()];
+            });
         }
             break;
         case 3: {
-            tips = @"字体放大";
-            attr = [SJAttributesFactory alteringStr:@"我的故乡\n我的故乡" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .font([UIFont systemFontOfSize:40])
-                .alignment(NSTextAlignmentCenter);
-                
-                worker.nextExpansion(1).range(NSMakeRange(0, 4));
-                
-                CGSize size = worker.size(NSMakeRange(0, worker.length));
-                [self updateConstraintsWithSize:size];
-            }];
+            tips = @"左右图文";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.insert(@"  左右图文  ", 0);
+                make.font([UIFont boldSystemFontOfSize:18]).textColor([UIColor redColor]);
+                make.insert([UIImage imageNamed:@"sample2"], 0, CGPointMake(0, -18), CGSizeMake(50, 50));
+                [self updateConstraintsWithSize:make.size()];
+            });
         }
             break;
         case 4: {
-            tips = @"下划线 + 删除线";
-            attr = [SJAttributesFactory alteringStr:@"$ 999" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker.font([UIFont systemFontOfSize:40]);
-                worker.underline(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor yellowColor]).strikethrough(NSUnderlineByWord | NSUnderlinePatternSolid | NSUnderlineStyleDouble, [UIColor redColor]);
+            tips = @"左缩进 + 右缩进";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.insert(@"故事:", 0);
+                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
+                    lastOperator.font([UIFont boldSystemFontOfSize:22]);
+                    lastOperator.textColor([UIColor yellowColor]);
+                });
                 
-                CGSize size = worker.size(NSMakeRange(0, worker.length));
-                [self updateConstraintsWithSize:size];
-            }];
+                CGSize lastSize = make.size();
+                make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。银白的烟灰已经结成了长长一串，但在叶秋挥舞着鼠标敲打着键盘施展操作的过程中却没有被震落分毫。摘下的烟头很快被掐灭在了桌上的一个形状古怪的烟灰缸里，叶秋的手飞快地回到了键盘，正准备对对手说点什么，房门却突得咣一声被人打开了。", -1);
+                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
+                    lastOperator.font([UIFont systemFontOfSize:14]);
+                    lastOperator.textColor([UIColor blueColor]);
+                });
+
+                // 左缩进
+                make.headIndent(lastSize.width);
+                // 右缩进
+                make.tailIndent(-12);
+                
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+            });
         }
             break;
         case 5: {
-            tips = @"局部段落样式";
-            NSString *pre = @"采薇采薇,薇亦作止.\n";
-            NSString *mid = @"曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.\n";
-            NSString *end = @"曰归曰归,岁亦莫止.靡家靡室,猃狁之故.不遑启居,猃狁之故.";
-            attr = [SJAttributesFactory alteringStr:[NSString stringWithFormat:@"%@%@%@", pre, mid, end] task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .alignment(NSTextAlignmentCenter)
-                .font([UIFont boldSystemFontOfSize:16])
-                .fontColor([UIColor orangeColor]);
-                
-                worker
-                .nextFont([UIFont boldSystemFontOfSize:12])
-                .nextFontColor([UIColor yellowColor])
-                .nextParagraphSpacingBefore(8)
-                .nextLineSpacing(8)
-                .nextFirstLineHeadIndent(8)
-                .nextHeadIndent(40)
-                .nextTailIndent(-40)
-                .nextAlignment(NSTextAlignmentRight)
-                .range(NSMakeRange(pre.length, mid.length));
-                
-                worker
-                .nextFontColor([UIColor blueColor])
-                .range(NSMakeRange(pre.length, 2));
-                
-                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
-                [self updateConstraintsWithSize:size];
-            }];
-        }
-            break;
-        case 6: {
-            tips = @"凸版 + 倾斜";
-            attr = [SJAttributesFactory alteringStr:@"我的故乡\n我的故乡" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .font([UIFont systemFontOfSize:40])
-                .letterpress()
-                .obliqueness(0.2);
-            }];
-        }
-            break;
-        case 7: {
-            tips = @"指定位置插入文本";
-            attr = [SJAttributesFactory alteringStr:@"我的故乡" task:^(SJAttributeWorker * _Nonnull worker) {
-                NSLog(@"插入前: %zd", worker.length);
-                
-                worker
-                .font([UIFont systemFontOfSize:20])
-                .insertText(@", 在哪里?", 4);
-                
-                NSLog(@"插入后: %zd", worker.length);
-            }];
-        }
-            break;
-        case 8: {
-            tips = @"指定范围删除文本";
-            attr = [SJAttributesFactory alteringStr:@"我的故乡" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .font([UIFont systemFontOfSize:20])
-                .removeText(NSMakeRange(0, 2));
-            }];
-        }
-            break;
-        case 9: {
-            tips = @"清除";
-            attr = _testLabel.attributedText;
-            attr = [SJAttributesFactory alteringAttrStr:attr task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .font([UIFont systemFontOfSize:20])
-                .clean();
-            }];
-        }
-            break;
-        case 10: {
-            tips = @"段前间隔 and 段后间隔";
-            attr = [SJAttributesFactory alteringStr:@"谁谓河广？一苇杭之.谁谓宋远？跂予望之.\n 谁谓河广？曾不容刀.\n 谁谓宋远？曾不崇朝.\n" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .font([UIFont systemFontOfSize:20])
-                .paragraphSpacingBefore(10)
-                .paragraphSpacing(10);
-            }];
-        }
-            break;
-        case 11: {
-            tips = @"效果同上";
-            attr = [SJAttributesFactory alteringStr:@"谁谓河广？一苇杭之.谁谓宋远？跂予望之.谁谓河广？曾不容刀.\n 谁谓宋远？曾不崇朝.\n" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker
-                .font([UIFont systemFontOfSize:20])
-                .paragraphSpacing(20);
-            }];
-        }
-            break;
-        case 12: {
-            tips = @"字体阴影";
-            attr = [SJAttributesFactory alteringStr:@"我的故乡" task:^(SJAttributeWorker * _Nonnull worker) {
-                NSShadow *shadow = [NSShadow new];
-                shadow.shadowColor = [UIColor greenColor];
-                shadow.shadowOffset = CGSizeMake(1, 1);
-                
-                worker
-                .font([UIFont boldSystemFontOfSize:40])
-                .shadow(shadow);
-            }];
-        }
-            break;
-        case 13: {
-            tips = @"Altering Range Sample";
-            attr = [SJAttributesFactory alteringStr:@"I am a bad man!" task:^(SJAttributeWorker * _Nonnull worker) {
-                worker.font([UIFont boldSystemFontOfSize:18]);
-                
-                // 修改 I
-                worker.rangeEdit(NSMakeRange(0, 1), ^(SJAttributeWorker * _Nonnull range) {
-                    range
-                    .nextFont([UIFont boldSystemFontOfSize:30])
-                    .nextFontColor([UIColor orangeColor]);
+            tips = @"下划线 + 删除线";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.insert(@"下划线", 0);
+                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
+                    lastOperator.font([UIFont boldSystemFontOfSize:40]).underLine([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor orangeColor]]);
                 });
                 
-                // 修改 bad
-                worker.rangeEdit(NSMakeRange(7, 3), ^(SJAttributeWorker * _Nonnull range) {
-                   range
-                    .nextFont([UIFont boldSystemFontOfSize:30])
-                    .nextFontColor([UIColor purpleColor])
-                    .nextObliqueness(0.3);
+                make.insert(@"删除线", -1);
+                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
+                    lastOperator.font([UIFont boldSystemFontOfSize:40]).strikethrough([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor orangeColor]]);
                 });
                 
-                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
-                [self updateConstraintsWithSize:size];
-
-            }];
-        }
-            break;
-        case 14: {
-            tips = @"正则";
-            attr = [SJAttributesFactory alteringStr:@"广告1，即广而告之之意. 广告是为了某种特定的需要, 通过一定形式的媒体, 公开而广泛地向公众传递信息的宣传手段, http://www.baidu.com 广告有广义和狭义之分. 广义广告包括非经济广告1和经济广告, 非经1济广告1指不以盈利为目的的广告, 又称效应广告." task:^(SJAttributeWorker * _Nonnull worker) {
-                worker.font([UIFont systemFontOfSize:14]);
-                worker.fontColor([UIColor blackColor])
-                .alignment(NSTextAlignmentLeft);
-                
-                worker.regexp(@"广告", ^(SJAttributeWorker * _Nonnull regexp) {
-                    regexp
-                    .nextFont([UIFont boldSystemFontOfSize:16])
-                    .nextFontColor([UIColor redColor])
-                    .nextStrikethough(NSUnderlineStyleDouble, [UIColor redColor])
-                    .nextUnderline(NSUnderlineStyleDouble, [UIColor redColor]);
-                });
-                
-                worker.regexp(@"http://www.baidu.com", ^(SJAttributeWorker * _Nonnull regexp) {
-                    regexp
-                    .nextFont([UIFont boldSystemFontOfSize:16])
-                    .nextFontColor([UIColor blueColor])
-                    .nextLink();
-                });
-                
-                worker.regexpRanges(@"\\. ", ^(NSArray<NSValue *> * _Nonnull ranges) {
-                    NSLog(@"%@", ranges);
-                    [ranges enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        worker.replace([obj rangeValue], @".\n");
-                    }];
-                });
-                
-                worker.regexp(@"的", ^(SJAttributeWorker * _Nonnull regexp) {
-                    worker.nextFont([UIFont boldSystemFontOfSize:25]).nextFontColor([UIColor yellowColor]);
-                });
-
-                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
-                [self updateConstraintsWithSize:size];
-            }];
-        }
-            break;
-        case 15: {
-            tips = @"调试";
-            attr = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
-                worker.insert(@"爱老虎油", 0);                
-                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
-                [self updateConstraintsWithSize:size];
-            }];
-        }
-            break;
-        case 16: {
-            tips = @"修改最后插入的Str";
-            attr = [SJAttributesFactory producingWithTask:^(SJAttributeWorker * _Nonnull worker) {
-                worker.insert(@"修改最后插入的字符串", 0);
-                worker.insert(@"就是我", -1);
-                worker
-                .font([UIFont systemFontOfSize:14])
-                .fontColor([UIColor whiteColor]);
-                
-                worker.lastInserted(^(SJAttributeWorker * _Nonnull worker) {
-                    worker
-                    .nextFont([UIFont boldSystemFontOfSize:20])
-                    .nextFontColor([UIColor blueColor]);
-                });
-                
-                worker.insert(@" recur ", worker.lastInsertedRange.location);
-                worker.lastInserted(^(SJAttributeWorker * _Nonnull worker) {
-                  worker
-                    .nextFont([UIFont systemFontOfSize:30])
-                    .nextFontColor([UIColor redColor]);
-                });
-                
-                CGSize size = worker.boundsByMaxWidth(self.view.bounds.size.width * 0.8).size;
-                [self updateConstraintsWithSize:size];
-            }];
-        }
-            break;
-        case 17: {
+                [self updateConstraintsWithSize:make.size()];
+            });
         }
             break;
     }
