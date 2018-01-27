@@ -5,7 +5,7 @@
   pod 'SJAttributesFactory'
   
   // v1.0
-  pod 'AliyunOSSiOS', '1.1.14'
+  pod 'SJAttributesFactory', '1.1.14'
 
 ```
 ### 最新动态:
