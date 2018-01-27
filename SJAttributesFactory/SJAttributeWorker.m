@@ -365,12 +365,7 @@ inline static void _errorLog(NSString *msg, NSString * __nullable target) {
         }
         else {
             NSAttributedString *subAttrStr = self.subAttrStr(range);
-            [subAttrStr enumerateAttributesInRange:NSMakeRange(0, subAttrStr.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
-                [attrs enumerateKeysAndObjectsUsingBlock:^(NSAttributedStringKey  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                   self.removeAttribute(key, range);
-                }];
-            }];
-            self.replace(range, subAttrStr);
+            self.replace(range, subAttrStr.string);
         }
     };
 }
