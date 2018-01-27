@@ -1,7 +1,12 @@
 # SJAttributesFactory
 
 ```ruby
+  // v2.0
   pod 'SJAttributesFactory'
+  
+  // v1.0
+  pod 'AliyunOSSiOS', '1.1.14'
+
 ```
 ### 最新动态:
 - [增加了一个可以匹配点击动作的 Label](https://github.com/changsanjiang/SJLabel).
