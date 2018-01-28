@@ -6,13 +6,11 @@
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
 //  Project Address: https://github.com/changsanjiang/SJAttributesFactory
-//  Email:  changsanjiange@gmail.com
+//  Email:  changsanjiang@gmail.com
 //
 
 #import <UIKit/UIKit.h>
 #import "SJAttributesRecorder.h"
-
-typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 
 @class SJAttributeWorker;
 
