@@ -1,16 +1,26 @@
 # SJAttributesFactory
 
-```ruby
-  // v2.0
-  pod 'SJAttributesFactory'
-  
-  // v1.0. 抱歉各位, 由于结构调整, `v1`和`v2`版本差距较大, 大家可以如下方式, 继续使用`v1`版本的.
-  pod 'SJAttributesFactory', '1.1.14'
-
-```
 ### 最新动态:
 - 发布v2版本, 优化了v1版本的操作不便之处, 移除了多余代码. [1/28/2018]
 
+### OC
+```ruby
+pod 'SJAttributesFactory'
+```
+___
+
+### Swift
+```ruby
+pod 'SJAttributesStringMaker'
+```
+___
+
+### 关于v1版本
+
+```ruby
+ // 抱歉各位, 由于结构调整, `v1`和`v2`版本差距较大, 大家可以如下方式, 继续使用`v1`版本的.
+ pod 'SJAttributesFactory', '1.1.14'
+```
 ___
 
 ### regular expression
