@@ -106,6 +106,9 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
 - (void)setAlignment:(double)alignment {self.paragraphStyleM.alignment = alignment;}
 - (double)alignment {return self.paragraphStyleM.alignment;}
 
+- (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode {self.paragraphStyleM.lineBreakMode = lineBreakMode;}
+- (NSLineBreakMode)lineBreakMode {return self.paragraphStyleM.lineBreakMode;}
+
 - (void)addAttributes:(NSMutableAttributedString *)attrStr {
     NSRange range = self.range;
     if ( range.location == 0 && range.length == 0 ) {

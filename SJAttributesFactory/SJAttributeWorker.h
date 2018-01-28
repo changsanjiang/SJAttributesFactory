@@ -6,11 +6,13 @@
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
 //  Project Address: https://github.com/changsanjiang/SJAttributesFactory
-//  Email:  changsanjiang@gmail.com
+//  Email:  changsanjiange@gmail.com
 //
 
 #import <UIKit/UIKit.h>
 #import "SJAttributesRecorder.h"
+
+typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 
 @class SJAttributeWorker;
 
@@ -20,16 +22,18 @@ NS_ASSUME_NONNULL_BEGIN
  *  make attributed string:
  
  *   NSAttributedString *attrStr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
- *
+ 
  *       // set font , text color.
  *       make.font([UIFont boldSystemFontOfSize:14]).textColor([UIColor blackColor]);
+ 
  *       // inset text
  *       make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
- *
+ 
  *       make.regexp(@"[@][^@]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
  *           matched.textColor([UIColor purpleColor]);
  *          // some code
  *       });
+ 
  *       make.regexp(@"[#][^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
  *          matched.textColor([UIColor orangeColor]);
  *          // some code
@@ -83,6 +87,8 @@ extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttribu
  *  按照范围获取文本
  **/
 @property (nonatomic, copy, readonly) NSAttributedString *(^subAttrStr)(NSRange subRange);
+
+@property (nonatomic, assign, readonly) NSInteger length;
 
 @end
 
@@ -229,6 +235,8 @@ extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttribu
 @property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^tailIndent)(double tailIndent);
 /// 对齐方式
 @property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^alignment)(NSTextAlignment alignment);
+/// 截断模式
+@property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^lineBreakMode)(NSLineBreakMode lineBreakMode);
 
 @end
 

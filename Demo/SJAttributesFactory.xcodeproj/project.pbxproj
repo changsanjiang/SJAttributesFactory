@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		66AFD0AF4CC3266F99FFEC7C /* libPods-SJAttributesFactory.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC64684C1803C091BA7E813A /* libPods-SJAttributesFactory.a */; };
 		779A59E51FB33AB100F88DEC /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E41FB33AB100F88DEC /* sample2.png */; };
+		77A974BC201DD89800C32711 /* SJAttributesStringMaker.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77A974BB201DD89800C32711 /* SJAttributesStringMaker.podspec */; };
 		77CD179F1FEA197000B2B54F /* SJAttributeWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CD179B1FEA196F00B2B54F /* SJAttributeWorker.m */; };
 		77D19C22201C7C6A00BE5412 /* SJAttributesRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D19C21201C7C6A00BE5412 /* SJAttributesRecorder.m */; };
 		77D19C39201D74FB00BE5412 /* regular.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77D19C38201D74FB00BE5412 /* regular.jpeg */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		779A59E41FB33AB100F88DEC /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
+		77A974BB201DD89800C32711 /* SJAttributesStringMaker.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SJAttributesStringMaker.podspec; path = ../SJAttributesStringMaker.podspec; sourceTree = "<group>"; };
 		77CD179B1FEA196F00B2B54F /* SJAttributeWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAttributeWorker.m; sourceTree = "<group>"; };
 		77CD179D1FEA196F00B2B54F /* SJAttributeWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAttributeWorker.h; sourceTree = "<group>"; };
 		77D19C20201C7C6A00BE5412 /* SJAttributesRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributesRecorder.h; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				77E7E62E1FE794860061439B /* README.md */,
 				77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */,
+				77A974BB201DD89800C32711 /* SJAttributesStringMaker.podspec */,
 				A69E5BF21FB09BDC00EB65B5 /* SJAttributesFactory */,
 				77D19C44201DA62900BE5412 /* SwiftVersion */,
 				A69E5BF11FB09BDC00EB65B5 /* Products */,
@@ -291,6 +294,7 @@
 				77E7E64D1FE795680061439B /* SJAttributesFactory.podspec in Resources */,
 				77D19C39201D74FB00BE5412 /* regular.jpeg in Resources */,
 				A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */,
+				77A974BC201DD89800C32711 /* SJAttributesStringMaker.podspec in Resources */,
 				77D19C3B201D7E0800BE5412 /* common.jpeg in Resources */,
 				77E7E6521FE7A3F60061439B /* action.gif in Resources */,
 				77E7E62F1FE794860061439B /* README.md in Resources */,

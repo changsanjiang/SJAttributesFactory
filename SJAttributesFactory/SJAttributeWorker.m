@@ -66,6 +66,10 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     return NSMakeRange(0, self.attrStr.length);
 }
 
+- (NSInteger)length {
+    return self.attrStr.length;
+}
+
 - (void)pauseTask {
     [self endTask];
 }
@@ -525,7 +529,13 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
         return self;
     };
 }
-
+/// 截断模式
+- (SJAttributesRangeOperator * _Nonnull (^)(NSLineBreakMode))lineBreakMode {
+    return ^ SJAttributesRangeOperator *(NSLineBreakMode lineBreakMode) {
+        self.recorder.lineBreakMode = lineBreakMode;
+        return self;
+    };
+}
 @end
 
 NS_ASSUME_NONNULL_END

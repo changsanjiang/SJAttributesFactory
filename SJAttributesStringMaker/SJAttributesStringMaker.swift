@@ -11,11 +11,13 @@
 
 import UIKit
 
-public func sj_makeAttributesString(_ task: ((SJAttributesStringMaker) -> Void)) -> NSAttributedString {
+
+public func sj_makeAttributesString(_ task: ((SJAttributesStringMaker) -> Void)) -> NSMutableAttributedString {
     let maker = SJAttributesStringMaker.init()
     task(maker)
     return maker.endTask()
 }
+
 
 public class SJAttributesRangeOperator {
     
@@ -38,12 +40,18 @@ public class SJAttributesStringMaker: SJAttributesRangeOperator {
         get { return self.attrStr.length}
     }
     
+    public var range: NSRange {
+        get {
+            return NSRange.init(location: 0, length: self.attrStr.length)
+        }
+    }
+    
     @discardableResult
-    private func pauseTask() -> NSAttributedString {
+    private func pauseTask() -> NSMutableAttributedString {
         return self.endTask()
     }
     
-    public func endTask() -> NSAttributedString {
+    public func endTask() -> NSMutableAttributedString {
         if 0 == self.attrStr.length {
             return self.attrStr
         }
@@ -71,12 +79,6 @@ public class SJAttributesStringMaker: SJAttributesRangeOperator {
         
         self.pauseTask()
         return self.attrStr.attributedSubstring(from:byRange)
-    }
-    
-    fileprivate var range: NSRange {
-        get {
-            return NSRange.init(location: 0, length: self.attrStr.length)
-        }
     }
     
     /// 指定范围进行编辑
@@ -482,6 +484,14 @@ public extension SJAttributesRangeOperator {
         recorder.paragraphStyleM.alignment = alignment
         return self
     }
+    
+    /// 截断模式
+    @discardableResult
+    func lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> SJAttributesRangeOperator {
+        recorder.paragraphStyleM.lineBreakMode = lineBreakMode
+        return self
+    }
+
 }
 
 
@@ -674,6 +684,18 @@ private class SJAttributesRecorder: NSObject, NSCopying {
         
         get {
             return self.paragraphStyleM.alignment
+        }
+    }
+    
+    var lineBreakMode: NSLineBreakMode? {
+        set {
+            var newV = newValue
+            if nil == newValue { newV = NSLineBreakMode.byWordWrapping}
+            self.paragraphStyleM.lineBreakMode = newV!
+        }
+        
+        get {
+            return self.paragraphStyleM.lineBreakMode
         }
     }
     
