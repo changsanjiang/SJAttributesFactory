@@ -11,14 +11,6 @@
 ### 最新动态:
 - 发布v2版本, 优化了v1版本的操作不便之处, 移除了多余代码.
 
-附 富文本属性:
-http://www.jianshu.com/p/ebbcfc24f9cb
-
-___
-
-### [可匹配点击的Label](https://github.com/changsanjiang/SJLabel):
-<img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/Demo/SJAttributesFactory/action.gif" />
-
 ___
 
 ### regular expression
@@ -131,3 +123,7 @@ ___
 - 增加了对范围段落Style编辑的方法
 - 改变了项目结构, 使其更合逻辑(变更较大)
 - 新增可变参(insert)插入方法
+
+### advert -- [可匹配点击的Label](https://github.com/changsanjiang/SJLabel):
+
+<img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/Demo/SJAttributesFactory/action.gif" />
