@@ -66,6 +66,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         }
             break;
         case 1: {
+            tips = @"备用";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
                 
             });
