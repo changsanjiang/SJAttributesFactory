@@ -11,18 +11,18 @@
 
 import UIKit
 
-func sj_makeAttributesString(_ task: ((SJAttributesStringMaker) -> Void)) -> NSAttributedString {
+public func sj_makeAttributesString(_ task: ((SJAttributesStringMaker) -> Void)) -> NSAttributedString {
     let maker = SJAttributesStringMaker.init()
     task(maker)
     return maker.endTask()
 }
 
-class SJAttributesRangeOperator {
+public class SJAttributesRangeOperator {
     
     fileprivate var recorder: SJAttributesRecorder = SJAttributesRecorder()
 }
 
-class SJAttributesStringMaker: SJAttributesRangeOperator {
+public class SJAttributesStringMaker: SJAttributesRangeOperator {
     
     fileprivate let attrStr: NSMutableAttributedString = NSMutableAttributedString()
     
@@ -127,7 +127,7 @@ class SJAttributesStringMaker: SJAttributesRangeOperator {
 
 // MARK: 正则 - regexp
 
-extension SJAttributesStringMaker {
+public extension SJAttributesStringMaker {
     
     /// 正则匹配
     func regexp(_ regexpStr: String, matchedTask: ((SJAttributesRangeOperator) -> Void)) -> Void {
@@ -167,7 +167,7 @@ extension SJAttributesStringMaker {
 
 // MARK: 大小 - size
 
-extension SJAttributesStringMaker {
+public extension SJAttributesStringMaker {
     
     func size() -> CGSize {
         return self.bounds(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude, range: self.range).size
@@ -201,7 +201,7 @@ extension SJAttributesStringMaker {
 
 // MARK: 插入 - insert
 
-extension SJAttributesStringMaker {
+public extension SJAttributesStringMaker {
     
     /// 添加属性
     @discardableResult
@@ -209,7 +209,7 @@ extension SJAttributesStringMaker {
         self.attrStr.addAttribute(key, value: value, range: range)
         return self
     }
-
+    
     /// 插入文本
     @discardableResult
     func insertText(_ text: String, _ index: Int) -> SJAttributesRangeOperator {
@@ -263,7 +263,7 @@ extension SJAttributesStringMaker {
 
 // MARK: 替换 - replace
 
-extension SJAttributesStringMaker {
+public extension SJAttributesStringMaker {
     
     func replace(_ range: NSRange, str: String) -> Void {
         if ( !_rangeContains(self.range, range) ) {
@@ -293,7 +293,7 @@ extension SJAttributesStringMaker {
 
 // MARK: 移除 - remove
 
-extension SJAttributesStringMaker {
+public extension SJAttributesStringMaker {
     
     /// 删除文本
     public func removeText(_ range: NSRange) -> Void {
@@ -323,7 +323,7 @@ extension SJAttributesStringMaker {
 
 // MARK: property
 
-extension SJAttributesRangeOperator {
+public extension SJAttributesRangeOperator {
     /// 字体
     @discardableResult
     func font(_ font: UIFont) -> SJAttributesRangeOperator {
@@ -717,4 +717,3 @@ fileprivate func _attachment(_ image: UIImage, _ offset: CGPoint, _ size: CGSize
 }
 
 private var kLastInsertedRange: String?
-
