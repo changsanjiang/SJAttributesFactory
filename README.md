@@ -39,9 +39,9 @@ ___
 ```
 ___
 
+### common method
 <img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/Demo/SJAttributesFactory/common.jpeg" />
 
-### common method
 ```Objective-C
     sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
         make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。", 0);
