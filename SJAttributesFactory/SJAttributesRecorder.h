@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@interface SJBorderAttribute: NSObject
+@interface SJBorderAttribute: NSObject<NSCopying, NSMutableCopying>
 @property (nonatomic, assign) double value;
 @property (nonatomic, strong) UIColor *color;
 + (instancetype)borderWithValue:(double)value color:(UIColor *)color;
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark -
-@interface SJUnderlineAttribute: NSObject
+@interface SJUnderlineAttribute: NSObject<NSCopying, NSMutableCopying>
 @property (nonatomic, assign) NSUnderlineStyle value;
 @property (nonatomic, strong) UIColor *color;
 + (instancetype)underLineWithStyle:(NSUnderlineStyle)value color:(UIColor *)color;

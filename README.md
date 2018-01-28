@@ -9,9 +9,10 @@
 
 ```
 ### 最新动态:
-- [增加了一个可以匹配点击动作的 Label](https://github.com/changsanjiang/SJLabel).
+- 发布v2版本, 优化了v1版本的操作不便之处, 移除了多余代码.
 
 ### 最近更新:
+- [增加了一个可以匹配点击动作的 Label](https://github.com/changsanjiang/SJLabel).
 - 添加了一个编辑最近(lastInserted)插入的文本的方法.
 - 完善参数错误的相关提示
 - 修复了insert方法插入-1时的Bug

@@ -58,7 +58,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 // 匹配所有`叶秋`
                 make.regexp(@"叶秋", ^(SJAttributesRangeOperator * _Nonnull matched) {
                     matched.textColor([UIColor redColor]);
-                    matched.underLine([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor orangeColor]]);
+                    matched.underLine(NSUnderlineStyleSingle, [UIColor redColor]);
                 });
                 
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
@@ -120,12 +120,12 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
                 make.insert(@"下划线", 0);
                 make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.font([UIFont boldSystemFontOfSize:40]).underLine([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor orangeColor]]);
+                    lastOperator.font([UIFont boldSystemFontOfSize:40]).underLine(NSUnderlineStyleSingle, [UIColor orangeColor]);
                 });
                 
                 make.insert(@"删除线", -1);
                 make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.font([UIFont boldSystemFontOfSize:40]).strikethrough([SJUnderlineAttribute underLineWithStyle:NSUnderlineStyleSingle | NSUnderlinePatternSolid color:[UIColor orangeColor]]);
+                    lastOperator.font([UIFont boldSystemFontOfSize:40]).strikethrough(NSUnderlineStyleSingle | NSUnderlinePatternDot, [UIColor orangeColor]);
                 });
                 
                 [self updateConstraintsWithSize:make.size()];
