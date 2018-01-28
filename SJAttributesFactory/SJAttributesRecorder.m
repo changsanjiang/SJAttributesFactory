@@ -25,8 +25,8 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
     return namesArrM.copy;
 }
 
-@implementation SJBorderAttribute
-+ (instancetype)borderWithValue:(double)value color:(UIColor *)color {
+@implementation SJStrokeAttribute
++ (instancetype)strokeWithValue:(double)value color:(UIColor *)color {
     return [[self alloc] initWithValue:value color:color];
 }
 - (instancetype)initWithValue:(double)value color:(UIColor *)color {
@@ -37,7 +37,7 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
     return self;
 }
 - (id)copyWithZone:(NSZone *)zone {
-    SJBorderAttribute *newBorder = [SJBorderAttribute new];
+    SJStrokeAttribute *newBorder = [SJStrokeAttribute new];
     [csj_propertyList([self class]) enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [newBorder setValue:[[self valueForKey:obj] copy] forKey:obj];
     }];
@@ -134,9 +134,9 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
         [attrStr addAttribute:NSStrikethroughStyleAttributeName value:@(self.strikethrough.value) range:range];
         [attrStr addAttribute:NSStrikethroughColorAttributeName value:self.strikethrough.color range:range];
     }
-    if ( nil != self.border ) {
-        [attrStr addAttribute:NSStrokeWidthAttributeName value:@(self.border.value) range:range];
-        [attrStr addAttribute:NSStrokeColorAttributeName value:self.border.color range:range];
+    if ( nil != self.stroke ) {
+        [attrStr addAttribute:NSStrokeWidthAttributeName value:@(self.stroke.value) range:range];
+        [attrStr addAttribute:NSStrokeColorAttributeName value:self.stroke.color range:range];
     }
     if ( 0 != self.obliqueness ) {
         [attrStr addAttribute:NSObliquenessAttributeName value:@(self.obliqueness) range:range];

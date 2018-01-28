@@ -32,8 +32,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     
     // test btn
     self.testLabel.layer.cornerRadius = 8;
+    self.testLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    self.testLabel.layer.borderWidth = 0.6;
     self.testLabel.clipsToBounds = YES;
-    self.testLabel.backgroundColor = [UIColor lightGrayColor];
+    self.testLabel.backgroundColor = [UIColor whiteColor];
     self.testLabel.numberOfLines = 0;
     self.testLabel.text = @"请选择 demo ";
 
@@ -50,25 +52,42 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     NSString *tips = nil;
     switch (indexPath.row) {
         case 0: {
-            tips = @"正则";
+            tips = @"常用方法";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。银白的烟灰已经结成了长长一串，但在叶秋挥舞着鼠标敲打着键盘施展操作的过程中却没有被震落分毫。摘下的烟头很快被掐灭在了桌上的一个形状古怪的烟灰缸里，叶秋的手飞快地回到了键盘，正准备对对手说点什么，房门却突得咣一声被人打开了。", 0);
-                make.font([UIFont boldSystemFontOfSize:14]).textColor([UIColor blueColor]);
+                make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。", 0);
                 
-                // 匹配所有`叶秋`
-                make.regexp(@"叶秋", ^(SJAttributesRangeOperator * _Nonnull matched) {
-                    matched.textColor([UIColor redColor]);
-                    matched.underLine(NSUnderlineStyleSingle, [UIColor redColor]);
-                });
+                make
+                .font([UIFont boldSystemFontOfSize:40])                       // 设置字体
+                .textColor([UIColor blackColor])                              // 设置文本颜色
+                .underLine(NSUnderlineStyleSingle, [UIColor orangeColor])     // 设置下划线
+                .strikethrough(NSUnderlineStyleSingle, [UIColor orangeColor]) // 设置删除线
+//                .shadow(CGSizeMake(0.5, 0.5), 0, [UIColor redColor])        // 设置阴影
+//                .backgroundColor([UIColor whiteColor])                      // 设置文本背景颜色
+                .stroke([UIColor greenColor], 1)                              // 字体边缘的颜色, 设置后, 字体会镂空
+//                .offset(-10)                                                // 上下偏移
+                .obliqueness(0.3)                                             //  倾斜
+                .letterSpacing(4)                                             // 字体间隔
+                .lineSpacing(4)                                               // 行间隔
+                .alignment(NSTextAlignmentCenter)                             // 对其方式
+                ;
                 
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
         }
             break;
         case 1: {
-            tips = @"备用";
+            tips = @"正则匹配";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
+
+                make.regexp(@"[@][^@]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
+                    matched.textColor([UIColor purpleColor]);
+                });
+                make.regexp(@"[#][^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
+                    matched.textColor([UIColor orangeColor]);
+                });
                 
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
         }
             break;

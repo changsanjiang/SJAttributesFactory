@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@interface SJBorderAttribute: NSObject<NSCopying, NSMutableCopying>
+@interface SJStrokeAttribute: NSObject<NSCopying, NSMutableCopying>
 @property (nonatomic, assign) double value;
 @property (nonatomic, strong) UIColor *color;
-+ (instancetype)borderWithValue:(double)value color:(UIColor *)color;
++ (instancetype)strokeWithValue:(double)value color:(UIColor *)color;
 - (instancetype)initWithValue:(double)value color:(UIColor *)color;
 @end
 
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIColor *backgroundColor;
 @property (nonatomic, strong, nullable) SJUnderlineAttribute *underLine;
 @property (nonatomic, strong, nullable) SJUnderlineAttribute *strikethrough;
-@property (nonatomic, strong, nullable) SJBorderAttribute *border;
+@property (nonatomic, strong, nullable) SJStrokeAttribute *stroke;
 @property (nonatomic, assign) double obliqueness;
 @property (nonatomic, assign) double letterSpacing;
 @property (nonatomic, assign) double offset;
