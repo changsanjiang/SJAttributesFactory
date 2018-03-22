@@ -134,6 +134,8 @@ ___
 - 改变了项目结构, 使其更合逻辑(变更较大)
 - 新增可变参(insert)插入方法
 
-### advert -- [可匹配点击的Label](https://github.com/changsanjiang/SJLabel):
-
-<img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/Demo/SJAttributesFactory/action.gif" />
+## Contact
+* Email: changsanjiang@gmail.com
+* QQ: 1779609779
+* QQGroup: 719616775 
+<img src="https://github.com/changsanjiang/SJVideoPlayer/blob/master/SJVideoPlayerProject/SJVideoPlayerProject/Group.jpeg" width="200"  />
