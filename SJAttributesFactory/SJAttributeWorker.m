@@ -20,7 +20,7 @@ NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttributeWorke
 }
 
 inline static BOOL _rangeContains(NSRange range, NSRange subRange) {
-    return range.location <= subRange.location && range.length >= subRange.location + subRange.length;
+    return (range.location <= subRange.location) && (range.location + range.length >= subRange.location + subRange.length);
 }
 
 inline static void _errorLog(NSString *msg, id __nullable target) {
@@ -29,16 +29,20 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 
 #pragma mark -
 
-@interface SJAttributesRangeOperator ()
-@property (nonatomic, strong) SJAttributesRecorder *recorder;
+@interface __SJKVOHelper: NSObject
+- (instancetype)initWithTarget:(__strong id)target keyPaths:(NSArray<NSString *> *)keyPaths valueChangedExeBlock:(void(^__nullable)(__SJKVOHelper *helper, NSString *keyPath))valueChangedExeBlock;
+@property (nonatomic, strong, readonly) id value_new;
+@property (nonatomic, strong, readonly) id value_old;
+@property (nonatomic, strong, readonly) id target;
+@property (nonatomic, strong, readonly) NSArray<NSString *> *keyPaths;
+@property (nonatomic, copy, nullable) void(^valueChangedExeBlock)(__SJKVOHelper *helper, NSString *keyPath);
 @end
 
-@implementation SJAttributesRangeOperator
-- (SJAttributesRecorder *)recorder {
-    if ( _recorder ) return _recorder;
-    _recorder = [SJAttributesRecorder new];
-    return _recorder;
-}
+#pragma mark -
+
+@interface SJAttributesRangeOperator ()
+@property (nonatomic, strong) __SJKVOHelper *recorderKVOHelper;
+@property (nonatomic, assign) BOOL recorder_value_added;
 @end
 
 #pragma mark -
@@ -59,6 +63,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     _defaultTextColor = [UIColor blackColor];
     _attrStr = [NSMutableAttributedString new];
     _rangeOperatorsM = [NSMutableArray array];
+    self.recorder = [SJAttributesRecorder new];
     return self;
 }
 
@@ -74,16 +79,25 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     [self endTask];
 }
 
+- (NSMutableAttributedString *)workInProcess {
+    return self.attrStr;
+}
+
 - (NSMutableAttributedString *)endTask {
     if ( 0 == self.attrStr.length ) return self.attrStr;
     if ( nil == self.recorder.font ) self.recorder.font = self.defaultFont;
     if ( nil == self.recorder.textColor ) self.recorder.textColor = self.defaultTextColor;
-
-    [self.recorder addAttributes:self.attrStr];
+    _addAttributes(self, self.attrStr);
     [self.rangeOperatorsM enumerateObjectsUsingBlock:^(SJAttributesRangeOperator * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj.recorder addAttributes:self.attrStr];
+        _addAttributes(obj, self.attrStr);
     }];
     return self.attrStr;
+}
+
+BOOL _addAttributes(SJAttributesRangeOperator *operator, NSMutableAttributedString *attrStr) {
+    if ( operator.recorder_value_added ) return NO;
+    [operator.recorder addAttributes:attrStr];
+    return operator.recorder_value_added = YES;
 }
 
 - (NSMutableAttributedString *)endTaskAndComplete:(void(^)(SJAttributeWorker *worker))block; {
@@ -143,6 +157,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     if ( rangeOperator ) return rangeOperator;
     
     rangeOperator = [SJAttributesRangeOperator new];
+    rangeOperator.recorder = [SJAttributesRecorder new];
     rangeOperator.recorder.range = range;
     [self.rangeOperatorsM addObject:rangeOperator];
     return rangeOperator;
@@ -538,4 +553,53 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 }
 @end
 
+
+#pragma mark -
+@implementation SJAttributesRangeOperator
+- (instancetype)init {
+    self = [super init];
+    if ( !self ) return nil;
+    [self addObserver:self forKeyPath:@"recorder" options:NSKeyValueObservingOptionNew context:nil];
+    return self;
+}
+- (void)observeValueForKeyPath:(NSString *__nullable)keyPath ofObject:(id __nullable)object change:(NSDictionary<NSKeyValueChangeKey,id> * __nullable)change context:(void * __nullable)context {
+    if ( !keyPath ) return;
+    __weak typeof(self) _self = self;
+    self.recorderKVOHelper = [[__SJKVOHelper alloc] initWithTarget:_recorder keyPaths:[_recorder properties] valueChangedExeBlock:^(__SJKVOHelper * _Nonnull helper, NSString * _Nonnull keyPath) {
+        __strong typeof(_self) self = _self;
+        if ( !self ) return;
+        self.recorder_value_added = NO;
+    }];
+}
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"recorder"];
+}
+@end
+
+@implementation __SJKVOHelper
+- (instancetype)initWithTarget:(__strong id)target keyPaths:(NSArray<NSString *> *)keyPaths valueChangedExeBlock:(void(^__nullable)(__SJKVOHelper *helper, NSString *keyPath))valueChangedExeBlock {
+    self = [super init];
+    if ( !self ) return nil;
+    _target = target;
+    _keyPaths = keyPaths;
+    _valueChangedExeBlock = [valueChangedExeBlock copy];
+    [_keyPaths enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [target addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    }];
+    return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *__nullable)keyPath ofObject:(id __nullable)object change:(NSDictionary<NSKeyValueChangeKey,id> * __nullable)change context:(void * __nullable)context {
+    if ( !keyPath ) return;
+    _value_new = change[NSKeyValueChangeNewKey];
+    _value_old = change[NSKeyValueChangeOldKey];
+    if ( _valueChangedExeBlock ) _valueChangedExeBlock(self, keyPath);
+}
+
+- (void)dealloc {
+    [_keyPaths enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self->_target removeObserver:self forKeyPath:obj];
+    }];
+}
+@end
 NS_ASSUME_NONNULL_END

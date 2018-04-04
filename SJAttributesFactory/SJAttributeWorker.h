@@ -6,7 +6,7 @@
 //  Copyright © 2017年 畅三江. All rights reserved.
 //
 //  Project Address: https://github.com/changsanjiang/SJAttributesFactory
-//  Email:  changsanjiange@gmail.com
+//  Email:  changsanjiang@gmail.com
 //
 
 #import <UIKit/UIKit.h>
@@ -44,7 +44,7 @@ extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttribu
 
 #pragma mark -
 @interface SJAttributesRangeOperator: NSObject
-@property (nonatomic, strong, readonly) SJAttributesRecorder *recorder;
+@property (nonatomic, strong, nullable) SJAttributesRecorder *recorder;
 @end
 
 
@@ -55,6 +55,8 @@ extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttribu
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, assign, readonly) NSRange range;
+
+@property (nonatomic, assign, readonly) NSMutableAttributedString *workInProcess;
 
 - (NSMutableAttributedString *)endTask;
 

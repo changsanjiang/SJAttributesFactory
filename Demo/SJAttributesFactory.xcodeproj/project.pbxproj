@@ -423,14 +423,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = DB5B5F2RH5;
+				DEVELOPMENT_TEAM = U5A7L7SMNP;
 				INFOPLIST_FILE = SwiftVersion/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SwiftVersion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "acd2453e-e396-4ccf-bf56-508276824c6c";
-				PROVISIONING_PROFILE_SPECIFIER = SanJiangDevelopment;
+				PROVISIONING_PROFILE = "ca8186e4-0d11-4c23-9f2f-50f3a29199fd";
+				PROVISIONING_PROFILE_SPECIFIER = WildcardProfile;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -566,7 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: sanjiang chang (43553KMQ9B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DB5B5F2RH5;
 				INFOPLIST_FILE = SJAttributesFactory/Info.plist;
@@ -574,7 +574,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "acd2453e-e396-4ccf-bf56-508276824c6c";
+				PROVISIONING_PROFILE = "64c214b3-450d-41eb-b05e-df636dfa28c8";
 				PROVISIONING_PROFILE_SPECIFIER = SanJiangDevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "SJAttributesFactory/SJAttributesFactory-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

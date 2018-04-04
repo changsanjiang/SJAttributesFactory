@@ -70,7 +70,6 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 .lineSpacing(4)                                               // 行间隔
                 .alignment(NSTextAlignmentCenter)                             // 对其方式
                 ;
-                
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
         }

@@ -159,9 +159,12 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
 }
 - (id)copyWithZone:(NSZone *)zone {
     SJAttributesRecorder *newRecorder = [SJAttributesRecorder new];
-    [csj_propertyList([self class]) enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.properties enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [newRecorder setValue:[[self valueForKey:obj] copy] forKey:obj];
     }];
     return newRecorder;
+}
+- (NSArray<NSString *> *)properties {
+    return csj_propertyList([self class]);
 }
 @end

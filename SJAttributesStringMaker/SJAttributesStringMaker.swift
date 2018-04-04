@@ -36,6 +36,12 @@ public class SJAttributesStringMaker: SJAttributesRangeOperator {
     /// default is UIColor.black
     var defaultTextColor: UIColor = UIColor.black
     
+    public var workInProcess: NSMutableAttributedString {
+        get {
+            return self.attrStr
+        }
+    }
+    
     public var length: Int {
         get { return self.attrStr.length}
     }
@@ -143,7 +149,7 @@ public extension SJAttributesStringMaker {
     /// 正则匹配
     func regexp(_ regexpStr: String, reversed: Bool? = nil, matchedRanges: (([NSRange]) -> Void) ) -> Void {
         
-        if ( 0 == regexpStr.count ) {
+        if ( regexpStr.isEmpty ) {
             _errorLog("Exe Regular Expression Failed! param `ex` is empty!", self.attrStr.string);
             return
         }
@@ -724,7 +730,7 @@ private class SJAttributesRecorder: NSObject, NSCopying {
 // MARK: 辅助 - other func
 
 fileprivate func _rangeContains(_ range: NSRange, _ subRange: NSRange) -> Bool {
-    return range.location <= subRange.location && range.length >= subRange.location + subRange.length
+    return (range.location <= subRange.location) && (range.location + range.length >= subRange.location + subRange.length)
 }
 
 fileprivate func _errorLog(_ msg: String, _ rangeStr: Any) {
