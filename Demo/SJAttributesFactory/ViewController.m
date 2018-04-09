@@ -79,9 +79,12 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
                 make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
 
+                // 匹配 以@字符开头, 后接一个以上非空格字符, 直到遇到一个空格字符
                 make.regexp(@"[@][^\\s]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
                     matched.textColor([UIColor purpleColor]);
                 });
+                
+                // 匹配 以#字符开头, 后接一个以上非#字符, 直到遇到一个#字符
                 make.regexp(@"[#][^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
                     matched.textColor([UIColor orangeColor]);
                 });
@@ -113,6 +116,8 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             tips = @"左缩进 + 右缩进";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
                 make.insert(@"故事:", 0);
+                
+                // 编辑最近一次插入的文本
                 make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
                     lastOperator.font([UIFont boldSystemFontOfSize:22]);
                     lastOperator.textColor([UIColor yellowColor]);
@@ -120,6 +125,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 
                 CGSize lastSize = make.size();
                 make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。银白的烟灰已经结成了长长一串，但在叶秋挥舞着鼠标敲打着键盘施展操作的过程中却没有被震落分毫。摘下的烟头很快被掐灭在了桌上的一个形状古怪的烟灰缸里，叶秋的手飞快地回到了键盘，正准备对对手说点什么，房门却突得咣一声被人打开了。", -1);
+                // 编辑最近一次插入的文本
                 make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
                     lastOperator.font([UIFont systemFontOfSize:14]);
                     lastOperator.textColor([UIColor blueColor]);
@@ -151,6 +157,42 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             });
         }
             break;
+        case 6: {
+            tips = @"替换文本";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.font([UIFont boldSystemFontOfSize:14]).textColor([UIColor orangeColor]);
+                make.insert(@"叶秋笑了笑笑笑笑笑笑,", 0);
+               
+                make.insert(@"抬手取下了", -1);
+                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
+                    lastOperator.textColor([UIColor greenColor]);
+                });
+                
+                make.insert(@"衔在嘴角的烟头H.", -1);
+                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
+                    lastOperator.textColor([UIColor redColor]);
+                    lastOperator.font([UIFont boldSystemFontOfSize:17]);
+                });
+                
+                make.regexp_r(@"H", ^(NSArray<NSValue *> * _Nonnull matchedRanges) {
+                    [matchedRanges enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        NSRange matchedRange = [obj rangeValue];
+
+                        make.replace(matchedRange, @"h");
+                        make.insert(@"ello", matchedRange.location + matchedRange.length); // h + ello == hello
+                    }];
+                }, YES);
+                
+                
+                make.regexp_insert(@"嘴角", SJAttributeRegexpInsertPositionRight, [UIImage imageNamed:@"sample2"], 0, CGPointMake(0, 0), CGSizeZero);
+                
+                make.regexp_replace(@"笑", [UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
+
+
+                
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+            });
+        }
     }
     
     

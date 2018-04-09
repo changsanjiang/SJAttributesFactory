@@ -114,6 +114,7 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
     if ( range.location == 0 && range.length == 0 ) {
         range = NSMakeRange(0, attrStr.length);
     }
+    if ( range.length == 0 ) return;
     if ( nil != self.font ) {
         [attrStr addAttribute:NSFontAttributeName value:self.font range:range];
     }
@@ -156,6 +157,21 @@ static NSArray<NSString *> *csj_propertyList(Class cls) {
     if ( nil != _paragraphStyleM ) {
         [attrStr addAttribute:NSParagraphStyleAttributeName value:self.paragraphStyleM range:range];
     }
+}
+- (void)removeAttribute:(NSAttributedStringKey)attributedStringKey {
+    if      ( attributedStringKey == NSFontAttributeName ) self.font = nil;
+    else if ( attributedStringKey == NSForegroundColorAttributeName ) self.textColor = nil;
+    else if ( attributedStringKey == NSExpansionAttributeName ) self.expansion = 0;
+    else if ( attributedStringKey == NSShadowAttributeName ) self.shadow = nil;
+    else if ( attributedStringKey == NSBackgroundColorAttributeName ) self.backgroundColor = nil;
+    else if ( attributedStringKey == NSUnderlineStyleAttributeName ) self.underLine = nil;
+    else if ( attributedStringKey == NSStrikethroughStyleAttributeName ) self.strikethrough = nil;
+    else if ( attributedStringKey == NSStrokeWidthAttributeName ) self.stroke = nil;
+    else if ( attributedStringKey == NSObliquenessAttributeName ) self.obliqueness = 0;
+    else if ( attributedStringKey == NSKernAttributeName ) self.letterSpacing = 0;
+    else if ( attributedStringKey == NSBaselineOffsetAttributeName ) self.offset = 0;
+    else if ( attributedStringKey == NSLinkAttributeName ) self.link = NO;
+    else if ( attributedStringKey == NSParagraphStyleAttributeName ) self.paragraphStyleM = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
 }
 - (id)copyWithZone:(NSZone *)zone {
     SJAttributesRecorder *newRecorder = [SJAttributesRecorder new];
