@@ -22,14 +22,6 @@ pod 'SJAttributesStringMaker'
 ```
 ___
 
-### 关于v1版本
-
-```ruby
- // 抱歉各位, 由于结构调整, `v1`和`v2`版本差距较大, 大家可以如下方式, 继续使用`v1`版本的.
- pod 'SJAttributesFactory', '1.1.14'
-```
-___
-
 ### regular expression
 <img src="https://github.com/changsanjiang/SJAttributesFactory/blob/master/Demo/SJAttributesFactory/regular.jpeg" />
 
@@ -37,10 +29,10 @@ ___
     sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
         make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
         
-        make.regexp(@"[@][^\\s]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
+        make.regexp(@"@\\w+", ^(SJAttributesRangeOperator * _Nonnull matched) {
             matched.textColor([UIColor purpleColor]);
         });
-        make.regexp(@"[#][^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
+        make.regexp(@"#[^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
             matched.textColor([UIColor orangeColor]);
         });
     });
