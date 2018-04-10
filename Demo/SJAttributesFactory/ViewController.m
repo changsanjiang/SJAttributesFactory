@@ -183,12 +183,14 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                     }];
                 }, YES);
                 
-                
                 make.regexp_insert(@"嘴角", SJAttributeRegexpInsertPositionRight, [UIImage imageNamed:@"sample2"], 0, CGPointMake(0, 0), CGSizeZero);
-                
+
                 make.regexp_replace(@"笑", [UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
 
 
+                
+                make.append(@"Hello").font([UIFont systemFontOfSize:14]).textColor([UIColor yellowColor]);
+                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero).font([UIFont systemFontOfSize:12]).textColor([UIColor redColor]);
                 
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
