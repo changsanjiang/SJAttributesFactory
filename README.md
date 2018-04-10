@@ -29,10 +29,10 @@ ___
     sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
         make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
         
-        make.regexp(@"[@][^\\s]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
+        make.regexp(@"@\\w+", ^(SJAttributesRangeOperator * _Nonnull matched) {
             matched.textColor([UIColor purpleColor]);
         });
-        make.regexp(@"[#][^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
+        make.regexp(@"#[^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
             matched.textColor([UIColor orangeColor]);
         });
     });
