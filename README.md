@@ -4,7 +4,7 @@
 - 添加了一个[append]方法. [4/10/2018]
 ```Objective-C
     make.append(@"Hello").font([UIFont systemFontOfSize:14]).textColor([UIColor yellowColor]);
-    make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero).font([UIFont systemFontOfSize:12]).textColor([UIColor redColor]);
+    make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
 ```
 - 修复[插入/替换/删除]时RangeOperator未调整的问题, 增加了几个正则相关方法. [4/9/2018]
 - 优化`endTask`方法. 当调用 endTask , 只有记录员的属性发生改变时, 才会重新赋值. [4/4/2018]

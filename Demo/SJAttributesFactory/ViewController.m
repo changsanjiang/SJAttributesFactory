@@ -190,7 +190,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 
                 
                 make.append(@"Hello").font([UIFont systemFontOfSize:14]).textColor([UIColor yellowColor]);
-                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero).font([UIFont systemFontOfSize:12]).textColor([UIColor redColor]);
+                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
                 
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });

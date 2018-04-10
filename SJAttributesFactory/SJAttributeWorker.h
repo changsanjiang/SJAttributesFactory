@@ -173,7 +173,7 @@ typedef NS_ENUM(NSUInteger, SJAttributeRegexpInsertPosition) {
  append text.
  
  make.append(@"Hello").font([UIFont systemFontOfSize:14]).textColor([UIColor yellowColor]);
- make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero).font([UIFont systemFontOfSize:12]).textColor([UIColor redColor]);
+ make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
  */
 @property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^append)(id strOrImg, ...);
 
