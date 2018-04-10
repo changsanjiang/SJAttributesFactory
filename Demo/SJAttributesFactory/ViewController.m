@@ -43,11 +43,14 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     [self.tableView registerClass:NSClassFromString(UITableViewCellID) forCellReuseIdentifier:UITableViewCellID];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    
 
 }
 
 #pragma mark -
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     NSAttributedString *attr = nil;
     NSString *tips = nil;
     switch (indexPath.row) {
@@ -55,7 +58,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             tips = @"常用方法";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
                 make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。", 0);
-                
+
                 make
                 .font([UIFont boldSystemFontOfSize:40])                       // 设置字体
                 .textColor([UIColor blackColor])                              // 设置文本颜色
@@ -63,13 +66,15 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 .strikethrough(NSUnderlineStyleSingle, [UIColor orangeColor]) // 设置删除线
 //                .shadow(CGSizeMake(0.5, 0.5), 0, [UIColor redColor])        // 设置阴影
 //                .backgroundColor([UIColor whiteColor])                      // 设置文本背景颜色
-                .stroke([UIColor greenColor], 1)                              // 字体边缘的颜色, 设置后, 字体会镂空
+//                .stroke([UIColor greenColor], 1)                            // 字体边缘的颜色, 设置后, 字体会镂空
 //                .offset(-10)                                                // 上下偏移
                 .obliqueness(0.3)                                             //  倾斜
                 .letterSpacing(4)                                             // 字体间隔
                 .lineSpacing(4)                                               // 行间隔
                 .alignment(NSTextAlignmentCenter)                             // 对其方式
                 ;
+
+                make.append(@"Hello").font([UIFont systemFontOfSize:22]).textColor([UIColor redColor]);
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
         }
@@ -192,16 +197,45 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 make.append(@"Hello").font([UIFont systemFontOfSize:14]).textColor([UIColor yellowColor]);
                 make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
                 
+                
+                make.append(@"hhHHh");
+                // 忽略大小写
+                make.regexpOptions = NSRegularExpressionCaseInsensitive;
+                make.regexp(@"H", ^(SJAttributesRangeOperator * _Nonnull make) {
+                    make.textColor([UIColor purpleColor]);
+                });
+                
                 [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
         }
+            break;
+        case 7: {
+            tips = @"测试";
+            
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.font([UIFont systemFontOfSize:14]).textColor([UIColor blackColor]);
+                make.append(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#");
+                
+                make.regexp(@"@\\w+", ^(SJAttributesRangeOperator * _Nonnull make) {
+                    make.textColor([UIColor purpleColor]);
+                });
+                
+                make.regexp(@"#[^#]+#", ^(SJAttributesRangeOperator * _Nonnull make) {
+                    make.textColor([UIColor orangeColor]);
+                });
+                
+                
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+            });
+        }
+            break;
     }
     
     
     if ( !attr ) return;
     _tipsLabel.text = tips;
     _testLabel.attributedText = attr;
-    
+
     NSLog(@"------------- end -------------");
 }
 

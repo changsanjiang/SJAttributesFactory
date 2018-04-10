@@ -24,8 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *       // set font , text color.
  *       make.font([UIFont boldSystemFontOfSize:14]).textColor([UIColor blackColor]);
  
- *       // inset text
- *       make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
+ *       make.append(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#");
  
  *       make.regexp(@"[@][^@]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
  *           matched.textColor([UIColor purpleColor]);
@@ -124,7 +123,8 @@ extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttribu
         NSRange matchedRange = [obj rangeValue];
 
         make.replace(matchedRange, @"h");
-        make.insert(@"ello", matchedRange.location + matchedRange.length); // h + ello == hello
+        NSInteger index = matchedRange.location + matchedRange.length;
+        make.insert(@"ello", index); // h + ello == hello
     }];
  }, YES);
  **/
@@ -133,7 +133,7 @@ extern NSMutableAttributedString *sj_makeAttributesString(void(^block)(SJAttribu
 
 /**
  make.regexp_replace(@"Hello", @" World!");
- make.regexp_replace(@"Hello", [UIImage imageNamed:@"sample2"], CGPointMake(0, 0), CGSizeZero);
+ make.regexp_replace(@"Hello", [UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
  */
 @property (nonatomic, copy, readonly) void(^regexp_replace)(NSString *regexp, id replaceByStrOrAttrStrOrImg, ...);
 
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, SJAttributeRegexpInsertPosition) {
 };
 /**
  make.regexp_insert(@"Hello", SJAttributeRegexpInsertPositionRight, @" World!");
- make.regexp_insert(@"Hello", SJAttributeRegexpInsertPositionRight, [UIImage imageNamed:@"sample2"], CGPointMake(0, 0), CGSizeZero);
+ make.regexp_insert(@"Hello", SJAttributeRegexpInsertPositionRight, [UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
  */
 @property (nonatomic, copy, readonly) void(^regexp_insert)(NSString *regexp, SJAttributeRegexpInsertPosition position, id insertingStrOrAttrStrOrImg, ...);
 
@@ -167,7 +167,7 @@ typedef NS_ENUM(NSUInteger, SJAttributeRegexpInsertPosition) {
 #pragma mark - 插入 - insert
 @interface SJAttributeWorker(Insert)
 
-#pragma mark - often
+#pragma mark - 常用方法
 
 /**
  append text.
@@ -176,6 +176,9 @@ typedef NS_ENUM(NSUInteger, SJAttributeRegexpInsertPosition) {
  make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
  */
 @property (nonatomic, copy, readonly) SJAttributesRangeOperator *(^append)(id strOrImg, ...);
+
+
+
 
 #pragma mark -
 /*!
