@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SJAttributesFactory"
-  s.version      = "2.0.3.2"
+  s.version      = "2.0.3.3"
   s.summary      = "富文本编辑工厂."
 
   # This description is used to generate tags and improve search results.
