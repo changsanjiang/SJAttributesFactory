@@ -911,23 +911,15 @@ BOOL _addAttributes(SJAttributesRangeOperator *operator, NSMutableAttributedStri
 
 
 #pragma mark -
-@implementation SJAttributesRangeOperator {
-    __SJKVOHelper *_helper;
-}
-- (instancetype)init {
-    self = [super init];
-    if ( !self ) return nil;
+@implementation SJAttributesRangeOperator
+- (void)setRecorder:(nullable SJAttributesRecorder *)recorder {
+    _recorder = recorder;
     __weak typeof(self) _self = self;
-    _helper = [[__SJKVOHelper alloc] initWithTarget:self keyPaths:@[@"recorder"] valueChangedExeBlock:^(__SJKVOHelper * _Nonnull helper, NSString * _Nonnull keyPath) {
+    _recorderKVOHelper = [[__SJKVOHelper alloc] initWithTarget:self.recorder keyPaths:[self.recorder properties] valueChangedExeBlock:^(__SJKVOHelper * _Nonnull helper, NSString * _Nonnull keyPath) {
         __strong typeof(_self) self = _self;
         if ( !self ) return;
-        self.recorderKVOHelper = [[__SJKVOHelper alloc] initWithTarget:_recorder keyPaths:[_recorder properties] valueChangedExeBlock:^(__SJKVOHelper * _Nonnull helper, NSString * _Nonnull keyPath) {
-            __strong typeof(_self) self = _self;
-            if ( !self ) return;
-            self.recorder_value_added = NO;
-        }];
+        self.recorder_value_added = NO;
     }];
-    return self;
 }
 @end
 
