@@ -246,6 +246,31 @@ static NSString *UITableViewCellID = @"UITableViewCell";
                 make.regexp(@"^[\\p{S}|\\p{P}|\\p{M}|\\p{Z}]+$", ^(SJAttributesRangeOperator * _Nonnull make) {
                     make.textColor([UIColor redColor]);
                 });
+                
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+            });
+        }
+            break;
+            
+        case 9: {
+            
+            tips = @"测试";
+            
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                
+                make.font([UIFont boldSystemFontOfSize:30]);
+                
+                make.append(@"lalalalalalalsho sj");
+                
+                make.regexp(@"sj", ^(SJAttributesRangeOperator * _Nonnull make) {
+                    make.textColor([UIColor blueColor]);
+                });
+                
+                make.regexp(@"^((?!shop[\\s]*).)*sj", ^(SJAttributesRangeOperator * _Nonnull make) {
+                    make.textColor([UIColor redColor]);
+                });
+                
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
             });
         }
             break;
