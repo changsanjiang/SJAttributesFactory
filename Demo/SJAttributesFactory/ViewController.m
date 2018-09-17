@@ -101,8 +101,8 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 2: {
             tips = @"上下图文";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert([UIImage imageNamed:@"sample2"], 0, CGPointZero, CGSizeMake(50, 50));
-                make.insert(@"\n  上下图文  ", -1).alignment(NSTextAlignmentCenter).lineSpacing(8);
+                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50));
+                make.append(@"\n  上下图文  ").alignment(NSTextAlignmentCenter).lineSpacing(8);
                 [self updateConstraintsWithSize:make.size()];
             });
         }
@@ -274,6 +274,16 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             });
         }
             break;
+        case 10: {
+            
+            tips = @"测试";
+            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50)).alignment(NSTextAlignmentCenter);
+                make.append(@"\n上下图文");
+                make.lineSpacing(8).alignment(NSTextAlignmentCenter);
+                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+            });
+        }
     }
     
     
