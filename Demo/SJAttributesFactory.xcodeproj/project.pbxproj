@@ -66,6 +66,7 @@
 		A69E5BFF1FB09BDC00EB65B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A69E5C011FB09BDC00EB65B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A69E5C021FB09BDC00EB65B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A6FF16E121BE948B008421F6 /* SJAttributesFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SJAttributesFactory.h; sourceTree = "<group>"; };
 		A9D887137C8F564BA68B72DB /* Pods-SJAttributesFactory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SJAttributesFactory.release.xcconfig"; path = "Pods/Target Support Files/Pods-SJAttributesFactory/Pods-SJAttributesFactory.release.xcconfig"; sourceTree = "<group>"; };
 		BC64684C1803C091BA7E813A /* libPods-SJAttributesFactory.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SJAttributesFactory.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -150,6 +151,7 @@
 		77E7E6301FE794950061439B /* SJAttributesFactory */ = {
 			isa = PBXGroup;
 			children = (
+				A6FF16E121BE948B008421F6 /* SJAttributesFactory.h */,
 				77CD179D1FEA196F00B2B54F /* SJAttributeWorker.h */,
 				77CD179B1FEA196F00B2B54F /* SJAttributeWorker.m */,
 				77D19C20201C7C6A00BE5412 /* SJAttributesRecorder.h */,

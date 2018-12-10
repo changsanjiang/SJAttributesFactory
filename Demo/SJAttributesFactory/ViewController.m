@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SJAttributeWorker.h"
+#import "SJAttributesFactory.h"
 
 static NSString *UITableViewCellID = @"UITableViewCell";
 
@@ -57,8 +57,8 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 0: {
             tips = @"常用方法";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。", 0);
-
+                make.append(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。");
+                
                 make
                 .font([UIFont boldSystemFontOfSize:40])                       // 设置字体
                 .textColor([UIColor blackColor])                              // 设置文本颜色
@@ -82,7 +82,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 1: {
             tips = @"正则匹配";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0);
+                make.append(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#");
 
                 // 匹配 以@字符开头, 后接一个以上非空格字符, 直到遇到一个空格字符
                 make.regexp(@"[@][^\\s]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
@@ -101,8 +101,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 2: {
             tips = @"上下图文";
             attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50));
-                make.append(@"\n  上下图文  ").alignment(NSTextAlignmentCenter).lineSpacing(8);
+                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
+                make.append(@"\n上下图文");
+                make.alignment(NSTextAlignmentCenter).lineSpacing(8);
+                
                 [self updateConstraintsWithSize:make.size()];
             });
         }
