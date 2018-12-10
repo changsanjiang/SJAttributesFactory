@@ -23,9 +23,13 @@ inline static BOOL _rangeContains(NSRange range, NSRange subRange) {
     return (range.location <= subRange.location) && (range.location + range.length >= subRange.location + subRange.length);
 }
 
+#ifdef DEBUG
 inline static void _errorLog(NSString *msg, id __nullable target) {
     NSLog(@"\n__Error__: %@\nTarget: %@", msg, target);
 }
+#else
+#define _errorLog(...)
+#endif
 
 #pragma mark -
 
@@ -69,7 +73,9 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     if ( !_needToAdd ) return;
     else _needToAdd = NO;
     
+#ifdef SJ_MAC
     NSLog(@"%@", self);
+#endif
     
     NSRange range = _recorder.range;
     if ( range.location == 0 && range.length == 0 ) {
