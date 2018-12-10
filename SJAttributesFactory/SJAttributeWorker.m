@@ -150,16 +150,16 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     self = [super initWithRange:NSMakeRange(0, 0) target:attrStr];
     if ( !self ) return nil;
     _rangeOperatorsM = [NSMutableArray array];
-    _attrStr = attrStr;
+    self->_attrStr = attrStr;
     return self;
 }
 
 - (NSRange)range {
-    return NSMakeRange(0, _attrStr.length);
+    return NSMakeRange(0, self->_attrStr.length);
 }
 
 - (NSInteger)length {
-    return _attrStr.length;
+    return self->_attrStr.length;
 }
 
 - (void)pauseTask {
@@ -167,7 +167,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 }
 
 - (NSMutableAttributedString *)workInProcess {
-    return _attrStr;
+    return self->_attrStr;
 }
 
 - (void)setDefaultFont:(UIFont *_Nullable)defaultFont {
@@ -187,13 +187,13 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 }
 
 - (NSMutableAttributedString *)endTask {
-    if ( 0 == _attrStr.length ) return _attrStr;
+    if ( 0 == self->_attrStr.length ) return self->_attrStr;
     [self addAttributesToTargetIfNeeded];
     [self.rangeOperatorsM enumerateObjectsUsingBlock:^(SJAttributesRangeOperator * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self _addCommonValuesToRecorderIfNeed:obj.recorder];
         [obj addAttributesToTargetIfNeeded];
     }];
-    return _attrStr;
+    return self->_attrStr;
 }
 
 - (void)_addCommonValuesToRecorderIfNeed:(SJAttributesRecorder *)recorder {
@@ -206,14 +206,14 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (NSMutableAttributedString *)endTaskAndComplete:(void(^)(SJAttributeWorker *worker))block; {
     [self endTask];
     if ( block ) block(self);
-    return _attrStr;
+    return self->_attrStr;
 }
 
 /// 范围编辑. 可以配合正则使用.
 - (SJAttributeWorker * _Nonnull (^)(NSRange, void (^ _Nonnull)(SJAttributesRangeOperator * _Nonnull)))rangeEdit {
     return ^ SJAttributeWorker *(NSRange range, void(^task)(SJAttributesRangeOperator *matched)) {
         if ( !_rangeContains(self.range, range) ) {
-            _errorLog(@"Edit Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Edit Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return self;
         }
         SJAttributesRangeOperator *rangeOperator = [self _getOperatorWithRange:range];
@@ -226,11 +226,11 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (NSAttributedString * _Nonnull (^)(NSRange))subAttrStr {
     return ^ NSAttributedString *(NSRange subRange) {
         if ( !_rangeContains(self.range, subRange) ) {
-            _errorLog(@"Get `subAttributedString` Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Get `subAttributedString` Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return nil;
         }
         [self pauseTask];
-        return [_attrStr attributedSubstringFromRange:subRange];
+        return [self->_attrStr attributedSubstringFromRange:subRange];
     };
 }
 
@@ -541,7 +541,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
     return ^ SJAttributeWorker *(NSString *regStr, void(^task)(NSArray<NSValue *> *ranges), BOOL reverse) {
         NSMutableArray<NSValue *> *rangesM = [NSMutableArray array];
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regStr options:self.regexpOptions error:nil];
-        [regex enumerateMatchesInString:_attrStr.string options:NSMatchingWithoutAnchoringBounds range:self.range usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+        [regex enumerateMatchesInString:self->_attrStr.string options:NSMatchingWithoutAnchoringBounds range:self.range usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
             if ( result ) { [rangesM addObject:[NSValue valueWithRange:result.range]];}
         }];
         if ( reverse ) {
@@ -574,7 +574,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
                     self.replace([obj rangeValue], replaceByStrOrAttrStrOrImg, origin, size);
                 }
                 else {
-                    _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", _attrStr.string);
+                    _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", self->_attrStr.string);
                 }
             }];
         }, YES);
@@ -616,7 +616,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
                     self.insertImage(insertingStrOrAttrStrOrImg, index, origin, size);
                 }
                 else {
-                    _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", _attrStr.string);
+                    _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", self->_attrStr.string);
                 }
             }];
         }, YES);
@@ -631,7 +631,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 
 - (CGSize (^)(void))size {
     return ^ CGSize() {
-        return [self sizeWithAttrString:_attrStr width:CGFLOAT_MAX height:CGFLOAT_MAX];
+        return [self sizeWithAttrString:self->_attrStr width:CGFLOAT_MAX height:CGFLOAT_MAX];
     };
 }
 
@@ -642,12 +642,12 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 }
 - (CGSize (^)(double))sizeByHeight {
     return ^ CGSize (double height) {
-        return [self sizeWithAttrString:_attrStr width:CGFLOAT_MAX height:height];
+        return [self sizeWithAttrString:self->_attrStr width:CGFLOAT_MAX height:height];
     };
 }
 - (CGSize (^)(double))sizeByWidth {
     return ^ CGSize (double width) {
-        return [self sizeWithAttrString:_attrStr width:width height:CGFLOAT_MAX];
+        return [self sizeWithAttrString:self->_attrStr width:width height:CGFLOAT_MAX];
     };
 }
 - (CGSize)sizeWithAttrString:(NSAttributedString *)attrStr width:(double)width height:(double)height {
@@ -682,14 +682,14 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (SJAttributeWorker * _Nonnull (^)(NSAttributedStringKey _Nonnull, id _Nonnull, NSRange))add {
     return ^ SJAttributeWorker *(NSAttributedStringKey key, id value, NSRange range) {
         if ( !key || !value ) {
-            _errorLog(@"Added Attribute Failed! param `key or value` is Empty!", _attrStr.string);
+            _errorLog(@"Added Attribute Failed! param `key or value` is Empty!", self->_attrStr.string);
             return self;
         }
         if ( !_rangeContains(self.range, range) ) {
-            _errorLog(@"Add Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Add Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return self;
         }
-        [_attrStr addAttribute:key value:value range:range];
+        [self->_attrStr addAttribute:key value:value range:range];
         return self;
     };
 }
@@ -704,7 +704,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
             self.insertImage(strOrImg, -1, va_arg(args, CGPoint), va_arg(args, CGSize));
         }
         else {
-            _errorLog(@"append `text` Failed! param `strOrImg` is Unlawfulness!", _attrStr.string);
+            _errorLog(@"append `text` Failed! param `strOrImg` is Unlawfulness!", self->_attrStr.string);
         }
         va_end(args);
         return [self _getOperatorWithRange:self.lastInsertedRange];
@@ -713,7 +713,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (SJAttributeWorker * _Nonnull (^)(NSString * _Nonnull, NSInteger))insertText {
     return ^ SJAttributeWorker *(NSString *text, NSInteger idx) {
         if ( 0 == text.length ) {
-            _errorLog(@"inset `text` Failed! param `text` is Empty!", _attrStr.string);
+            _errorLog(@"inset `text` Failed! param `text` is Empty!", self->_attrStr.string);
             return self;
         }
         return self.insertAttrStr([[NSAttributedString alloc] initWithString:text], idx);
@@ -722,7 +722,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (SJAttributeWorker * _Nonnull (^)(UIImage * _Nonnull, NSInteger, CGPoint, CGSize))insertImage {
     return ^ SJAttributeWorker *(UIImage *image, NSInteger idx, CGPoint offset, CGSize size) {
         if ( nil == image ) {
-            _errorLog(@"inset `image` Failed! param `image` is Empty!", _attrStr.string);
+            _errorLog(@"inset `image` Failed! param `image` is Empty!", self->_attrStr.string);
             return self;
         }
         NSTextAttachment *attachment = [NSTextAttachment new];
@@ -735,15 +735,15 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (SJAttributeWorker * _Nonnull (^)(NSAttributedString * _Nonnull, NSInteger))insertAttrStr {
     return ^ SJAttributeWorker *(NSAttributedString *text, NSInteger idx) {
         if ( 0 == text.length ) {
-            _errorLog(@"inset `text` Failed! param `text` is Empty!", _attrStr.string);
+            _errorLog(@"inset `text` Failed! param `text` is Empty!", self->_attrStr.string);
             return self;
         }
-        if ( -1 == idx || idx > _attrStr.length ) {
-            idx = _attrStr.length;
+        if ( -1 == idx || idx > self->_attrStr.length ) {
+            idx = self->_attrStr.length;
         }
         self.lastInsertedRange = NSMakeRange(idx, text.length);
         [self _adjustOperatorsWhenInsertingText:self.lastInsertedRange];
-        [_attrStr insertAttributedString:text atIndex:idx];
+        [self->_attrStr insertAttributedString:text atIndex:idx];
         return self;
     };
 }
@@ -761,7 +761,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
             self.insertImage(strOrAttrStrOrImg, idx, va_arg(args, CGPoint), va_arg(args, CGSize));
         }
         else {
-            _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", _attrStr.string);
+            _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", self->_attrStr.string);
         }
         va_end(args);
         return self;
@@ -777,7 +777,7 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (void (^)(NSRange, id _Nonnull, ...))replace {
     return ^ void (NSRange range, id strOrAttrStrOrImg, ...) {
         if ( !_rangeContains(self.range, range) ) {
-            _errorLog(@"Replace Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Replace Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return;
         }
 
@@ -800,12 +800,12 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
             va_end(args);
         }
         else {
-            _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", _attrStr.string);
+            _errorLog(@"inset `text` Failed! param `strOrAttrStrOrImg` is Unlawfulness!", self->_attrStr.string);
         }
         
         if ( !text ) return;
 
-        [_attrStr replaceCharactersInRange:range withAttributedString:text];
+        [self->_attrStr replaceCharactersInRange:range withAttributedString:text];
         [self _adjustOperatorsWhenReplaceCharactersInRange:range textLength:[text length]];
     };
 }
@@ -818,27 +818,27 @@ inline static void _errorLog(NSString *msg, id __nullable target) {
 - (void (^)(NSRange))removeText {
     return ^ (NSRange range) {
         if ( !_rangeContains(self.range, range) ) {
-            _errorLog(@"Remove Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Remove Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return ;
         }
         [self _adjustOperatorsWhenRemovingText:range];
-        [_attrStr deleteCharactersInRange:range];
+        [self->_attrStr deleteCharactersInRange:range];
     };
 }
 - (void (^)(NSAttributedStringKey _Nonnull, NSRange))removeAttribute {
     return ^ (NSAttributedStringKey key, NSRange range) {
         if ( !_rangeContains(self.range, range) ) {
-            _errorLog(@"Remove Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Remove Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return ;
         }
         [self _adjustOperatorsWhenRemovingAttribute:key deleteingRange:range];
-        [_attrStr removeAttribute:key range:range];
+        [self->_attrStr removeAttribute:key range:range];
     };
 }
 - (void (^)(NSRange))removeAttributes {
     return ^ (NSRange range) {
         if ( !_rangeContains(self.range, range) ) {
-            _errorLog(@"Remove Failed! param 'range' is unlawfulness!", _attrStr.string);
+            _errorLog(@"Remove Failed! param 'range' is unlawfulness!", self->_attrStr.string);
             return ;
         }
         [self _adjustOperatorsWhenRemovingAttributes:range];
