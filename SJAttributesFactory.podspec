@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SJAttributesFactory"
-  s.version      = "2.0.5"
+  s.version      = "2.1.0"
   s.summary      = "富文本编辑工厂."
 
   # This description is used to generate tags and improve search results.
@@ -91,6 +91,13 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "SJAttributesFactory/*.{h,m}"
+  s.subspec 'UIKitText' do |ss|
+    ss.source_files = "SJAttributesFactory/UIKitText/*.{h,m}"
+  end
+
+  s.subspec 'Deprecated' do |ss|
+    ss.source_files = "SJAttributesFactory/Deprecated/*.{h,m}"
+  end
 
   # s.public_header_files = "Classes/**/*.h"
 

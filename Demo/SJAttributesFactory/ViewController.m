@@ -26,6 +26,14 @@ static NSString *UITableViewCellID = @"UITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self _setupViews];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"");
+    });
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSLog(@"");
+    });
 }
 
 - (void)_setupViews {
@@ -56,253 +64,122 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     switch (indexPath.row) {
         case 0: {
             tips = @"常用方法";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+            attr = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                make.font([UIFont boldSystemFontOfSize:20]);
+                make.lineSpacing(8);
                 make.append(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。");
+                make.underLine(^(id<SJUTDecoration>  _Nonnull make) {
+                    make.style = NSUnderlineStyleSingle;
+                    make.color = [UIColor orangeColor];
+                });
+                make.strikethrough(^(id<SJUTDecoration>  _Nonnull make) {
+                    make.style = NSUnderlineStyleSingle;
+                    make.color = [UIColor orangeColor];
+                });
                 
-                make
-                .font([UIFont boldSystemFontOfSize:40])                       // 设置字体
-                .textColor([UIColor blackColor])                              // 设置文本颜色
-                .underLine(NSUnderlineStyleSingle, [UIColor orangeColor])     // 设置下划线
-                .strikethrough(NSUnderlineStyleSingle, [UIColor orangeColor]) // 设置删除线
-//                .shadow(CGSizeMake(0.5, 0.5), 0, [UIColor redColor])        // 设置阴影
-//                .backgroundColor([UIColor whiteColor])                      // 设置文本背景颜色
-//                .stroke([UIColor greenColor], 1)                            // 字体边缘的颜色, 设置后, 字体会镂空
-//                .offset(-10)                                                // 上下偏移
-                .obliqueness(0.3)                                             //  倾斜
-                .letterSpacing(4)                                             // 字体间隔
-                .lineSpacing(4)                                               // 行间隔
-                .alignment(NSTextAlignmentCenter)                             // 对其方式
-                ;
-
-                make.append(@"Hello").font([UIFont systemFontOfSize:22]).textColor([UIColor redColor]);
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
+                make.regex(@"叶秋").update(^(id<SJUTAttributesProtocol>  _Nonnull make) {
+                    make.font([UIFont boldSystemFontOfSize:40]).textColor([UIColor purpleColor]);
+                });
+                
+                make.regex(@"笑了笑").replaceWithText(^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                    make.append(@"xiao了笑");
+                });
+                
+                make.regex(@"抬手").replaceWithString(@"Tai手");
+            }];
         }
             break;
         case 1: {
             tips = @"正则匹配";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+            attr = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                make.font([UIFont boldSystemFontOfSize:20]);
                 make.append(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#");
+                
+                make.regex(@"[@][^\\s]+\\s").update(^(id<SJUTAttributesProtocol>  _Nonnull make) {
+                    make.textColor([UIColor purpleColor]);
+                });
+                
+                make.regex(@"[#][^#]+#").update(^(id<SJUTAttributesProtocol>  _Nonnull make) {
+                    make.textColor([UIColor orangeColor]);
+                });
+            }];
 
-                // 匹配 以@字符开头, 后接一个以上非空格字符, 直到遇到一个空格字符
-                make.regexp(@"[@][^\\s]+\\s", ^(SJAttributesRangeOperator * _Nonnull matched) {
-                    matched.textColor([UIColor purpleColor]);
-                });
-                
-                // 匹配 以#字符开头, 后接一个以上非#字符, 直到遇到一个#字符
-                make.regexp(@"[#][^#]+#", ^(SJAttributesRangeOperator * _Nonnull matched) {
-                    matched.textColor([UIColor orangeColor]);
-                });
-                
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
         }
             break;
         case 2: {
             tips = @"上下图文";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
+            attr = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                make.appendImage(^(id<SJUTImageAttachment>  _Nonnull make) {
+                    make.image = [UIImage imageNamed:@"sample2"];
+                    make.bounds = CGRectMake(0, 0, 50, 50);
+                });
                 make.append(@"\n上下图文");
                 make.alignment(NSTextAlignmentCenter).lineSpacing(8);
-                
-                [self updateConstraintsWithSize:make.size()];
-            });
+            }];
         }
             break;
         case 3: {
             tips = @"左右图文";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert(@"  左右图文  ", 0);
+            attr = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                make.append(@"  左右图文  ");
                 make.font([UIFont boldSystemFontOfSize:18]).textColor([UIColor redColor]);
-                make.insert([UIImage imageNamed:@"sample2"], 0, CGPointMake(0, -18), CGSizeMake(50, 50));
-                [self updateConstraintsWithSize:make.size()];
-            });
+                make.appendImage(^(id<SJUTImageAttachment>  _Nonnull make) {
+                    make.image = [UIImage imageNamed:@"sample2"];
+                    make.bounds = CGRectMake(0, -18, 50, 50);
+                });
+            }];
         }
             break;
-        case 4: {
-            tips = @"左缩进 + 右缩进";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert(@"故事:", 0);
-                
-                // 编辑最近一次插入的文本
-                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.font([UIFont boldSystemFontOfSize:22]);
-                    lastOperator.textColor([UIColor yellowColor]);
-                });
-                
-                CGSize lastSize = make.size();
-                make.insert(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。银白的烟灰已经结成了长长一串，但在叶秋挥舞着鼠标敲打着键盘施展操作的过程中却没有被震落分毫。摘下的烟头很快被掐灭在了桌上的一个形状古怪的烟灰缸里，叶秋的手飞快地回到了键盘，正准备对对手说点什么，房门却突得咣一声被人打开了。", -1);
-                // 编辑最近一次插入的文本
-                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.font([UIFont systemFontOfSize:14]);
-                    lastOperator.textColor([UIColor blueColor]);
-                });
-
-                // 左缩进
-                make.headIndent(lastSize.width);
-                // 右缩进
-                make.tailIndent(-12);
-                
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
-        }
-            break;
-        case 5: {
-            tips = @"下划线 + 删除线";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.insert(@"下划线", 0);
-                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.font([UIFont boldSystemFontOfSize:40]).underLine(NSUnderlineStyleSingle, [UIColor orangeColor]);
-                });
-                
-                make.insert(@"删除线", -1);
-                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.font([UIFont boldSystemFontOfSize:40]).strikethrough(NSUnderlineStyleSingle | NSUnderlinePatternDot, [UIColor orangeColor]);
-                });
-                
-                [self updateConstraintsWithSize:make.size()];
-            });
-        }
-            break;
-        case 6: {
-            tips = @"替换文本";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.font([UIFont boldSystemFontOfSize:14]).textColor([UIColor orangeColor]);
-                make.insert(@"叶秋笑了笑笑笑笑笑笑,", 0);
-               
-                make.insert(@"抬手取下了", -1);
-                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.textColor([UIColor greenColor]);
-                });
-                
-                make.insert(@"衔在嘴角的烟头H.", -1);
-                make.lastInserted(^(SJAttributesRangeOperator * _Nonnull lastOperator) {
-                    lastOperator.textColor([UIColor redColor]);
-                    lastOperator.font([UIFont boldSystemFontOfSize:17]);
-                });
-                
-                make.regexp_r(@"H", ^(NSArray<NSValue *> * _Nonnull matchedRanges) {
-                    [matchedRanges enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        NSRange matchedRange = [obj rangeValue];
-
-                        make.replace(matchedRange, @"h");
-                        make.insert(@"ello", matchedRange.location + matchedRange.length); // h + ello == hello
-                    }];
-                }, YES);
-                
-                make.regexp_insert(@"嘴角", SJAttributeRegexpInsertPositionRight, [UIImage imageNamed:@"sample2"], 0, CGPointMake(0, 0), CGSizeZero);
-
-                make.regexp_replace(@"笑", [UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
-
-
-                
-                make.append(@"Hello").font([UIFont systemFontOfSize:14]).textColor([UIColor yellowColor]);
-                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeZero);
-                
-                
-                make.append(@"hhHHh");
-                // 忽略大小写
-                make.regexpOptions = NSRegularExpressionCaseInsensitive;
-                make.regexp(@"H", ^(SJAttributesRangeOperator * _Nonnull make) {
-                    make.textColor([UIColor purpleColor]);
-                });
-                
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
-        }
-            break;
-        case 7: {
-            tips = @"测试";
-            
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.font([UIFont systemFontOfSize:14]).textColor([UIColor blackColor]);
-                make.append(@"@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#");
-                
-                make.regexp(@"@\\w+", ^(SJAttributesRangeOperator * _Nonnull make) {
-                    make.textColor([UIColor purpleColor]);
-                });
-                
-                make.regexp(@"#[^#]+#", ^(SJAttributesRangeOperator * _Nonnull make) {
-                    make.textColor([UIColor orangeColor]);
-                });
-                
-                
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
-        }
-            break;
-        case 8: {
-            tips = @"测试";
-            
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-//                大写 P 表示 Unicode 字符集七个字符属性之一：标点字符
-//                L：字母；
-//                M：标记符号（一般不会单独出现）；
-//                Z：分隔符（比如空格、换行等）；
-//                S：符号（比如数学符号、货币符号等）；
-//                N：数字（比如阿拉伯数字、罗马数字等）；
-//                C：其他字符
-                
-                make.append(@"&&&&###@@$$$$");
-                
-                make.regexp(@"^[\\p{S}|\\p{P}|\\p{M}|\\p{Z}]+$", ^(SJAttributesRangeOperator * _Nonnull make) {
-                    make.textColor([UIColor redColor]);
-                });
-                
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
-        }
-            break;
-            
-        case 9: {
-            
-            tips = @"测试";
-            
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                
-                make.font([UIFont boldSystemFontOfSize:30]);
-                
-                make.append(@"lalalalalalalsho sj");
-                
-                make.regexp(@"sj", ^(SJAttributesRangeOperator * _Nonnull make) {
-                    make.textColor([UIColor blueColor]);
-                });
-                
-                make.regexp(@"^((?!shop[\\s]*).)*sj", ^(SJAttributesRangeOperator * _Nonnull make) {
-                    make.textColor([UIColor redColor]);
-                });
-                
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
-        }
-            break;
-        case 10: {
-            
-            tips = @"测试";
-            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
-                make.append([UIImage imageNamed:@"sample2"], CGPointZero, CGSizeMake(50, 50)).alignment(NSTextAlignmentCenter);
-                make.append(@"\n上下图文");
-                make.lineSpacing(8).alignment(NSTextAlignmentCenter);
-                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
-            });
-        }
+//        case 8: {
+//            tips = @"测试";
+//
+//            attr = sj_makeAttributesString(^(SJAttributeWorker * _Nonnull make) {
+////                大写 P 表示 Unicode 字符集七个字符属性之一：标点字符
+////                L：字母；
+////                M：标记符号（一般不会单独出现）；
+////                Z：分隔符（比如空格、换行等）；
+////                S：符号（比如数学符号、货币符号等）；
+////                N：数字（比如阿拉伯数字、罗马数字等）；
+////                C：其他字符
+//
+//                make.append(@"&&&&###@@$$$$");
+//
+//                make.regexp(@"^[\\p{S}|\\p{P}|\\p{M}|\\p{Z}]+$", ^(SJAttributesRangeOperator * _Nonnull make) {
+//                    make.textColor([UIColor redColor]);
+//                });
+//
+//                [self updateConstraintsWithSize:make.sizeByWidth(self.view.bounds.size.width - 80)];
+//            });
+//        }
+//            break;
     }
     
     
     if ( !attr ) return;
     _tipsLabel.text = tips;
     _testLabel.attributedText = attr;
-
+    [self updateConstraints];
+    
     NSLog(@"------------- end -------------");
 }
 
-- (void)updateConstraintsWithSize:(CGSize)size {
+- (void)updateConstraints {
+    CGSize size = sj_textSize(_testLabel.attributedText, self.view.bounds.size.width - 80, CGFLOAT_MAX);
     _widthConstraint.constant = size.width;
     _heightConstraint.constant = size.height;
     
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
+}
+
+static CGSize sj_textSize(NSAttributedString *attrStr, CGFloat width, CGFloat height) {
+    if ( attrStr.length < 1 )
+        return CGSizeZero;
+    CGRect bounds = [attrStr boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    bounds.size.width = ceil(bounds.size.width);
+    bounds.size.height = ceil(bounds.size.height);
+    return bounds.size;
 }
 
 #pragma mark -

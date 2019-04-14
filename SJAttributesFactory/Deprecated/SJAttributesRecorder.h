@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+// - deprecated (use `NSAttributedString+SJMake.h`).
+
+
 NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 @interface SJStrokeAttribute: NSObject<NSMutableCopying>

@@ -12,6 +12,8 @@
 #import <UIKit/UIKit.h>
 #import "SJAttributesRecorder.h"
 
+// - deprecated (use `NSAttributedString+SJMake.h`).
+
 @class SJAttributeWorker;
 
 NS_ASSUME_NONNULL_BEGIN
