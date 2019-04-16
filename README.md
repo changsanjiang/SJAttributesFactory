@@ -33,7 +33,7 @@ use in swift:
 
 ___
 
-use in Objc
+use in Objc:
 
 ```Objective-C
     NSAttributedString *text = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
