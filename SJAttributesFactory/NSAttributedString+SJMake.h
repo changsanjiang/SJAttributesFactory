@@ -5,6 +5,9 @@
 //  Created by BlueDancer on 2019/4/12.
 //  Copyright © 2019 SanJiang. All rights reserved.
 //
+//  Project: https://github.com/changsanjiang/SJAttributesFactory
+//  Email:  changsanjiang@gmail.com
+//
 
 #import <Foundation/Foundation.h>
 #import "SJUIKitAttributesDefines.h"

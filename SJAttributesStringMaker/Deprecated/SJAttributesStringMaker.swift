@@ -5,7 +5,7 @@
 //  Created by BlueDancer on 2018/1/25.
 //  Copyright © 2018年 SanJiang. All rights reserved.
 //
-//  Project Address: https://github.com/changsanjiang/SJAttributesFactory
+//  Project: https://github.com/changsanjiang/SJAttributesFactory
 //  Email:  changsanjiang@gmail.com
 //
 
@@ -213,7 +213,7 @@ public extension SJAttributesStringMaker {
     
     /// 添加属性
     @discardableResult
-    func add(key: NSAttributedStringKey, value: Any, range: NSRange) -> SJAttributesStringMaker {
+    func add(key: NSAttributedString.Key, value: Any, range: NSRange) -> SJAttributesStringMaker {
         self.attrStr.addAttribute(key, value: value, range: range)
         return self
     }
@@ -304,7 +304,7 @@ public extension SJAttributesStringMaker {
 public extension SJAttributesStringMaker {
     
     /// 删除文本
-    public func removeText(_ range: NSRange) -> Void {
+    func removeText(_ range: NSRange) -> Void {
         if !_rangeContains(self.range, range) {
             _errorLog("Delete Text Failed! param 'range' is unlawful!", self.attrStr.string)
         }
@@ -312,7 +312,7 @@ public extension SJAttributesStringMaker {
     }
     
     /// 删除属性
-    public func removeAttribute(_ key: NSAttributedStringKey, _ range: NSRange) -> Void {
+    func removeAttribute(_ key: NSAttributedString.Key, _ range: NSRange) -> Void {
         if !_rangeContains(self.range, range) {
             _errorLog("Delete Text Failed! param 'range' is unlawful!", self.attrStr.string)
         }
@@ -320,7 +320,7 @@ public extension SJAttributesStringMaker {
     }
     
     /// 删除属性
-    public func removeAttributes(_ range: NSRange) -> Void {
+    func removeAttributes(_ range: NSRange) -> Void {
         if !_rangeContains(self.range, range) {
             _errorLog("Delete Text Failed! param 'range' is unlawful!", self.attrStr.string)
         }
@@ -540,45 +540,45 @@ private class SJAttributesRecorder: NSObject, NSCopying {
             range = NSRange.init(location: 0, length: attrStr.length)
         }
         if nil != self.font {
-            attrStr.addAttribute(NSAttributedStringKey.font, value: self.font!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.font, value: self.font!, range: range!)
         }
         if nil != self.textColor {
-            attrStr.addAttribute(NSAttributedStringKey.foregroundColor, value: self.textColor!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.foregroundColor, value: self.textColor!, range: range!)
         }
         if nil != self.expansion {
-            attrStr.addAttribute(NSAttributedStringKey.expansion, value: self.expansion!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.expansion, value: self.expansion!, range: range!)
         }
         if nil != self.shadow {
-            attrStr.addAttribute(NSAttributedStringKey.shadow, value: self.shadow!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.shadow, value: self.shadow!, range: range!)
         }
         if nil != self.backgroundColor {
-            attrStr.addAttribute(NSAttributedStringKey.backgroundColor, value: self.backgroundColor!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.backgroundColor, value: self.backgroundColor!, range: range!)
         }
         if nil != self.underLine {
-            attrStr.addAttribute(NSAttributedStringKey.underlineStyle, value: self.underLine!.value.rawValue, range: range!)
-            attrStr.addAttribute(NSAttributedStringKey.underlineColor, value: self.underLine!.color, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.underlineStyle, value: self.underLine!.value.rawValue, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.underlineColor, value: self.underLine!.color, range: range!)
         }
         if nil != self.strikethrough {
-            attrStr.addAttribute(NSAttributedStringKey.strikethroughStyle, value: self.strikethrough!.value.rawValue, range: range!)
-            attrStr.addAttribute(NSAttributedStringKey.strikethroughColor, value: self.strikethrough!.color, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: self.strikethrough!.value.rawValue, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.strikethroughColor, value: self.strikethrough!.color, range: range!)
         }
         if nil != self.stroke {
-            attrStr.addAttribute(NSAttributedStringKey.strokeWidth, value: self.stroke!.value, range: range!)
-            attrStr.addAttribute(NSAttributedStringKey.strokeColor, value: self.stroke!.color, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.strokeWidth, value: self.stroke!.value, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.strokeColor, value: self.stroke!.color, range: range!)
         }
         if nil != self.obliqueness {
-            attrStr.addAttribute(NSAttributedStringKey.obliqueness, value: self.obliqueness!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.obliqueness, value: self.obliqueness!, range: range!)
         }
         if nil != self.letterSpacing {
-            attrStr.addAttribute(NSAttributedStringKey.kern, value: self.letterSpacing!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.kern, value: self.letterSpacing!, range: range!)
         }
         if nil != self.offset {
-            attrStr.addAttribute(NSAttributedStringKey.baselineOffset, value: self.offset!, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.baselineOffset, value: self.offset!, range: range!)
         }
         if nil != self.link {
-            attrStr.addAttribute(NSAttributedStringKey.link, value: true, range: range!)
+            attrStr.addAttribute(NSAttributedString.Key.link, value: true, range: range!)
         }
-        attrStr.addAttribute(NSAttributedStringKey.paragraphStyle, value: self.paragraphStyleM, range: range!)
+        attrStr.addAttribute(NSAttributedString.Key.paragraphStyle, value: self.paragraphStyleM, range: range!)
     }
     
     var range: NSRange?

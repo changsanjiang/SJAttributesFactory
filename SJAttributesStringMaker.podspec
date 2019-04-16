@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SJAttributesStringMaker"
-  s.version      = "2.0.2"
+  s.version      = "2.1.0"
   s.summary      = "富文本编辑工厂."
 
   # This description is used to generate tags and improve search results.
@@ -91,6 +91,10 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "SJAttributesStringMaker/*.swift"
+
+  s.subspec 'Deprecated' do |ss|
+    ss.source_files = "SJAttributesStringMaker/Deprecated/*.swift"
+  end
 
   # s.public_header_files = "Classes/**/*.h"
 

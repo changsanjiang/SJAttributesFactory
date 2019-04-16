@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SJUTRangeRecorder : NSObject
 @property (nonatomic) NSRange range;
-@property (nonatomic, strong, nullable) id<SJUTAttributesProtocol> attrOfReplaceWithString;
+@property (nonatomic, strong, nullable) id<SJUTAttributesProtocol> utOfReplaceWithString;
 @property (nonatomic, copy, nullable) void(^replaceWithText)(id<SJUIKitTextMakerProtocol> make);
 @property (nonatomic, copy, nullable) void(^update)(id<SJUTAttributesProtocol> make);
 @end

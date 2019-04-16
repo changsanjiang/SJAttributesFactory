@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (SJUTDecorationAttribute)strikethrough {
     return ^id<SJUTAttributesProtocol>(void(^block)(id<SJUTDecoration> decoration)) {
-        SJUTDecoration *_Nullable decoration = self.recorder->underLine;
+        SJUTDecoration *_Nullable decoration = self.recorder->strikethrough;
         if ( !decoration ) {
             self.recorder->strikethrough = decoration = [SJUTDecoration new];
         }

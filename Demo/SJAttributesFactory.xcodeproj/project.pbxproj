@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		66AFD0AF4CC3266F99FFEC7C /* libPods-SJAttributesFactory.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC64684C1803C091BA7E813A /* libPods-SJAttributesFactory.a */; };
+		774A4A3A2265B056007F99BA /* SJUIKitTextMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A4A372265B056007F99BA /* SJUIKitTextMaker.swift */; };
+		774A4A3B2265B056007F99BA /* SJAttributesStringMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A4A392265B056007F99BA /* SJAttributesStringMaker.swift */; };
 		779A59E51FB33AB100F88DEC /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A59E41FB33AB100F88DEC /* sample2.png */; };
 		77A974BC201DD89800C32711 /* SJAttributesStringMaker.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77A974BB201DD89800C32711 /* SJAttributesStringMaker.podspec */; };
 		77D19C39201D74FB00BE5412 /* regular.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 77D19C38201D74FB00BE5412 /* regular.jpeg */; };
@@ -18,7 +20,6 @@
 		77D19C4D201DA62900BE5412 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D19C4C201DA62900BE5412 /* Assets.xcassets */; };
 		77D19C50201DA62900BE5412 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D19C4E201DA62900BE5412 /* LaunchScreen.storyboard */; };
 		77D19C5C201DA87A00BE5412 /* SJDemoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D19C5B201DA87A00BE5412 /* SJDemoInfo.swift */; };
-		77D19C66201DB58300BE5412 /* SJAttributesStringMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D19C65201DB58300BE5412 /* SJAttributesStringMaker.swift */; };
 		77E7E62F1FE794860061439B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E62E1FE794860061439B /* README.md */; };
 		77E7E64D1FE795680061439B /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */; };
 		77E7E6521FE7A3F60061439B /* action.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E6511FE7A3F60061439B /* action.gif */; };
@@ -39,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		774A4A372265B056007F99BA /* SJUIKitTextMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJUIKitTextMaker.swift; sourceTree = "<group>"; };
+		774A4A392265B056007F99BA /* SJAttributesStringMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJAttributesStringMaker.swift; sourceTree = "<group>"; };
 		779A59E41FB33AB100F88DEC /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
 		77A974BB201DD89800C32711 /* SJAttributesStringMaker.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SJAttributesStringMaker.podspec; path = ../SJAttributesStringMaker.podspec; sourceTree = "<group>"; };
 		77D19C38201D74FB00BE5412 /* regular.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = regular.jpeg; sourceTree = "<group>"; };
@@ -52,7 +55,6 @@
 		77D19C4F201DA62900BE5412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77D19C51201DA62900BE5412 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77D19C5B201DA87A00BE5412 /* SJDemoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SJDemoInfo.swift; sourceTree = "<group>"; };
-		77D19C65201DB58300BE5412 /* SJAttributesStringMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SJAttributesStringMaker.swift; path = ../../SJAttributesStringMaker/SJAttributesStringMaker.swift; sourceTree = "<group>"; };
 		77E7E62E1FE794860061439B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SJAttributesFactory.podspec; path = ../SJAttributesFactory.podspec; sourceTree = "<group>"; };
 		77E7E6511FE7A3F60061439B /* action.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = action.gif; sourceTree = "<group>"; };
@@ -126,12 +128,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		774A4A362265B056007F99BA /* SJAttributesStringMaker */ = {
+			isa = PBXGroup;
+			children = (
+				774A4A372265B056007F99BA /* SJUIKitTextMaker.swift */,
+				774A4A382265B056007F99BA /* Deprecated */,
+			);
+			name = SJAttributesStringMaker;
+			path = ../../SJAttributesStringMaker;
+			sourceTree = "<group>";
+		};
+		774A4A382265B056007F99BA /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				774A4A392265B056007F99BA /* SJAttributesStringMaker.swift */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
 		77D19C44201DA62900BE5412 /* SwiftVersion */ = {
 			isa = PBXGroup;
 			children = (
 				77D19C45201DA62900BE5412 /* AppDelegate.swift */,
 				77D19C47201DA62900BE5412 /* ViewController.swift */,
-				77D19C65201DB58300BE5412 /* SJAttributesStringMaker.swift */,
+				774A4A362265B056007F99BA /* SJAttributesStringMaker */,
 				77D19C58201DA83A00BE5412 /* Asset */,
 			);
 			path = SwiftVersion;
@@ -412,9 +432,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				77D19C48201DA62900BE5412 /* ViewController.swift in Sources */,
+				774A4A3A2265B056007F99BA /* SJUIKitTextMaker.swift in Sources */,
 				77D19C5C201DA87A00BE5412 /* SJDemoInfo.swift in Sources */,
 				77D19C46201DA62900BE5412 /* AppDelegate.swift in Sources */,
-				77D19C66201DB58300BE5412 /* SJAttributesStringMaker.swift in Sources */,
+				774A4A3B2265B056007F99BA /* SJAttributesStringMaker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,7 +510,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = WildcardProfile;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -507,7 +528,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -629,7 +650,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = DB5B5F2RH5;
+				DEVELOPMENT_TEAM = U5A7L7SMNP;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -641,7 +662,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SanJiang.SJAttributesFactory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "64c214b3-450d-41eb-b05e-df636dfa28c8";
-				PROVISIONING_PROFILE_SPECIFIER = SanJiangDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = WildcardProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "SJAttributesFactory/SJAttributesFactory-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;

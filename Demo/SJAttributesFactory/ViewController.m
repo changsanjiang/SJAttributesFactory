@@ -34,6 +34,10 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSLog(@"");
     });
+    
+    
+     
+
 }
 
 - (void)_setupViews {
@@ -54,6 +58,7 @@ static NSString *UITableViewCellID = @"UITableViewCell";
     
     
 
+
 }
 
 #pragma mark -
@@ -65,27 +70,58 @@ static NSString *UITableViewCellID = @"UITableViewCell";
         case 0: {
             tips = @"常用方法";
             attr = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
-                make.font([UIFont boldSystemFontOfSize:20]);
-                make.lineSpacing(8);
-                make.append(@"叶秋笑了笑，抬手取下了衔在嘴角的烟头。");
-                make.underLine(^(id<SJUTDecoration>  _Nonnull make) {
+                make.font([UIFont boldSystemFontOfSize:20]).textColor(UIColor.blackColor).lineSpacing(8);
+                
+                make.append(@":Image -");
+                make.appendImage(^(id<SJUTImageAttachment>  _Nonnull make) {
+                    make.image = [UIImage imageNamed:@"sample2"];
+                    make.bounds = CGRectMake(0, 0, 30, 30);
+                });
+
+                make.append(@"\n");
+                make.append(@":UnderLine").underLine(^(id<SJUTDecoration>  _Nonnull make) {
                     make.style = NSUnderlineStyleSingle;
-                    make.color = [UIColor orangeColor];
+                    make.color = UIColor.greenColor;
                 });
-                make.strikethrough(^(id<SJUTDecoration>  _Nonnull make) {
+                
+                make.append(@"\n");
+                make.append(@":Strikethrough").strikethrough(^(id<SJUTDecoration>  _Nonnull make) {
                     make.style = NSUnderlineStyleSingle;
-                    make.color = [UIColor orangeColor];
+                    make.color = UIColor.greenColor;
                 });
                 
-                make.regex(@"叶秋").update(^(id<SJUTAttributesProtocol>  _Nonnull make) {
-                    make.font([UIFont boldSystemFontOfSize:40]).textColor([UIColor purpleColor]);
+                make.append(@"\n");
+                make.append(@":BackgroundColor").backgroundColor(UIColor.greenColor);
+                
+                make.append(@"\n");
+                make.append(@":Kern").kern(6);
+
+                make.append(@"\n");
+                make.append(@":Shadow").shadow(^(NSShadow * _Nonnull make) {
+                    make.shadowColor = [UIColor redColor];
+                    make.shadowOffset = CGSizeMake(0, 1);
+                    make.shadowBlurRadius = 5;
+                });
+
+                make.append(@"\n");
+                make.append(@":Stroke").stroke(^(id<SJUTStroke>  _Nonnull make) {
+                    make.color = [UIColor greenColor];
+                    make.width = 1;
+                });
+
+                make.append(@"\n");
+                make.append(@"oOo").font([UIFont boldSystemFontOfSize:25]).alignment(NSTextAlignmentCenter);
+
+                make.append(@"\n");
+                make.append(@"Regular Expression").backgroundColor([UIColor greenColor]);
+                make.regex(@"Regular").update(^(id<SJUTAttributesProtocol>  _Nonnull make) {
+                    make.font([UIFont boldSystemFontOfSize:25]).textColor(UIColor.purpleColor);
                 });
                 
-                make.regex(@"笑了笑").replaceWithText(^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
-                    make.append(@"xiao了笑");
+                make.regex(@"ss").replaceWithString(@"SS").backgroundColor([UIColor greenColor]);
+                make.regex(@"on").replaceWithText(^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                    make.append(@"ON😆").textColor([UIColor redColor]).backgroundColor([UIColor greenColor]).font([UIFont boldSystemFontOfSize:30]);
                 });
-                
-                make.regex(@"抬手").replaceWithString(@"Tai手");
             }];
         }
             break;

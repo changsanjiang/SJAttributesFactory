@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
     return ^id<SJUTAttributesProtocol>(NSString *string) {
         SJUTAttributes *attr = [SJUTAttributes new];
         attr.recorder->string = string;
-        self.recorder.attrOfReplaceWithString = attr;
+        self.recorder.utOfReplaceWithString = attr;
         return attr;
     };
 }

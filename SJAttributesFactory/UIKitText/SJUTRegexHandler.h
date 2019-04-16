@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SJUTRegexRecorder : NSObject
 @property (nonatomic) NSRegularExpressionOptions regularExpressionOptions;
 @property (nonatomic) NSMatchingOptions matchingOptions;
-@property (nonatomic, strong, nullable) id<SJUTAttributesProtocol> attrOfReplaceWithString;
+@property (nonatomic, strong, nullable) id<SJUTAttributesProtocol> utOfReplaceWithString;
 @property (nonatomic, copy, nullable) NSString *regex;
 @property (nonatomic, copy, nullable) void(^replaceWithText)(id<SJUIKitTextMakerProtocol> make);
 @property (nonatomic, copy, nullable) void(^update)(id<SJUTAttributesProtocol> make);

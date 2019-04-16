@@ -9,14 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SJAttributesFactory.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>SwiftVersion.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>SwiftVersion.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>77D19C42201DA62900BE5412</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A69E5BEF1FB09BDC00EB65B5</key>
 		<dict>
 			<key>primary</key>

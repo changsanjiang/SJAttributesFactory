@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
     var demosM: [SJDemoInfo] = [SJDemoInfo]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,82 +39,100 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    
     func createExamples() -> Void {
-        for i in 0...10 {
+        for i in 0...3 {
             let model = SJDemoInfo.init()
             switch (i) {
             case 0:
                 model.name = "\(i) 常用方法"
-                model.task = {
-                    return sj_makeAttributesString({ (make) in
-                        make.insertText("叶秋笑了笑，抬手取下了衔在嘴角的烟头。", 0)
-                        make
-                            .font(UIFont.systemFont(ofSize: 40))                         // 设置字体
-                            .textColor(UIColor.black)                                    // 设置文本颜色
-                            .underLine(NSUnderlineStyle.styleSingle, UIColor.orange)     // 设置下划线
-                            .strikethrough(NSUnderlineStyle.styleSingle, UIColor.orange) // 设置删除线
-                            .stroke(UIColor.green, 1)                                    // 字体边缘的颜色, 设置后, 字体会镂空
-                            .obliqueness(0.3)                                            //  倾斜
-                            .letterSpacing(4)                                            // 字体间隔
-                            .lineSpacing(4)                                              // 行间隔
-                            .alignment(NSTextAlignment.center)                           // 对其方式
-//                          .shadow(CGSizeMake(0.5, 0.5), 0, UIColor.red)                // 设置阴影
-//                          .backgroundColor(UIColor.white)                              // 设置文本背景颜色
-//                          .offset(-10)                                                 // 上下偏移
-                        model.size = make.size(byMaxWidth: self.view.bounds.size.width - 80)
+                                
+                let text = NSAttributedString.sj.makeText({ (make) in
+                    make.font(.boldSystemFont(ofSize: 20)).textColor(.black).lineSpacing(8)
+                    
+                    make.append(":Image - ")
+                    make.append({ (make) in
+                        make.image = UIImage.init(named: "sample2")
+                        make.bounds = CGRect.init(x: 0, y: 0, width: 30, height: 30)
                     })
-                }
+                    make.append("\n")
+                    make.append(":UnderLine").underLine({ (make) in
+                        make.style = .single
+                        make.color = .green
+                    })
+                    make.append("\n")
+                    make.append(":Strikethrough").strikethrough({ (make) in
+                        make.style = .single
+                        make.color = .green
+                    })
+                    make.append("\n")
+                    make.append(":BackgroundColor").backgroundColor(.green)
+                    
+                    make.append("\n")
+                    make.append(":Kern").kern(6)
+                    
+                    make.append("\n")
+                    let shadow = NSShadow.init()
+                    shadow.shadowColor = UIColor.red
+                    shadow.shadowOffset = .init(width: 0, height: 1)
+                    shadow.shadowBlurRadius = 5
+                    make.append(":Shadow").shadow(shadow)
+                    
+                    make.append("\n")
+                    make.append(":Stroke").stroke({ (make) in
+                        make.color = .red
+                        make.width = 1
+                    })
+                    
+                    make.append("\n")
+                    make.append("oOo").font(.boldSystemFont(ofSize: 25)).alignment(.center)
+                    
+                    make.append("\n")
+                    make.append("Regular Expression")
+                    make.regex("Regular").update({ (make) in
+                        make.font(.boldSystemFont(ofSize: 25)).textColor(.purple)
+                    })
+                    make.regex("ss").replace("SS")
+                    make.regex("on").replace({ (make) in
+                        make.append("ON😆").textColor(.red).backgroundColor(.green).font(.boldSystemFont(ofSize: 30))
+                    })
+                });
+                
+                model.size = text.sj_textSize(forPreferredMaxLayoutWidth: self.view.bounds.size.width - 80)
+                
+                model.task = { return text }
                 break;
             case 1:
                 model.name = "\(i) 正则匹配"
-                model.task = {
-                    return sj_makeAttributesString({ (make) in
-                        make.insertText("@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#", 0)
-                        
-                        make.regexp("[@][^\\s]+\\s", matchedTask: { (matched) in
-                            matched.textColor(UIColor.purple)
-                        })
-                        
-                        make.regexp("[#][^#]+#", matchedTask: { (matched) in
-                            matched.textColor(UIColor.orange)
-                        })
-                        
-                        model.size = make.size(byMaxWidth: self.view.bounds.size.width - 80)
+                let text = NSAttributedString.sj.makeText({ (make) in
+                    make.append("@迷你世界联机 :@江叔 用小淘气耍赖野人#迷你世界#")
+                    
+                    make.regex("[@][^\\s]+\\s").update({ (make) in
+                        make.font(.boldSystemFont(ofSize: 25)).textColor(.purple)
                     })
-                }
+                    
+                    make.regex("[#][^#]+#").update({ (make) in
+                        make.font(.boldSystemFont(ofSize: 25)).textColor(.purple)
+                    })
+                })
+                
+                model.size = text.sj_textSize(forPreferredMaxLayoutWidth: self.view.bounds.size.width - 80)
+                model.task = { return text }
                 break;
             case 2:
                 model.name = "\(i) 上下图文"
-                model.task = {
-                    return sj_makeAttributesString({ (make) in
-                        make.insertImage(UIImage.init(named: "sample2")!, 0, CGPoint.init(), CGSize.init(width: 30, height: 30))
-                        make.insertText("\n999", -1).alignment(NSTextAlignment.center).lineSpacing(4)
-                        model.size = make.size()
+                let text = NSAttributedString.sj.makeText({ (make) in
+                    make.alignment(NSTextAlignment.center).lineSpacing(8)
+                    make.append({ (make) in
+                        make.image = UIImage.init(named: "sample2")
+                        make.bounds = CGRect.init(x: 0, y: 0, width: 30, height: 30)
                     })
-                }
+                    
+                    make.append("\n999")
+                })
+                
+                model.size = text.sj_textSize(forPreferredMaxLayoutWidth: self.view.bounds.size.width - 80)
+                model.task = { return text }
                 break;
-            case 3:
-                model.name = "\(i) 下划线 + 删除线"
-                model.task = {
-                    return sj_makeAttributesString({ (make) in
-                        make.font(UIFont.boldSystemFont(ofSize: 25))
-                        make.insertText("下划线", 0)
-                        make.lastInserted({ (lastOperator) in
-                            lastOperator.underLine(NSUnderlineStyle.styleSingle, UIColor.red)
-                        })
-                        
-                        make.insertText("-----", -1)
-                        
-                        make.insertText("删除线", -1)
-                        make.lastInserted({ (lastOperator) in
-                            lastOperator.strikethrough(NSUnderlineStyle.styleSingle, UIColor.red)
-                        })
-
-                        model.size = make.size()
-                    })
-                }
-                break
             default:
                 model.name = "\(i) 备用"
                 break;

@@ -145,7 +145,7 @@ typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTAlignmentAttribute)(NSTextAlignm
 typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTLineSpacingAttribute)(CGFloat lineSpacing);
 typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTKernAttribute)(CGFloat kern);
 typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTShadowAttribute)(void(^)(NSShadow *make));
-typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTStrokeAttribute)(void(^block)(id<SJUTStroke> stroke));
+typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTStrokeAttribute)(void(^block)(id<SJUTStroke> make));
 typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTParagraphStyleAttribute)(void(^block)(NSMutableParagraphStyle *make));
 typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTLineBreakModeAttribute)(NSLineBreakMode lineBreakMode);
 typedef id<SJUTAttributesProtocol>_Nonnull(^SJUTDecorationAttribute)(void(^)(id<SJUTDecoration> make));
