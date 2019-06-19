@@ -134,7 +134,30 @@ class ViewController: UIViewController {
                 model.task = { return text }
                 break;
             default:
-                model.name = "\(i) 备用"
+                model.name = "\(i) 图文对齐"
+                let text = NSAttributedString.sj.makeText { (make) in
+                    make.font(UIFont.systemFont(ofSize: 14))
+                    make.append("Top->")
+                    make.append({ (make) in
+                        make.image = UIImage.init(named: "sample2")
+                        make.alignment = .top
+                    })
+                    
+                    make.append("Center->")
+                    make.append({ (make) in
+                        make.image = UIImage.init(named: "sample2")
+                        make.alignment = .center
+                    })
+                    
+                    make.append("Bottom->")
+                    make.append({ (make) in
+                        make.image = UIImage.init(named: "sample2")
+                        make.alignment = .bottom
+                    })
+                }
+                
+                model.size = text.sj_textSize(forPreferredMaxLayoutWidth: self.view.bounds.size.width - 80)
+                model.task = { return text }
                 break;
             }
             demosM.append(model)

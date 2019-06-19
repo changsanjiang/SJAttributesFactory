@@ -288,9 +288,16 @@ public class SJUTAttributes {
         public var style: NSUnderlineStyle?
     }
     
+    public enum SJUTVerticalAlignment {
+        case bottom
+        case center
+        case top
+    }
+    
     public struct SJUTImageAttachment {
         public var image: UIImage?
         public var bounds: CGRect?
+        public var alignment: SJUTVerticalAlignment = .bottom
     }
     
     fileprivate struct SJUTRecorder {
@@ -493,7 +500,7 @@ public class SJUIKitTextMaker: SJUTAttributes {
         else if let attachment = ut.recorder.attachment {
             let textAttachment = NSTextAttachment.init()
             textAttachment.image = attachment.image
-            textAttachment.bounds = attachment.bounds ?? CGRect.zero
+            textAttachment.bounds = adjustVerticalOffsetOfImageAttachment(attachment.bounds ?? CGRect.zero, attachment.image?.size ?? CGSize.zero, attachment.alignment, self.recorder.font!)
             current = NSAttributedString.init(attachment: textAttachment).mutableCopy() as? NSMutableAttributedString
         }
         
@@ -608,6 +615,27 @@ public class SJUIKitTextMaker: SJUTAttributes {
             dict[NSAttributedString.Key.baselineOffset] = recorder.baseLineOffset
         }
         return dict
+    }
+    
+    private func adjustVerticalOffsetOfImageAttachment(_ bounds: CGRect, _ imageSize: CGSize, _ alignment: SJUTVerticalAlignment, _ commonFont: UIFont) -> CGRect {
+        var r_bounds = bounds;
+        switch alignment {
+        case .top:
+            if ( __CGSizeEqualToSize(CGSize.zero, bounds.size) ) {
+                r_bounds.size = imageSize;
+            }
+            let offset = -(r_bounds.size.height - abs(commonFont.capHeight))
+            r_bounds.origin.y = offset
+        case .center:
+            if ( __CGSizeEqualToSize(CGSize.zero, bounds.size) ) {
+                r_bounds.size = imageSize;
+            }
+            let offset = -(r_bounds.size.height * 0.5 - abs(commonFont.descender))
+            r_bounds.origin.y = offset;
+        case .bottom: break
+        }
+        
+        return r_bounds
     }
     
     private func textRange(_ text: NSAttributedString)-> NSRange {

@@ -166,6 +166,30 @@ static NSString *UITableViewCellID = @"UITableViewCell";
             }];
         }
             break;
+        case 4: {
+            tips = @"图文对齐";
+            attr = [NSAttributedString sj_UIKitText:^(id<SJUIKitTextMakerProtocol>  _Nonnull make) {
+                make.font([UIFont systemFontOfSize:14]); ///< 图文对齐, 需要Text为统一字体时才生效.
+                make.append(@"Top->");
+                make.appendImage(^(id<SJUTImageAttachment>  _Nonnull make) {
+                    make.image = [UIImage imageNamed:@"sample2"];
+                    make.alignment = SJUTVerticalAlignmentTop;
+                });
+                
+                make.append(@"Center->");
+                make.appendImage(^(id<SJUTImageAttachment>  _Nonnull make) {
+                    make.image = [UIImage imageNamed:@"sample2"];
+                    make.alignment = SJUTVerticalAlignmentCenter;
+                });
+                
+                make.append(@"Bottom->");
+                make.appendImage(^(id<SJUTImageAttachment>  _Nonnull make) {
+                    make.image = [UIImage imageNamed:@"sample2"];
+                    make.alignment = SJUTVerticalAlignmentBottom;
+                });
+            }];
+        }
+            break;
 //        case 8: {
 //            tips = @"测试";
 //

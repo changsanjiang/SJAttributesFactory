@@ -22,7 +22,6 @@
 		77D19C5C201DA87A00BE5412 /* SJDemoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D19C5B201DA87A00BE5412 /* SJDemoInfo.swift */; };
 		77E7E62F1FE794860061439B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E62E1FE794860061439B /* README.md */; };
 		77E7E64D1FE795680061439B /* SJAttributesFactory.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */; };
-		77E7E6521FE7A3F60061439B /* action.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77E7E6511FE7A3F60061439B /* action.gif */; };
 		A660298E226249C2006915E6 /* SJUTAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A660297B226249C2006915E6 /* SJUTAttributes.m */; };
 		A660298F226249C2006915E6 /* SJUIKitTextMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A660297D226249C2006915E6 /* SJUIKitTextMaker.m */; };
 		A6602990226249C2006915E6 /* SJUTRangeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A660297E226249C2006915E6 /* SJUTRangeHandler.m */; };
@@ -57,7 +56,6 @@
 		77D19C5B201DA87A00BE5412 /* SJDemoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SJDemoInfo.swift; sourceTree = "<group>"; };
 		77E7E62E1FE794860061439B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		77E7E64C1FE795670061439B /* SJAttributesFactory.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SJAttributesFactory.podspec; path = ../SJAttributesFactory.podspec; sourceTree = "<group>"; };
-		77E7E6511FE7A3F60061439B /* action.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = action.gif; sourceTree = "<group>"; };
 		7B5BBDDC8EBE6151143BEA0B /* Pods-SJAttributesFactory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SJAttributesFactory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SJAttributesFactory/Pods-SJAttributesFactory.debug.xcconfig"; sourceTree = "<group>"; };
 		A61066CC1FB0D08A00A67DF9 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A660297B226249C2006915E6 /* SJUTAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJUTAttributes.m; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 		77D19C57201DA6C600BE5412 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
-				77E7E6511FE7A3F60061439B /* action.gif */,
 				A61066CC1FB0D08A00A67DF9 /* sample1.png */,
 				779A59E41FB33AB100F88DEC /* sample2.png */,
 				77D19C38201D74FB00BE5412 /* regular.jpeg */,
@@ -366,7 +363,6 @@
 				A69E5BFD1FB09BDC00EB65B5 /* Assets.xcassets in Resources */,
 				77A974BC201DD89800C32711 /* SJAttributesStringMaker.podspec in Resources */,
 				77D19C3B201D7E0800BE5412 /* common.jpeg in Resources */,
-				77E7E6521FE7A3F60061439B /* action.gif in Resources */,
 				77E7E62F1FE794860061439B /* README.md in Resources */,
 				A69E5BFB1FB09BDC00EB65B5 /* Main.storyboard in Resources */,
 				779A59E51FB33AB100F88DEC /* sample2.png in Resources */,
